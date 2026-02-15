@@ -4,160 +4,134 @@
 <meta charset="UTF-8">
 <title>Premium IC Database</title>
 
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-
 <style>
 body{
-  margin:0;
-  font-family:Arial;
-  background:#0f172a;
-  color:white;
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0f172a;
+    color:#e2e8f0;
 }
-
 header{
-  background:#111827;
-  padding:15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+    background:#111827;
+    padding:20px;
+    text-align:center;
+    border-bottom:2px solid #2563eb;
 }
-
-.logo{
-  font-weight:bold;
-  font-size:18px;
+header h1{
+    margin:0;
+    font-size:22px;
 }
-
-button{
-  background:#2563eb;
-  border:none;
-  padding:8px 14px;
-  color:white;
-  border-radius:5px;
-  cursor:pointer;
+header p{
+    margin:5px 0 0 0;
+    font-size:14px;
+    opacity:0.7;
 }
-
 .container{
-  padding:20px;
+    padding:20px;
 }
-
-.search-box{
-  margin-bottom:20px;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
 }
-
-input{
-  padding:8px;
-  width:100%;
-  max-width:400px;
-  border-radius:5px;
-  border:none;
-}
-
 .card{
-  background:#1e293b;
-  padding:15px;
-  border-radius:8px;
-  margin-bottom:15px;
+    background:#1e293b;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
 }
-
-table{
-  width:100%;
-  border-collapse:collapse;
+.card h3{
+    margin:0 0 10px 0;
 }
-
-th, td{
-  padding:10px;
-  border-bottom:1px solid #334155;
-  text-align:left;
+.card p{
+    margin:0;
+    font-size:14px;
+    opacity:0.8;
 }
-
-th{
-  background:#1e293b;
+a{
+    text-decoration:none;
+    color:white;
+}
+.section{
+    margin-top:30px;
+    background:#1e293b;
+    padding:15px;
+    border-radius:10px;
+}
+.footer{
+    margin-top:40px;
+    text-align:center;
+    font-size:12px;
+    opacity:0.6;
+    padding-bottom:20px;
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <div class="logo">IC Reference Premium 🔥</div>
-  <button onclick="logout()">Logout</button>
+<h1>🛠 IC Reference Teknisi HP Indonesia</h1>
+<p>Database Kode IC Storage, UFS, PMIC & CPU Smartphone</p>
 </header>
 
 <div class="container">
 
-  <h2>Database IC Teknisi</h2>
-  <p>Selamat datang, member premium.</p>
+<h2>Kategori Database</h2>
 
-  <div class="search-box">
-    <input type="text" placeholder="Cari kode IC...">
-  </div>
+<a href="login.html">
+<div class="card">
+<h3>🔐 Premium Access</h3>
+<p>Akses Full 400+ Database</p>
+</div>
+</a>
+<div class="grid">
 
-  <div class="card">
-    <h3>Daftar IC (Demo)</h3>
+<a href="storage.html">
+<div class="card">
+<h3>💾 Storage (eMMC)</h3>
+<p>Database IC eMMC</p>
+</div>
+</a>
 
-    <table>
-      <tr>
-        <th>Kode IC</th>
-        <th>Tipe</th>
-        <th>Kapasitas</th>
-        <th>Keterangan</th>
-      </tr>
+<a href="ufs.html">
+<div class="card">
+<h3>🚀 UFS</h3>
+<p>Database IC UFS</p>
+</div>
+</a>
 
-      <tr>
-        <td>KM8G9001JM</td>
-        <td>eMMC</td>
-        <td>8GB</td>
-        <td>Samsung</td>
-      </tr>
+<a href="pmic.html">
+<div class="card">
+<h3>⚡ PMIC</h3>
+<p>Power Management IC</p>
+</div>
+</a>
 
-      <tr>
-        <td>MT29F32G08</td>
-        <td>eMMC</td>
-        <td>32GB</td>
-        <td>Micron</td>
-      </tr>
-
-      <tr>
-        <td>PM660L</td>
-        <td>PMIC</td>
-        <td>-</td>
-        <td>Qualcomm Power IC</td>
-      </tr>
-
-    </table>
-
-  </div>
+<a href="cpu.html">
+<div class="card">
+<h3>🧠 CPU (SoC)</h3>
+<p>Processor Smartphone</p>
+</div>
+</a>
 
 </div>
 
-<script>
+<div class="section">
+<h3>Statistik Database</h3>
+<p>Total IC Saat Ini: 100+ eMMC</p>
+<p>Update Berkala Untuk Teknisi Indonesia</p>
+</div>
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBrSk6ZyoxvKAEQFFkEHMT-PenWSSsFSdQ",
-  authDomain: "ic-reference-teknisi.firebaseapp.com",
-  projectId: "ic-reference-teknisi",
-  storageBucket: "ic-reference-teknisi.firebasestorage.app",
-  messagingSenderId: "376962038194",
-  appId: "1:376962038194:web:fa8475c2e097f5e0548cab"
-};
+<div class="section">
+<h3>Rekomendasi Alat Teknisi</h3>
+<p>eMMC Programmer | UFI Box | Power Supply | Hot Air</p>
+</div>
 
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
+</div>
 
-auth.onAuthStateChanged(function(user){
-  if(!user){
-    window.location="login.html";
-  }
-});
-
-function logout(){
-  auth.signOut().then(()=>{
-    window.location="login.html";
-  });
-}
-
-</script>
+<div class="footer">
+© 2026 IC Reference Teknisi HP Indonesia
+</div>
 
 </body>
 </html>
