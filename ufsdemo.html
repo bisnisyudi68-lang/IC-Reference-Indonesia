@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UFS - IC Reference Teknisi HP Indonesia</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0f172a;
+    color:#e2e8f0;
+}
+header{
+    background:#111827;
+    padding:20px;
+    text-align:center;
+    border-bottom:2px solid #2563eb;
+}
+nav{
+    text-align:center;
+    padding:10px;
+    background:#1e293b;
+}
+nav a{
+    color:#38bdf8;
+    margin:0 10px;
+    text-decoration:none;
+}
+.container{
+    padding:20px;
+}
+input{
+    width:100%;
+    padding:8px;
+    margin-bottom:15px;
+    border-radius:6px;
+    border:none;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+th, td{
+    padding:10px;
+    border:1px solid #334155;
+    font-size:14px;
+}
+th{
+    background:#2563eb;
+}
+tr:hover{
+    background:#1e293b;
+}
+.footer{
+    margin-top:40px;
+    text-align:center;
+    font-size:12px;
+    opacity:0.6;
+    padding-bottom:20px;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🚀 Database IC UFS</h1>
+</header>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="storage.html">Storage</a>
+<a href="pmic.html">PMIC</a>
+<a href="cpu.html">CPU</a>
+</nav>
+
+<div class="container">
+
+<input type="text" id="search" placeholder="Cari kode IC UFS...">
+
+<table id="icTable">
+<thead>
+<tr>
+<th>Kode</th>
+<th>Merk</th>
+<th>Kapasitas</th>
+<th>Versi</th>
+<th>Gejala Umum</th>
+</tr>
+<tr><td>KLUDG4UHDB</td><td>Samsung</td><td>64GB</td><td>UFS 2.1</td><td>Bootloop</td></tr>
+<tr><td>KLUCG4J1ED</td><td>Samsung</td><td>128GB</td><td>UFS 2.1</td><td>Restart terus</td></tr>
+<tr><td>KLUEG8UHDB</td><td>Samsung</td><td>256GB</td><td>UFS 3.0</td><td>Hardbrick</td></tr>
+<tr><td>KLUDG8V1EE</td><td>Samsung</td><td>256GB</td><td>UFS 3.0</td><td>Tidak detect</td></tr>
+<tr><td>KLUEG4UHDB</td><td>Samsung</td><td>128GB</td><td>UFS 2.1</td><td>Boot lama</td></tr>
+<tr><td>KLUDG4U1EA</td><td>Samsung</td><td>64GB</td><td>UFS 2.1</td><td>OTA gagal</td></tr>
+<tr><td>KLUEG8U1EE</td><td>Samsung</td><td>512GB</td><td>UFS 3.1</td><td>Hardbrick</td></tr>
+<tr><td>KLUFG8R1EE</td><td>Samsung</td><td>1TB</td><td>UFS 3.1</td><td>Tidak detect</td></tr>
+
+<tr><td>H9HQ21AECMMD</td><td>Hynix</td><td>128GB</td><td>UFS 2.1</td><td>Bootloop</td></tr>
+<tr><td>H9HQ15AECMMD</td><td>Hynix</td><td>64GB</td><td>UFS 2.1</td><td>Restart sendiri</td></tr>
+<tr><td>H9HQ64AECMMD</td><td>Hynix</td><td>256GB</td><td>UFS 3.0</td><td>Gagal flash</td></tr>
+<tr><td>H9HQ53AECMMD</td><td>Hynix</td><td>512GB</td><td>UFS 3.1</td><td>Hardbrick</td></tr>
+<tr><td>H9HQ26AECMMD</td><td>Hynix</td><td>128GB</td><td>UFS 2.1</td><td>Boot lama</td></tr>
+
+<tr><td>MT29PZZZ8D4</td><td>Micron</td><td>256GB</td><td>UFS 3.0</td><td>Tidak detect</td></tr>
+<tr><td>MT29F256G08</td><td>Micron</td><td>128GB</td><td>UFS 2.1</td><td>Bootloop</td></tr>
+<tr><td>MT29F512G08</td><td>Micron</td><td>512GB</td><td>UFS 3.1</td><td>Restart terus</td></tr>
+<tr><td>MT29F1T08</td><td>Micron</td><td>1TB</td><td>UFS 3.1</td><td>Hardbrick</td></tr>
+</thead>
+<tr><td>KLUEG4U1EA</td><td>Samsung</td><td>64GB</td><td>UFS 2.1</td><td>Boot lama</td></tr>
+<tr><td>KLUEG6U1EA</td><td>Samsung</td><td>96GB</td><td>UFS 2.1</td><td>Restart acak</td></tr>
+<tr><td>KLUEG8U1EA</td><td>Samsung</td><td>128GB</td><td>UFS 2.1</td><td>Gagal OTA</td></tr>
+<tr><td>KLUEG8U1EB</td><td>Samsung</td><td>256GB</td><td>UFS 3.0</td><td>Hardbrick</td></tr>
+<tr><td>KLUEG8U1EC</td><td>Samsung</td><td>512GB</td><td>UFS 3.1</td><td>Tidak detect</td></tr>
+<tr><td>KLUCG2U1EA</td><td>Samsung</td><td>32GB</td><td>UFS 2.0</td><td>Bootloop</td></tr>
+<tr><td>KLUCG4U1EA</td><td>Samsung</td><td>64GB</td><td>UFS 2.0</td><td>Boot lama</td></tr>
+<tr><td>KLUCG8U1EA</td><td>Samsung</td><td>128GB</td><td>UFS 2.1</td><td>Restart sendiri</td></tr>
+<tr><td>KLUFG8U1EE</td><td>Samsung</td><td>1TB</td><td>UFS 3.1</td><td>Hardbrick</td></tr>
+<tr><td>KLUFG4U1EE</td><td>Samsung</td><td>512GB</td><td>UFS 3.1</td><td>Tidak detect</td></tr>
+
+
+<tr><td>MT29U512GQ</td><td>Micron</td><td>512GB</td><td>UFS 3.1</td><td>Hardbrick</td></tr>
+<tr><td>MT29U1T0GQ</td><td>Micron</td><td>1TB</td><td>UFS 3.1</td><td>Tidak detect</td></tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="footer">
+© 2026 IC Reference Teknisi HP Indonesia
+</div>
+
+<script>
+document.getElementById("search").addEventListener("keyup", function() {
+    let value = this.value.toLowerCase();
+    let rows = document.querySelectorAll("#icTable tbody tr");
+    rows.forEach(row => {
+        row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
+    });
+});
+</script>
+
+</body>
+</html>
