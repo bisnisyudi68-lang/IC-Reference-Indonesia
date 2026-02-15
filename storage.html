@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storage eMMC - IC Reference Teknisi HP Indonesia</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0f172a;
+    color:#e2e8f0;
+}
+header{
+    background:#111827;
+    padding:20px;
+    text-align:center;
+    border-bottom:2px solid #2563eb;
+}
+header h1{
+    margin:0;
+    font-size:20px;
+}
+nav{
+    text-align:center;
+    padding:10px;
+    background:#1e293b;
+}
+nav a{
+    color:#38bdf8;
+    margin:0 10px;
+    text-decoration:none;
+}
+.container{
+    padding:20px;
+}
+input{
+    width:100%;
+    padding:8px;
+    margin-bottom:15px;
+    border-radius:6px;
+    border:none;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+th, td{
+    padding:10px;
+    border:1px solid #334155;
+    font-size:14px;
+}
+th{
+    background:#2563eb;
+}
+tr:hover{
+    background:#1e293b;
+}
+.footer{
+    margin-top:40px;
+    text-align:center;
+    font-size:12px;
+    opacity:0.6;
+    padding-bottom:20px;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>💾 Database IC Storage (eMMC)</h1>
+</header>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="ufs.html">UFS</a>
+<a href="pmic.html">PMIC</a>
+<a href="cpu.html">CPU</a>
+</nav>
+
+<div class="container">
+
+<input type="text" id="search" placeholder="Cari kode IC eMMC...">
+
+<table id="icTable">
+<thead>
+<tr>
+<th>Kode</th>
+<th>Merk</th>
+<th>Kapasitas</th>
+<th>Versi</th>
+<th>Gejala Umum</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+<td>KMQ72000SM</td>
+<td>Samsung</td>
+<td>32GB</td>
+<td>eMMC 5.1</td>
+<td>Bootloop, gagal flash</td>
+</tr>
+
+<tr>
+<td>KMQ820013M</td>
+<td>Samsung</td>
+<td>64GB</td>
+<td>eMMC 5.1</td>
+<td>Stuck logo</td>
+</tr>
+
+<tr>
+<td>KMVTU000LM</td>
+<td>Samsung</td>
+<td>16GB</td>
+<td>eMMC 5.0</td>
+<td>Read only</td>
+</tr>
+
+<tr>
+<td>H9TP32A8JDMCPR</td>
+<td>Hynix</td>
+<td>32GB</td>
+<td>eMMC 5.0</td>
+<td>IMEI hilang setelah flash</td>
+</tr>
+
+<tr>
+<td>THGBMNG5D1LBAIL</td>
+<td>Toshiba</td>
+<td>64GB</td>
+<td>eMMC 5.1</td>
+<td>Gagal write</td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+
+<div class="footer">
+© 2026 IC Reference Teknisi HP Indonesia
+</div>
+
+<script>
+document.getElementById("search").addEventListener("keyup", function() {
+    let value = this.value.toLowerCase();
+    let rows = document.querySelectorAll("#icTable tbody tr");
+    rows.forEach(row => {
+        row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
+    });
+});
+</script>
+
+</body>
+</html>
