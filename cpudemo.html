@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPU - IC Reference Teknisi HP Indonesia</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0f172a;
+    color:#e2e8f0;
+}
+header{
+    background:#111827;
+    padding:20px;
+    text-align:center;
+    border-bottom:2px solid #2563eb;
+}
+nav{
+    text-align:center;
+    padding:10px;
+    background:#1e293b;
+}
+nav a{
+    color:#38bdf8;
+    margin:0 10px;
+    text-decoration:none;
+}
+.container{
+    padding:20px;
+}
+input{
+    width:100%;
+    padding:8px;
+    margin-bottom:15px;
+    border-radius:6px;
+    border:none;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+th, td{
+    padding:10px;
+    border:1px solid #334155;
+    font-size:14px;
+}
+th{
+    background:#2563eb;
+}
+tr:hover{
+    background:#1e293b;
+}
+.footer{
+    margin-top:40px;
+    text-align:center;
+    font-size:12px;
+    opacity:0.6;
+    padding-bottom:20px;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🧠 Database IC CPU (SoC)</h1>
+</header>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="storage.html">Storage</a>
+<a href="ufs.html">UFS</a>
+<a href="pmic.html">PMIC</a>
+</nav>
+
+<div class="container">
+
+<input type="text" id="search" placeholder="Cari kode IC CPU...">
+
+<table id="icTable">
+<thead>
+<tr>
+<th>Kode</th>
+<th>Merk</th>
+<th>RAM Support</th>
+<th>Tahun</th>
+<th>Gejala Umum</th>
+</tr>
+</thead>
+<tr><td>MSM8916</td><td>Qualcomm</td><td>LPDDR3</td><td>2016</td><td>Lemah sinyal</td></tr>
+<tr><td>MSM8953</td><td>Qualcomm</td><td>LPDDR3</td><td>2017</td><td>Bootloop</td></tr>
+<tr><td>SD660</td><td>Qualcomm</td><td>LPDDR4X</td><td>2018</td><td>Restart sendiri</td></tr>
+<tr><td>SD710</td><td>Qualcomm</td><td>LPDDR4X</td><td>2019</td><td>Overheat</td></tr>
+<tr><td>SD720G</td><td>Qualcomm</td><td>LPDDR4X</td><td>2020</td><td>Boot lama</td></tr>
+<tr><td>SM6125</td><td>Qualcomm</td><td>LPDDR4X</td><td>2020</td><td>Mati total</td></tr>
+<tr><td>SM7150</td><td>Qualcomm</td><td>LPDDR4X</td><td>2019</td><td>Hardbrick</td></tr>
+<tr><td>SM8250</td><td>Qualcomm</td><td>LPDDR5</td><td>2020</td><td>Tidak detect</td></tr>
+<tr><td>SM8350</td><td>Qualcomm</td><td>LPDDR5</td><td>2021</td><td>Bootloop</td></tr>
+<tr><td>SM8550</td><td>Qualcomm</td><td>LPDDR5X</td><td>2023</td><td>Konslet</td></tr>
+
+
+</tbody>
+</table>
+
+</div>
+
+<div class="footer">
+© 2026 IC Reference Teknisi HP Indonesia
+</div>
+
+<script>
+document.getElementById("search").addEventListener("keyup", function() {
+    let value = this.value.toLowerCase();
+    let rows = document.querySelectorAll("#icTable tbody tr");
+    rows.forEach(row => {
+        row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
+    });
+});
+</script>
+
+</body>
+</html>
