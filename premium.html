@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Premium Access</title>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+</head>
+<body style="background:#0f172a;color:white;font-family:Arial;text-align:center;padding-top:100px;">
+
+<h2>Premium Database</h2>
+<p>Selamat datang, member premium 🔥</p>
+
+<button onclick="logout()">Logout</button>
+
+<script>
+
+// GANTI DENGAN CONFIG FIREBASE KAMU
+const firebaseConfig = {
+  apiKey: "ISI_API_KEY",
+  authDomain: "ISI_AUTH_DOMAIN",
+  projectId: "ISI_PROJECT_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+auth.onAuthStateChanged(user=>{
+  if(!user){
+    window.location="login.html";
+  }
+});
+
+function logout(){
+  auth.signOut().then(()=>{
+    window.location="login.html";
+  });
+}
+
+</script>
+
+</body>
+</html>
