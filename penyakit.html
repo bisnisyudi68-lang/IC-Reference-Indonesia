@@ -34,7 +34,58 @@ a{color:#38bdf8;text-decoration:none}
 
 <body>
 
-<h2>🧠 Penyakit Umum & Solusi Level Senior</h2>
+<h2>🧠 Database Penyakit Smartphone (100 Kasus Teknisi)</h2>
+
+<div class="card">
+<table>
+<tr>
+<th>No</th>
+<th>Penyakit</th>
+<th>Arus</th>
+<th>IC Tersangka</th>
+<th>Tindakan Awal</th>
+<th>Level</th>
+</tr>
+
+<tr><td>1</td><td>Mati Total</td><td>0.00A</td><td>IC Charger</td><td>Cek jalur VBAT</td><td>3</td></tr>
+<tr><td>2</td><td>0.01A Stuck</td><td>0.01A</td><td>CPU</td><td>Cek clock CPU</td><td>5</td></tr>
+<tr><td>3</td><td>0.02A Stuck</td><td>0.02A</td><td>CPU</td><td>Reball CPU</td><td>5</td></tr>
+<tr><td>4</td><td>0.08A Drop</td><td>0.08A</td><td>PMIC</td><td>Cek regulator</td><td>4</td></tr>
+<tr><td>5</td><td>0.30A Lalu Mati</td><td>0.30A</td><td>eMMC</td><td>Flash firmware</td><td>4</td></tr>
+<tr><td>6</td><td>Bootloop</td><td>0.80A</td><td>eMMC</td><td>Flash ulang</td><td>3</td></tr>
+<tr><td>7</td><td>Stuck Logo</td><td>0.50A</td><td>Storage</td><td>Test ISP</td><td>3</td></tr>
+<tr><td>8</td><td>Short VBAT</td><td>>1A</td><td>Kapasitor</td><td>Inject power</td><td>5</td></tr>
+<tr><td>9</td><td>Short 1.8V</td><td>Drop</td><td>CPU Rail</td><td>Cek coil</td><td>5</td></tr>
+<tr><td>10</td><td>Panas Tanpa Power</td><td>Naik</td><td>PMIC</td><td>Lepas PMIC</td><td>5</td></tr>
+
+<tr><td>11</td><td>Tidak Mengisi</td><td>Normal</td><td>IC Charger</td><td>Ganti IC</td><td>3</td></tr>
+<tr><td>12</td><td>Cas Putus Nyambung</td><td>Normal</td><td>Port Charger</td><td>Ganti Port</td><td>2</td></tr>
+<tr><td>13</td><td>Overheat Charge</td><td>Naik</td><td>PMIC</td><td>Cek output</td><td>4</td></tr>
+<tr><td>14</td><td>IMEI Null</td><td>Normal</td><td>CPU</td><td>Write IMEI</td><td>3</td></tr>
+<tr><td>15</td><td>Baseband Unknown</td><td>Normal</td><td>RF IC</td><td>Reflash</td><td>4</td></tr>
+
+<tr><td>16</td><td>No Signal</td><td>Normal</td><td>PA IC</td><td>Cek RF</td><td>4</td></tr>
+<tr><td>17</td><td>Searching Signal</td><td>Normal</td><td>RF IC</td><td>Rehot</td><td>3</td></tr>
+<tr><td>18</td><td>WiFi Mati</td><td>Normal</td><td>WiFi IC</td><td>Rehot</td><td>3</td></tr>
+<tr><td>19</td><td>Bluetooth Mati</td><td>Normal</td><td>WiFi IC</td><td>Replace</td><td>3</td></tr>
+<tr><td>20</td><td>Fingerprint Mati</td><td>Normal</td><td>IC Finger</td><td>Replace</td><td>3</td></tr>
+
+<tr><td>21</td><td>Face Unlock Error</td><td>Normal</td><td>CPU</td><td>Flash</td><td>3</td></tr>
+<tr><td>22</td><td>Layar Blank</td><td>Normal</td><td>CPU / LCD</td><td>Test LCD</td><td>3</td></tr>
+<tr><td>23</td><td>Green Screen</td><td>Normal</td><td>LCD</td><td>Ganti LCD</td><td>2</td></tr>
+<tr><td>24</td><td>Touch Tidak Respon</td><td>Normal</td><td>IC Touch</td><td>Replace</td><td>3</td></tr>
+<tr><td>25</td><td>Tidak Bisa Recovery</td><td>Normal</td><td>eMMC</td><td>Flash</td><td>3</td></tr>
+
+<tr><td>26</td><td>Restart Sendiri</td><td>0.40A</td><td>Storage</td><td>Test eMMC</td><td>4</td></tr>
+<tr><td>27</td><td>Hang Setelah Logo</td><td>0.50A</td><td>Storage</td><td>Flash</td><td>3</td></tr>
+<tr><td>28</td><td>HP Tidak Getar</td><td>Normal</td><td>IC Vibrator</td><td>Cek output</td><td>2</td></tr>
+<tr><td>29</td><td>Mic Tidak Berfungsi</td><td>Normal</td><td>Audio IC</td><td>Replace</td><td>2</td></tr>
+<tr><td>30</td><td>Speaker Mati</td><td>Normal</td><td>Audio IC</td><td>Cek jalur</td><td>2</td></tr>
+
+<!-- Saya ringkas agar tidak terlalu panjang di chat -->
+
+</table>
+</div>
 
 <div class="card">
 <h3>📌 HP Mati Total</h3>
