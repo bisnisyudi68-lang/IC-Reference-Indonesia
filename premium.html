@@ -2,142 +2,183 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Premium IC Database</title>
+<title>Premium Database - IC Reference</title>
 
 <style>
 body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#0f172a;
-    color:#e2e8f0;
+  margin:0;
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
 }
+
+/* HEADER */
 header{
-    background:#111827;
-    padding:20px;
-    text-align:center;
-    border-bottom:2px solid #2563eb;
+  text-align:center;
+  padding:25px 10px;
+  border-bottom:2px solid #1e293b;
 }
+
 header h1{
-    margin:0;
-    font-size:22px;
+  margin:0;
+  font-size:20px;
 }
+
 header p{
-    margin:5px 0 0 0;
-    font-size:14px;
-    opacity:0.7;
+  margin:5px 0 0;
+  font-size:13px;
+  color:#94a3b8;
 }
+
+/* CONTAINER */
 .container{
-    padding:20px;
+  max-width:1000px;
+  margin:auto;
+  padding:30px 20px;
 }
+
+/* JUDUL */
+.title{
+  text-align:center;
+  margin-bottom:25px;
+  font-size:22px;
+}
+
+/* BUTTON */
+.top-button{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.top-button a{
+  background:#16a34a;
+  padding:12px 20px;
+  border-radius:8px;
+  color:white;
+  text-decoration:none;
+  font-weight:bold;
+  display:inline-block;
+  transition:0.3s;
+}
+
+.top-button a:hover{
+  background:#15803d;
+}
+
+/* GRID */
 .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:15px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+  gap:20px;
 }
+
+/* CARD */
 .card{
-    background:#1e293b;
-    padding:20px;
-    border-radius:10px;
-    text-align:center;
-}
-h3{
+  background:#1e293b;
+  padding:25px;
+  border-radius:12px;
   text-align:center;
-  margin-bottom:30px;
-  font-size:28px;
+  transition:0.3s;
 }
+
+.card:hover{
+  transform:translateY(-5px);
+  background:#263445;
+}
+
+.card h3{
+  margin:0 0 10px;
+}
+
 .card p{
-    margin:0;
-    font-size:14px;
-    opacity:0.8;
+  font-size:13px;
+  color:#cbd5e1;
 }
-a{
-    text-decoration:none;
-    color:white;
-}
+
+/* SECTION */
 .section{
-    margin-top:30px;
-    background:#1e293b;
-    padding:15px;
-    border-radius:10px;
-}
-.footer{
-    margin-top:40px;
-    text-align:center;
-    font-size:12px;
-    opacity:0.6;
-    padding-bottom:20px;
-}
-h2{
+  margin-top:40px;
+  background:#1e293b;
+  padding:25px;
+  border-radius:12px;
   text-align:center;
-  margin-bottom:30px;
-  font-size:28px;
+}
+
+footer{
+  text-align:center;
+  margin-top:40px;
+  font-size:12px;
+  color:#64748b;
 }
 </style>
 </head>
+
 <body>
 
 <header>
-<h1>🛠 IC Reference Teknisi HP Indonesia</h1>
-<p>Database Kode IC Storage, UFS, PMIC & CPU Smartphone</p>
+  <h1>🛠 IC Reference Teknisi HP Indonesia</h1>
+  <p>Database Kode IC Storage, UFS, PMIC & CPU Smartphone</p>
 </header>
 
 <div class="container">
 
-<h2>Premium Database</h2>
+  <div class="title">Premium Database</div>
 
-<a href="arus.html" style="background:#16a34a;padding:10px 15px;border-radius:6px;color:white;text-decoration:none;">
-    ⚡ Arus Normal & Diagnosa
-</div>
-  </a>
+  <!-- BUTTON ARUS -->
+  <div class="top-button">
+    <a href="arus.html">⚡ Arus Normal & Diagnosa</a>
+  </div>
 
-<div class="grid">
-<div style="margin-bottom:20px;">
-</div>
-<a href="storage.html">
-<div class="card">
-<h3>💾 Storage (eMMC)</h3>
-<p>Database IC eMMC</p>
-</div>
-</a>
+  <!-- GRID KATEGORI -->
+  <div class="grid">
 
-<a href="ufs.html">
-<div class="card">
-<h3>🚀 UFS</h3>
-<p>Database IC UFS</p>
-</div>
-</a>
+    <a href="storage.html" style="text-decoration:none;color:white;">
+      <div class="card">
+        <h3>💾 Storage (eMMC)</h3>
+        <p>Database IC eMMC Lengkap</p>
+      </div>
+    </a>
 
-<a href="pmic.html">
-<div class="card">
-<h3>⚡ PMIC</h3>
-<p>Power Management IC</p>
-</div>
-</a>
+    <a href="ufs.html" style="text-decoration:none;color:white;">
+      <div class="card">
+        <h3>🚀 UFS</h3>
+        <p>Database IC UFS</p>
+      </div>
+    </a>
 
-<a href="cpu.html">
-<div class="card">
-<h3>🧠 CPU (SoC)</h3>
-<p>Processor Smartphone</p>
-</div>
-</a>
+    <a href="pmic.html" style="text-decoration:none;color:white;">
+      <div class="card">
+        <h3>⚡ PMIC</h3>
+        <p>Power Management IC</p>
+      </div>
+    </a>
 
-</div>
+    <a href="cpu.html" style="text-decoration:none;color:white;">
+      <div class="card">
+        <h3>🧠 CPU (SoC)</h3>
+        <p>Processor Smartphone</p>
+      </div>
+    </a>
 
-<div class="section">
-<h3>Statistik Database
-<p>Total IC Saat Ini: 400+ eMMC</p>
-<p>Update Berkala Untuk Teknisi Indonesia</p>
-</div>
+  </div>
 
-<div class="section">
-<h3>Rekomendasi Alat Teknisi
-<p>eMMC Programmer | Box Flash| Power Supply | Hot Air</p>
-</div>
+  <!-- STATISTIK -->
+  <div class="section">
+    <h3>Statistik Database</h3>
+    <p>Total IC Saat Ini: <b>400+ eMMC</b></p>
+    <p>Update Berkala Untuk Teknisi Indonesia</p>
+  </div>
 
-</div>
+  <!-- REKOMENDASI -->
+  <div class="section">
+    <h3>Rekomendasi Alat Teknisi</h3>
+    <p>eMMC Programmer | Box Flash | Power Supply | Hot Air</p>
+  </div>
 
-<div class="footer">
-© 2026 IC Reference Teknisi HP Indonesia
+  <footer>
+    © 2026 IC Reference Teknisi HP Indonesia
+  </footer>
+
 </div>
 
 </body>
