@@ -133,4 +133,44 @@ tr:hover{
 <tr><td>KM8V8001JM</td><td>Samsung</td><td>128GB</td><td>UFS 2.1</td><td>Restart terus</td></tr>
 <tr><td>KM8V9001JM</td><td>Samsung</td><td>256GB</td><td>UFS 3.0</td><td>Gagal OTA</td></tr>
 <tr><td>KM8V9101JM</td><td>Samsung</td><td>512GB</td><td>UFS 3.1</td><td>Tidak detect</td></tr>
-<tbody>
+<tr><td>KLUEG2U1EA</td><td>Samsung</td><td>32GB</td><td>UFS 2.0</td><td>Bootloop</td></tr>
+<tr><td>KLUEG16U1EA</td><td>Samsung</td><td>16GB</td><td>UFS 2.0</td><td>Lambat</td></tr>
+<tr><td>KLUEG32U1EA</td><td>Samsung</td><td>32GB</td><td>UFS 2.0</td><td>Restart sendiri</td></tr>
+<tr><td>KLUEG64U1EA</td><td>Samsung</td><td>64GB</td><td>UFS 2.1</td><td>Gagal flash</td></tr>
+<tr><td>KLUEG128U1EA</td><td>Samsung</td><td>128GB</td><td>UFS 2.1</td><td>Boot lama</td></tr>
+<tr><td>KLUEG256U1EA</td><td>Samsung</td><td>256GB</td><td>UFS 3.0</td><td>Hardbrick</td></tr>
+<tr><td>KLUEG512U1EA</td><td>Samsung</td><td>512GB</td><td>UFS 3.1</td><td>Tidak detect</td></tr>
+<tr><td>KLUFG256R1EE</td><td>Samsung</td><td>256GB</td><td>UFS 3.1</td><td>Restart acak</td></tr>
+<tr><td>KLUFG512R1EE</td><td>Samsung</td><td>512GB</td><td>UFS 3.1</td><td>Bootloop</td></tr>
+
+<tr><td>H9HQ04AECMMD</td><td>Hynix</td><td>64GB</td><td>UFS 2.1</td><td>Boot lama</td></tr>
+<tr><td>H9HQ08AECMMD</td><td>Hynix</td><td>128GB</td><td>UFS 2.1</td><td>Restart terus</td></tr>
+<tr><td>H9HQ16AECMMD</td><td>Hynix</td><td>256GB</td><td>UFS 3.0</td><td>Hardbrick</td></tr>
+<tr><td>H9HQ32AECMMD</td><td>Hynix</td><td>512GB</td><td>UFS 3.1</td><td>Tidak detect</td></tr>
+
+<tr><td>MT29U64G</td><td>Micron</td><td>64GB</td><td>UFS 2.1</td><td>Bootloop</td></tr>
+<tr><td>MT29U128G</td><td>Micron</td><td>128GB</td><td>UFS 2.1</td><td>Gagal OTA</td></tr>
+<tr><td>MT29U256GQ</td><td>Micron</td><td>256GB</td><td>UFS 3.0</td><td>Restart sendiri</td></tr>
+<tr><td>MT29U512GQ</td><td>Micron</td><td>512GB</td><td>UFS 3.1</td><td>Hardbrick</td></tr>
+<tr><td>MT29U1T0GQ</td><td>Micron</td><td>1TB</td><td>UFS 3.1</td><td>Tidak detect</td></tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="footer">
+© 2026 IC Reference Teknisi HP Indonesia
+</div>
+
+<script>
+document.getElementById("search").addEventListener("keyup", function() {
+    let value = this.value.toLowerCase();
+    let rows = document.querySelectorAll("#icTable tbody tr");
+    rows.forEach(row => {
+        row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
+    });
+});
+</script>
+
+</body>
+</html>
