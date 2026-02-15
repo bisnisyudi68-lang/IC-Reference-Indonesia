@@ -2,19 +2,134 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Premium Database</title>
+<title>Premium IC Database</title>
 
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
+}
+
+header{
+  background:#111827;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-weight:bold;
+  font-size:18px;
+}
+
+button{
+  background:#2563eb;
+  border:none;
+  padding:8px 14px;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.container{
+  padding:20px;
+}
+
+.search-box{
+  margin-bottom:20px;
+}
+
+input{
+  padding:8px;
+  width:100%;
+  max-width:400px;
+  border-radius:5px;
+  border:none;
+}
+
+.card{
+  background:#1e293b;
+  padding:15px;
+  border-radius:8px;
+  margin-bottom:15px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th, td{
+  padding:10px;
+  border-bottom:1px solid #334155;
+  text-align:left;
+}
+
+th{
+  background:#1e293b;
+}
+</style>
 </head>
 
-<body style="background:#0f172a;color:white;font-family:Arial;text-align:center;padding-top:100px;">
+<body>
 
-<h2>Premium Database</h2>
-<p>Selamat datang, member premium 🔥</p>
+<header>
+  <div class="logo">IC Reference Premium 🔥</div>
+  <button onclick="logout()">Logout</button>
+</header>
 
-<button onclick="logout()">Logout</button>
+<div class="container">
+
+  <h2>Database IC Teknisi</h2>
+  <p>Selamat datang, member premium.</p>
+
+  <div class="search-box">
+    <input type="text" placeholder="Cari kode IC...">
+  </div>
+
+  <div class="card">
+    <h3>Daftar IC (Demo)</h3>
+
+    <table>
+      <tr>
+        <th>Kode IC</th>
+        <th>Tipe</th>
+        <th>Kapasitas</th>
+        <th>Keterangan</th>
+      </tr>
+
+      <tr>
+        <td>KM8G9001JM</td>
+        <td>eMMC</td>
+        <td>8GB</td>
+        <td>Samsung</td>
+      </tr>
+
+      <tr>
+        <td>MT29F32G08</td>
+        <td>eMMC</td>
+        <td>32GB</td>
+        <td>Micron</td>
+      </tr>
+
+      <tr>
+        <td>PM660L</td>
+        <td>PMIC</td>
+        <td>-</td>
+        <td>Qualcomm Power IC</td>
+      </tr>
+
+    </table>
+
+  </div>
+
+</div>
 
 <script>
 
@@ -30,10 +145,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
-// CEK LOGIN
 auth.onAuthStateChanged(function(user){
   if(!user){
-    alert("Harus login dulu!");
     window.location="login.html";
   }
 });
