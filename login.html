@@ -2,22 +2,48 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login Premium - IC Reference</title>
+<title>Login Premium</title>
 
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  text-align:center;
+  padding-top:120px;
+}
+
+input{
+  padding:8px;
+  margin:5px;
+  width:220px;
+  border-radius:5px;
+  border:none;
+}
+
+button{
+  padding:8px 15px;
+  border:none;
+  background:#2563eb;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+}
+</style>
+
 </head>
 
-<body style="background:#0f172a;color:white;font-family:Arial;text-align:center;padding-top:100px;">
+<body>
 
 <h2>Login Premium</h2>
 
-<input type="email" id="email" placeholder="Email"><br><br>
+<input type="email" id="email" placeholder="Email"><br>
 <input type="password" id="password" placeholder="Password"><br><br>
 
 <button onclick="login()">Login</button>
-<button onclick="register()">Register</button>
 
 <script>
 
@@ -33,25 +59,13 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
-function register(){
-  auth.createUserWithEmailAndPassword(
-    document.getElementById("email").value,
-    document.getElementById("password").value
-  )
-  .then(()=> alert("Register sukses!"))
-  .catch(e=> alert(e.message));
-}
-
 function login(){
   auth.signInWithEmailAndPassword(
     document.getElementById("email").value,
     document.getElementById("password").value
-  )
-  .then(()=>{
-    alert("Login sukses!");
+  ).then(()=>{
     window.location="premium.html";
-  })
-  .catch(e=> alert(e.message));
+  }).catch(e=>alert("Akun tidak ditemukan / salah password"));
 }
 
 </script>
