@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Database Jalur Tegangan PMIC</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  margin:0;
+  padding:20px;
+}
+
+h2{
+  text-align:center;
+}
+
+.card{
+  background:#1e293b;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+th, td{
+  padding:10px;
+  border-bottom:1px solid #334155;
+  text-align:left;
+}
+
+th{
+  background:#0f172a;
+}
+
+.back{
+  display:inline-block;
+  margin-top:20px;
+  color:#38bdf8;
+  text-decoration:none;
+}
+</style>
+
+</head>
+<body>
+
+<h2>⚡ Database Jalur Tegangan PMIC</h2>
+
+<div class="card">
+<h3>Tegangan Umum Smartphone</h3>
+<table>
+<tr>
+<th>Jalur</th>
+<th>Tegangan</th>
+<th>Fungsi</th>
+<th>Jika Hilang</th>
+</tr>
+
+<tr>
+<td>VBAT</td>
+<td>3.7 – 4.2V</td>
+<td>Supply utama baterai</td>
+<td>HP mati total</td>
+</tr>
+
+<tr>
+<td>VPH_PWR</td>
+<td>3.8V</td>
+<td>Input utama ke PMIC</td>
+<td>Tidak bisa start</td>
+</tr>
+
+<tr>
+<td>VREG_L1</td>
+<td>1.8V</td>
+<td>Supply CPU IO</td>
+<td>No boot / stuck logo</td>
+</tr>
+
+<tr>
+<td>VREG_L2</td>
+<td>3.3V</td>
+<td>Supply RF / Peripheral</td>
+<td>No signal / WiFi mati</td>
+</tr>
+
+<tr>
+<td>VDD_CPU</td>
+<td>0.8 – 1.2V</td>
+<td>Core CPU</td>
+<td>CPU tidak kerja</td>
+</tr>
+
+<tr>
+<td>VDD_RAM</td>
+<td>1.1 – 1.2V</td>
+<td>Supply RAM</td>
+<td>Bootloop / restart</td>
+</tr>
+
+<tr>
+<td>VDD_UFS</td>
+<td>1.2V / 2.8V</td>
+<td>Supply IC UFS</td>
+<td>Tidak detect storage</td>
+</tr>
+
+<tr>
+<td>VIO_CAM</td>
+<td>1.8V</td>
+<td>Supply kamera</td>
+<td>Kamera error</td>
+</tr>
+
+<tr>
+<td>VREG_SIM</td>
+<td>1.8V / 3V</td>
+<td>Supply SIM</td>
+<td>No SIM detected</td>
+</tr>
+
+<tr>
+<td>VDD_WIFI</td>
+<td>3.3V</td>
+<td>Supply IC WiFi</td>
+<td>WiFi grey</td>
+</tr>
+
+</table>
+</div>
+
+<div class="card">
+<h3>⚡ Analisa Cepat</h3>
+
+<p>Jika 1.8V hilang → Cek regulator LDO PMIC</p>
+<p>Jika 3.3V drop → Cek short di jalur peripheral</p>
+<p>Jika VDD_CPU tidak keluar → PMIC rusak / CPU short</p>
+<p>Jika VBAT normal tapi tidak start → Cek power key / SIO</p>
+
+</div>
+
+<a class="back" href="premium.html">⬅ Kembali ke Premium</a>
+
+</body>
+</html>
