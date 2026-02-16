@@ -35,6 +35,16 @@ a{color:#38bdf8;text-decoration:none}
 <body>
 
 <h2>🧠 Database Penyakit Smartphone (100 Kasus Teknisi)</h2>
+<input type="text" id="searchInput" placeholder="🔎 Cari penyakit / arus / IC..."
+onkeyup="searchTable()" 
+style="
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border-radius:8px;
+border:none;
+font-size:16px;
+">
 
 <div class="card">
 <table>
@@ -190,6 +200,22 @@ auth.onAuthStateChanged(function(user){
   }
 });
 </script>
+<script>
+function searchTable() {
+  let input = document.getElementById("searchInput");
+  let filter = input.value.toLowerCase();
+  let table = document.querySelector("table");
+  let tr = table.getElementsByTagName("tr");
 
+  for (let i = 1; i < tr.length; i++) {
+    let text = tr[i].textContent.toLowerCase();
+    if (text.indexOf(filter) > -1) {
+      tr[i].style.display = "";
+    } else {
+      tr[i].style.display = "none";
+    }
+  }
+}
+</script>
 </body>
 </html>
