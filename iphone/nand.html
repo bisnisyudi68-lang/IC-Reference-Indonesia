@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>NAND / Storage - iPhone X ke Atas</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
+}
+
+header{
+  text-align:center;
+  padding:25px 10px;
+  border-bottom:2px solid #1e293b;
+}
+
+h1{
+  margin:0;
+  font-size:22px;
+}
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:30px 20px;
+}
+
+.card{
+  background:#1e293b;
+  padding:18px;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
+.card h3{
+  margin:0 0 8px;
+  color:#22c55e;
+}
+
+.badge{
+  background:#22c55e;
+  font-size:11px;
+  padding:3px 8px;
+  border-radius:10px;
+  margin-left:6px;
+}
+
+.back{
+  display:inline-block;
+  margin-top:20px;
+  padding:8px 15px;
+  background:#2563eb;
+  color:white;
+  text-decoration:none;
+  border-radius:6px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>💾 NAND / Storage iPhone X ke Atas</h1>
+<p style="opacity:0.7;font-size:13px;">
+Error 4013 / 4014 / Storage Issue
+</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h3>Error 4013</h3>
+<p>
+Biasanya karena NAND tidak stabil, jalur CPU ke NAND putus, atau solder retak.
+</p>
+<ul>
+<li>Cek resistansi jalur PP1V8_NAND</li>
+<li>Reheat ringan NAND</li>
+<li>Reball jika perlu</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>Error 4014</h3>
+<p>
+Sering disebabkan jalur komunikasi CPU - NAND bermasalah.
+</p>
+<ul>
+<li>Cek jalur data NAND</li>
+<li>Cek short di PP3V0_NAND</li>
+<li>Pastikan tidak ada korosi</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>NAND Rusak Total <span class="badge">NEW</span></h3>
+<ul>
+<li>Tidak terbaca di 3uTools</li>
+<li>Restore gagal terus</li>
+<li>IMEI hilang</li>
+</ul>
+<p>Solusi: Ganti NAND + Program ulang data</p>
+</div>
+
+<a href="index.html" class="back">⬅ Kembali</a>
+
+</div>
+
+</body>
+</html>
