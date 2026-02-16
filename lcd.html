@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LCD Compatibility PRO</title>
+<title>LCD Master Database</title>
 
 <style>
 body{
@@ -15,137 +15,164 @@ body{
 
 h1{
   text-align:center;
+  margin-bottom:5px;
+}
+
+.subtitle{
+  text-align:center;
+  opacity:0.7;
   margin-bottom:20px;
 }
 
-select{
+input, select{
   width:100%;
   padding:10px;
   border-radius:8px;
   border:none;
-  margin-bottom:15px;
+  margin-bottom:10px;
 }
 
-button{
-  background:#22c55e;
-  border:none;
-  padding:12px;
-  border-radius:8px;
-  font-weight:bold;
-  width:100%;
-  cursor:pointer;
-}
-
-.result{
+.card{
   background:#1e293b;
-  padding:20px;
+  padding:15px;
   border-radius:12px;
-  margin-top:20px;
+  margin-top:10px;
+}
+
+.brand{
+  color:#22c55e;
+  font-weight:bold;
+}
+
+.compat{
+  margin-top:5px;
+  font-size:14px;
+  opacity:0.9;
 }
 </style>
-
 </head>
 <body>
 
-<h1>📱 LCD Compatibility Checker</h1>
+<h1>📱 LCD MASTER DATABASE</h1>
+<div class="subtitle">Persamaan LCD Teknisi Indonesia</div>
 
-<select id="brand">
-<option value="">Pilih Brand</option>
-<option>Samsung</option>
-<option>Xiaomi</option>
-<option>Oppo</option>
-<option>Vivo</option>
-<option>Realme</option>
-<option>iPhone</option>
+<input type="text" id="search" placeholder="Cari model...">
+
+<select id="filterBrand">
+<option value="">Semua Brand</option>
 </select>
 
-<select id="model">
-<option value="">Pilih Model</option>
-</select>
-
-<button onclick="cekLCD()">Cek Persamaan</button>
-
-<div class="result" id="hasil">
-Hasil akan muncul di sini...
-</div>
+<div id="result"></div>
 
 <script>
 
-const dataLCD = {
+// ===== DATABASE LCD =====
 
-Samsung:{
-"A10":["A10s"],
-"A10s":["A10"],
-"A12":["A12 Nacho"],
-"A20":["Tidak ada 100% compatible"]
-},
+const data = [
 
-Xiaomi:{
-"Redmi 8":["Redmi 8A"],
-"Redmi 8A":["Redmi 8"],
-"Redmi Note 8":["Tidak ada persamaan"]
-},
+{brand:"ASUS", model:"Zenfone Max Pro M1 (ZB601KL / ZB602KL / X00TD)", compat:"Universal Touchscreen"},
 
-Oppo:{
-"A15":["A15s"],
-"A16":["Tidak ada 100% compatible"]
-},
+{brand:"HUAWEI", model:"Nova 3i", compat:"Standalone"},
+{brand:"HUAWEI", model:"Nova 7i", compat:"Incell Full Touchscreen"},
 
-Vivo:{
-"Y12":["Y15 versi tertentu"],
-"Y20":["Y20i"]
-},
+{brand:"INFINIX", model:"GT 10 Pro / Note 30 Pro", compat:"Universal Incell"},
+{brand:"INFINIX", model:"GT 20 Pro / Note 40 4G", compat:"Incell"},
+{brand:"INFINIX", model:"Hot 10 Play / Hot 11 Play", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Hot 10 / Note 8i / Pova LD7 / Camon 16 / Spark 6", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Hot 10S / Hot 10T / Smart 6 Plus", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Hot 11", compat:"Standalone"},
+{brand:"INFINIX", model:"Hot 11S / Zero 2023 5G", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Hot 12 Play / Hot 12 / Hot 30 Play / Note 12i / Pova 4", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Hot 12 Pro / Itel S18", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Hot 20 5G", compat:"Incell"},
+{brand:"INFINIX", model:"Hot 20 Play", compat:"Incell Black"},
+{brand:"INFINIX", model:"Hot 20i / Smart 6 HD / Hot 12i", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Hot 20S", compat:"Incell Black"},
+{brand:"INFINIX", model:"Hot 30i / Smart 7 / Itel A70", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Hot 40 / Hot 40 Pro / Note 40X", compat:"Incell Full Touchscreen"},
+{brand:"INFINIX", model:"Hot 50 Series", compat:"Incell Full Touchscreen"},
+{brand:"INFINIX", model:"Hot 6 / 6 Pro / 6X", compat:"Incell"},
+{brand:"INFINIX", model:"Hot 8 / Tecno Camon 12 / Spark 4", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Hot 9 / Note 7 Lite / Spark 5", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Hot 9 Play / Smart 4 Plus", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Hot S3", compat:"Incell"},
+{brand:"INFINIX", model:"Note 10 / Note 11S / Note 10 Pro / Pova 2 / Pova 3", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Note 11 / Note 12 / Note 30 VIP", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Note 12 VIP", compat:"Incell"},
+{brand:"INFINIX", model:"Note 12 (X676)", compat:"Incell Black"},
+{brand:"INFINIX", model:"Note 30 / Hot 30 / Pova 5 / Spark 10 Pro", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Note 4 / Note 4 Pro", compat:"Incell"},
+{brand:"INFINIX", model:"Note 40 Pro / 40 Pro Plus 5G", compat:"Incell"},
+{brand:"INFINIX", model:"Note 40S", compat:"Full Touchscreen"},
+{brand:"INFINIX", model:"Note 5", compat:"Incell"},
+{brand:"INFINIX", model:"Note 7", compat:"Standalone"},
+{brand:"INFINIX", model:"Note 8", compat:"Universal"},
+{brand:"INFINIX", model:"S5 / S5 Lite", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Smart 2", compat:"Incell"},
+{brand:"INFINIX", model:"Smart 3 Plus / S4", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Smart 4 / 4C", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Smart 5 / Hot 10 Lite / Tecno KC5 / Itel P36", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Smart 6", compat:"Universal"},
+{brand:"INFINIX", model:"Smart 8 / Hot 40i", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Smart 9 / Hot 50i", compat:"Full Touchscreen"},
+{brand:"INFINIX", model:"Smart HD", compat:"Standalone"},
+{brand:"INFINIX", model:"Smart X5010", compat:"Incell"},
+{brand:"INFINIX", model:"Zero 20 / Tecno Pova 4 Pro", compat:"Incell"},
+{brand:"INFINIX", model:"Zero 30 5G", compat:"Incell"},
+{brand:"INFINIX", model:"Zero 5 Pro", compat:"Incell"},
+{brand:"INFINIX", model:"Zero 8 / 8i", compat:"Universal Incell"},
+{brand:"INFINIX", model:"Zero Ultra", compat:"Incell"},
+{brand:"INFINIX", model:"Zero X Neo", compat:"Standalone"},
+{brand:"INFINIX", model:"Zero X Pro", compat:"Incell"},
+{brand:"INFINIX", model:"Hot 7 Pro", compat:"Incell"}
 
-Realme:{
-"C11":["C12"],
-"C12":["C11"]
-},
+];
 
-iPhone:{
-"iPhone X":["Tidak kompatibel dengan XS"],
-"iPhone XR":["Tidak kompatibel dengan 11"],
-"iPhone 11":["Tidak kompatibel dengan XR"]
-}
+// ===== FILTER BRAND =====
 
-};
+const filterBrand = document.getElementById("filterBrand");
+const result = document.getElementById("result");
+const search = document.getElementById("search");
 
-const brandSelect = document.getElementById("brand");
-const modelSelect = document.getElementById("model");
+const brands = [...new Set(data.map(item=>item.brand))];
 
-brandSelect.addEventListener("change",function(){
-
-modelSelect.innerHTML='<option value="">Pilih Model</option>';
-
-let brand = this.value;
-
-if(dataLCD[brand]){
-for(let model in dataLCD[brand]){
-modelSelect.innerHTML+=`<option>${model}</option>`;
-}
-}
-
+brands.forEach(b=>{
+filterBrand.innerHTML += `<option value="${b}">${b}</option>`;
 });
 
-function cekLCD(){
-
-let brand = brandSelect.value;
-let model = modelSelect.value;
-
-if(!brand || !model){
-document.getElementById("hasil").innerHTML="⚠ Pilih brand dan model dulu.";
+function tampilkan(list){
+result.innerHTML="";
+if(list.length===0){
+result.innerHTML="<p>Data tidak ditemukan</p>";
 return;
 }
-
-let result = dataLCD[brand][model];
-
-if(result){
-document.getElementById("hasil").innerHTML=
-"✅ Persamaan LCD:<br><br>"+result.join("<br>");
-}else{
-document.getElementById("hasil").innerHTML="❌ Tidak ada data.";
+list.forEach(item=>{
+result.innerHTML+=`
+<div class="card">
+<div class="brand">${item.brand}</div>
+<div>${item.model}</div>
+<div class="compat">Kompatibel: ${item.compat}</div>
+</div>
+`;
+});
 }
 
+tampilkan(data);
+
+function filterData(){
+const keyword = search.value.toLowerCase();
+const brandVal = filterBrand.value;
+
+const filtered = data.filter(item=>
+(item.model.toLowerCase().includes(keyword)) &&
+(brandVal==="" || item.brand===brandVal)
+);
+
+tampilkan(filtered);
 }
+
+search.addEventListener("keyup", filterData);
+filterBrand.addEventListener("change", filterData);
 
 </script>
 
