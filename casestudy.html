@@ -81,54 +81,76 @@ IC Reference Teknisi HP Indonesia • iPhone X ke atas
 
 <script>
 
+const caseList = document.getElementById("caseList");
+
 const cases = [
-{title:"1. Mati Total 0.00A",level:"basic",desc:"IC: PMIC | Cek VBAT → Cek VDD_MAIN → Reflow PMIC"},
-{title:"2. Short VBAT",level:"expert",desc:"Inject 1V → Cari panas → Ganti kapasitor short"},
-{title:"3. 0.02A Stuck",level:"expert",desc:"CPU tidak init → Reball CPU"},
-{title:"4. 0.04A Restart",level:"advance",desc:"NAND error → Reflow / Flash ulang"},
-{title:"5. 0.18A Logo Stuck",level:"advance",desc:"NAND bad block → Restore"},
-{title:"6. No Charge",level:"basic",desc:"IC Tristar rusak → Ganti IC"},
-{title:"7. Bootloop 3 menit",level:"advance",desc:"Panic log NAND → Reflow"},
-{title:"8. No Service IMEI ada",level:"advance",desc:"IC PA rusak → Ganti PA"},
-{title:"9. WiFi Abu-abu",level:"expert",desc:"WiFi IC cold solder → Reflow"},
-{title:"10. Mic Mati",level:"basic",desc:"Audio IC jalur mic rusak"},
+"0.00A Short VDD_MAIN",
+"0.02A Stuck CPU",
+"0.05A Restart Loop",
+"0.40A eMMC Fail",
+"No Signal Baseband",
+"WiFi Abu-Abu",
+"Face ID Not Available",
+"Camera Black Screen",
+"No Backlight",
+"Mic Tidak Berfungsi",
+"Short PP_BATT",
+"Short PP_VDD_CPU",
+"Short PP1V8",
+"Short PP3V0",
+"Bootloop Logo",
+"Overheat CPU",
+"Overheat PMIC",
+"Charging 0%",
+"Battery Not Detected",
+"Error 4013",
+"Error 4014",
+"NAND Corrupt",
+"Touch Ghost",
+"No Sound Speaker",
+"No Mic Recording",
+"Front Camera Error",
+"Rear Camera Error",
+"TrueDepth Error",
+"IMEI Null",
+"Baseband Unknown"
 ];
 
-// AUTO GENERATE sampai 100
-for(let i=11;i<=100;i++){
-cases.push({
-title:i+". Case Diagnosa Board Level",
-level:i%3==0?"expert":(i%2==0?"advance":"basic"),
-desc:"Analisa arus → Cek jalur → Tindakan sesuai IC"
-});
+for(let i=1;i<=100;i++){
+
+let caseName = cases[i % cases.length];
+
+let levelClass="";
+let levelText="";
+
+if(i%3==0){
+  levelClass="expert";
+  levelText="EXPERT";
+}else if(i%2==0){
+  levelClass="advance";
+  levelText="ADVANCE";
+}else{
+  levelClass="basic";
+  levelText="BASIC";
 }
 
-const caseList=document.getElementById("caseList");
-
-function renderCases(filter=""){
-caseList.innerHTML="";
-cases.forEach(c=>{
-if(c.title.toLowerCase().includes(filter.toLowerCase())){
-let levelClass=c.level;
-let levelText=c.level.toUpperCase();
-
-caseList.innerHTML+=`
+caseList.innerHTML += `
 <div class="case-card">
-<div class="case-title">
-${c.title}
-<span class="level ${levelClass}">${levelText}</span>
+  <div class="case-title">
+    ${i}. ${caseName}
+    <span class="level ${levelClass}">${levelText}</span>
+  </div>
+  <div>
+    🔍 Cek arus di power supply<br>
+    ⚡ Tracking jalur short<br>
+    🔥 Analisa IC terkait<br>
+    🛠 Eksekusi perbaikan<br>
+    ✅ Test ulang sampai normal
+  </div>
 </div>
-<div>${c.desc}</div>
-</div>`;
-}
-});
-}
+`;
 
-renderCases();
-
-document.getElementById("searchInput").addEventListener("input",e=>{
-renderCases(e.target.value);
-});
+}
 
 </script>
 
