@@ -21,16 +21,31 @@ h2{text-align:center;}
   margin-top:20px;
 }
 
-button{
-  padding:10px 15px;
-  margin:5px;
-  border:none;
+input, select{
+  width:100%;
+  padding:8px;
+  margin:5px 0 15px;
   border-radius:6px;
-  cursor:pointer;
-  font-weight:bold;
+  border:none;
 }
 
-.btn{background:#2563eb;color:white;}
+button{
+  padding:10px;
+  width:100%;
+  background:#22c55e;
+  border:none;
+  color:white;
+  font-weight:bold;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.result{
+  margin-top:20px;
+  padding:15px;
+  background:#111827;
+  border-radius:8px;
+}
 </style>
 </head>
 
@@ -38,42 +53,77 @@ button{
 
 <h2>🧠 Diagnosa Otomatis Teknisi</h2>
 
-<div class="card" id="step1">
-<h3>HP Mati Total?</h3>
-<button class="btn" onclick="step2()">Ya</button>
-<button class="btn" onclick="bootCase()">Tidak</button>
-</div>
+<div class="card">
 
-<div class="card" id="step2" style="display:none;">
-<h3>Ada Arus di Power Supply?</h3>
-<button class="btn" onclick="noArus()">Tidak Ada (0.00A)</button>
-<button class="btn" onclick="adaArus()">Ada Arus</button>
-</div>
+<label>Tipe HP:</label>
+<input type="text" id="tipe" placeholder="Contoh: Redmi Note 8">
 
-<div class="card" id="result" style="display:none;"></div>
+<label>Arus Standby (A):</label>
+<input type="number" step="0.01" id="standby" placeholder="0.00">
+
+<label>Arus Saat Tekan Power (A):</label>
+<input type="number" step="0.01" id="power" placeholder="0.10">
+
+<label>Gejala:</label>
+<select id="gejala">
+<option value="mati">Mati Total</option>
+<option value="bootloop">Bootloop</option>
+<option value="restart">Restart Sendiri</option>
+<option value="nocharge">Tidak Charging</option>
+<option value="nosignal">Tidak Ada Sinyal</option>
+<option value="blank">Blank Display</option>
+</select>
+
+<button onclick="diagnosa()">Analisa Sekarang</button>
+
+<div id="hasil" class="result"></div>
+
+</div>
 
 <script>
 
-function step2(){
-  document.getElementById("step2").style.display="block";
+function diagnosa(){
+
+let tipe = document.getElementById("tipe").value;
+let standby = parseFloat(document.getElementById("standby").value);
+let power = parseFloat(document.getElementById("power").value);
+let gejala = document.getElementById("gejala").value;
+
+let hasil = "";
+
+if(gejala=="mati"){
+    if(standby==0){
+        hasil="🔴 Tidak ada arus → Cek jalur VBAT / IC Charger";
+    }else if(standby>0 && standby<0.05){
+        hasil="🟡 Arus kecil → CPU / eMMC tidak respon";
+    }else if(standby>1){
+        hasil="🔥 Short jalur utama";
+    }
 }
 
-function noArus(){
-  showResult("Kemungkinan IC Charger / Jalur VBAT putus. Cek konektor baterai dan jalur utama.");
+if(gejala=="bootloop"){
+    hasil="⚠️ Kemungkinan Storage (eMMC/UFS) error → Coba Flash / Reball";
 }
 
-function adaArus(){
-  showResult("Periksa nilai arus: 0.02A → CPU, 0.40A → Storage, 0.80A → Firmware.");
+if(gejala=="restart"){
+    hasil="⚡ Cek PMIC / baterai drop";
 }
 
-function bootCase(){
-  showResult("Jika bootloop → cek eMMC/UFS. Jika no signal → cek PA & RF IC.");
+if(gejala=="nocharge"){
+    hasil="🔌 Cek IC Charger / Jalur USB";
 }
 
-function showResult(text){
-  let r = document.getElementById("result");
-  r.style.display="block";
-  r.innerHTML="<h3>📌 Hasil Diagnosa</h3><p>"+text+"</p>";
+if(gejala=="nosignal"){
+    hasil="📡 Cek RF IC / PA / Antena";
+}
+
+if(gejala=="blank"){
+    hasil="🖥️ Cek jalur backlight / IC display";
+}
+
+document.getElementById("hasil").innerHTML =
+"<b>Tipe HP:</b> "+tipe+"<br><br><b>Hasil Diagnosa:</b><br>"+hasil;
+
 }
 
 </script>
