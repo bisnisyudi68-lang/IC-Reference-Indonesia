@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>iPhone Thermal & Panic Log</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  margin:0;
+  padding:20px;
+}
+
+h1{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.card{
+  background:#1e293b;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+th,td{
+  padding:8px;
+  border-bottom:1px solid #334155;
+  text-align:left;
+}
+
+th{
+  background:#334155;
+}
+
+a{
+  color:#38bdf8;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🌡 iPhone Overheat & Panic Log</h1>
+
+<div class="card">
+<h3>Gejala Umum</h3>
+
+<table>
+<tr>
+<th>Kondisi</th>
+<th>Kemungkinan</th>
+</tr>
+
+<tr>
+<td>Panas saat standby</td>
+<td>Short ringan PP_VDD_MAIN</td>
+</tr>
+
+<tr>
+<td>Restart sendiri saat panas</td>
+<td>Sensor thermal rusak</td>
+</tr>
+
+<tr>
+<td>Tidak bisa charge karena panas</td>
+<td>Thermal battery line error</td>
+</tr>
+
+<tr>
+<td>Boot 3 menit lalu restart</td>
+<td>Sensor mic / thermal error</td>
+</tr>
+
+</table>
+</div>
+
+<div class="card">
+<h3>Cara Cek Panic Log</h3>
+<ol>
+<li>Masuk Settings → Privacy → Analytics & Improvements</li>
+<li>Buka Analytics Data</li>
+<li>Cari file panic-full</li>
+<li>Baca bagian error sensor</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>Error Panic Log Umum</h3>
+
+<table>
+<tr>
+<th>Error</th>
+<th>Analisa</th>
+</tr>
+
+<tr>
+<td>thermalmonitord</td>
+<td>Sensor suhu tidak terbaca</td>
+</tr>
+
+<tr>
+<td>mic1</td>
+<td>Audio line putus</td>
+</tr>
+
+<tr>
+<td>cpu watchdog</td>
+<td>CPU overload / solder retak</td>
+</tr>
+
+<tr>
+<td>baseband panic</td>
+<td>IC RF / Baseband error</td>
+</tr>
+
+</table>
+</div>
+
+<div class="card">
+<h3>Level Senior</h3>
+<ul>
+<li>Disconnect sensor satu per satu untuk isolasi</li>
+<li>Ukur jalur PP1V8 sensor</li>
+<li>Cek flex proximity & ear speaker</li>
+<li>Perhatikan sandwich board X–11 rawan retak layer</li>
+</ul>
+</div>
+
+<br>
+<a href="index.html">⬅ Kembali ke Menu iPhone</a>
+
+</body>
+</html>
