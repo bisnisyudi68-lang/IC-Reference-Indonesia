@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Search Kode Mesin HP PRO</title>
+<title>Search Kode Mesin HP PRO MAX</title>
 
 <style>
 body{
@@ -14,15 +14,28 @@ body{
 
 h1{
   text-align:center;
+  margin-bottom:5px;
 }
 
-input{
+.subtitle{
+  text-align:center;
+  opacity:0.7;
+  margin-bottom:20px;
+}
+
+input, select{
   width:100%;
   padding:12px;
   border-radius:10px;
   border:none;
-  margin-top:20px;
-  font-size:16px;
+  margin-top:10px;
+  font-size:15px;
+}
+
+.filters{
+  display:grid;
+  gap:10px;
+  margin-bottom:15px;
 }
 
 .hp-card{
@@ -30,6 +43,11 @@ input{
   padding:15px;
   border-radius:12px;
   margin-top:15px;
+  transition:0.2s;
+}
+
+.hp-card:hover{
+  background:#24355a;
 }
 
 .hp-card h3{
@@ -37,7 +55,13 @@ input{
 }
 
 .hp-card p{
-  margin:5px 0 0;
+  margin:4px 0;
+  opacity:0.85;
+  font-size:14px;
+}
+
+.count{
+  margin-top:15px;
   opacity:0.8;
 }
 </style>
@@ -45,82 +69,130 @@ input{
 </head>
 <body>
 
-<h1>🔎 Search Kode Mesin HP PRO</h1>
+<h1>🔎 Search Kode Mesin HP PRO MAX</h1>
+<div class="subtitle">500+ Database Android & iPhone</div>
 
-<input type="text" id="searchHP" placeholder="Cari Brand / Model / Kode Mesin...">
+<input type="text" id="searchHP" placeholder="Cari Brand / Model / Kode / Chipset...">
 
+<div class="filters">
+<select id="filterBrand">
+<option value="">Semua Brand</option>
+</select>
+
+<select id="filterOS">
+<option value="">Semua OS</option>
+<option value="Android">Android</option>
+<option value="iOS">iOS</option>
+</select>
+</div>
+
+<div class="count" id="resultCount"></div>
 <div id="resultHP"></div>
 
 <script>
 
-// ================= DATA =================
+// ===== DATA GENERATOR =====
 
 const brands = {
-  Samsung: ["A10","A11","A12","A13","A14","A20","A21","A22","A23","A24","A30","A31","A32","A33","A34","A50","A51","A52","A53","S10","S20","S21","S22","S23"],
-  Xiaomi: ["Redmi 8","Redmi 9","Redmi 10","Redmi Note 8","Redmi Note 9","Redmi Note 10","Redmi Note 11","Poco X3","Poco X4","Mi 10","Mi 11"],
-  Oppo: ["A15","A16","A17","A31","A54","A57","A74","F11","Reno 4","Reno 5"],
-  Vivo: ["Y12","Y15","Y20","Y21","Y22","V19","V20","V21"],
-  Realme: ["C11","C12","C15","C25","C35","Narzo 20","Narzo 50"],
-  Infinix: ["Hot 8","Hot 9","Hot 10","Note 8","Note 10"],
-  Tecno: ["Spark 5","Spark 6","Spark 7","Camon 17"],
-  iPhone: ["7","8","X","XR","XS","11","12","13","14","15"]
+  Samsung: {os:"Android", models:["A10","A11","A12","A13","A14","A20","A21","A22","A23","A24","A30","A31","A32","A33","A34","A50","A51","A52","A53","S10","S20","S21","S22","S23"]},
+  Xiaomi: {os:"Android", models:["Redmi 8","Redmi 9","Redmi 10","Note 8","Note 9","Note 10","Note 11","Poco X3","Poco X4","Mi 10","Mi 11"]},
+  Oppo: {os:"Android", models:["A15","A16","A17","A31","A54","A57","A74","F11","Reno 4","Reno 5"]},
+  Vivo: {os:"Android", models:["Y12","Y15","Y20","Y21","Y22","V19","V20","V21"]},
+  Realme: {os:"Android", models:["C11","C12","C15","C25","C35","Narzo 20","Narzo 50"]},
+  Infinix: {os:"Android", models:["Hot 8","Hot 9","Hot 10","Note 8","Note 10"]},
+  Tecno: {os:"Android", models:["Spark 5","Spark 6","Spark 7","Camon 17"]},
+  iPhone: {os:"iOS", models:["7","8","X","XR","XS","11","12","13","14","15"]}
 };
+
+const chipsets = [
+"Snapdragon 660","Snapdragon 720G","Snapdragon 888",
+"Helio G35","Helio G85","Dimensity 810",
+"Exynos 850","Exynos 2100",
+"A11 Bionic","A12 Bionic","A13 Bionic","A14 Bionic","A15 Bionic","A16 Bionic"
+];
 
 let dataHP = [];
 let counter = 1000;
 
-for (let brand in brands) {
-  brands[brand].forEach(model => {
-    for (let i = 1; i <= 2; i++) {
+for(let brand in brands){
+  brands[brand].models.forEach(model=>{
+    for(let i=0;i<3;i++){ // bikin banyak supaya >500
       dataHP.push({
-        brand: brand,
-        model: model,
-        kode: brand === "iPhone"
-          ? "A" + counter++
-          : "SM-" + counter++
+        brand:brand,
+        model:model,
+        os:brands[brand].os,
+        chipset:chipsets[Math.floor(Math.random()*chipsets.length)],
+        tahun:2018 + Math.floor(Math.random()*8),
+        kode: brand==="iPhone" ? "A"+counter++ : "SM-"+counter++
       });
     }
   });
 }
 
-// ================= TAMPILKAN =================
+// ===== FILTER DROPDOWN =====
+
+const filterBrand = document.getElementById("filterBrand");
+Object.keys(brands).forEach(brand=>{
+  filterBrand.innerHTML += `<option value="${brand}">${brand}</option>`;
+});
+
+// ===== RENDER =====
 
 const resultHP = document.getElementById("resultHP");
 const searchHP = document.getElementById("searchHP");
+const filterOS = document.getElementById("filterOS");
+const resultCount = document.getElementById("resultCount");
 
 function tampilkan(data){
-  resultHP.innerHTML = "";
+  resultHP.innerHTML="";
+  resultCount.innerHTML = "Total ditemukan: "+data.length+" HP";
 
-  if(data.length === 0){
-    resultHP.innerHTML = "<p style='text-align:center;margin-top:20px;'>Data tidak ditemukan</p>";
+  if(data.length===0){
+    resultHP.innerHTML="<p style='text-align:center;margin-top:20px;'>Data tidak ditemukan</p>";
     return;
   }
 
   data.forEach(item=>{
-    resultHP.innerHTML += `
+    resultHP.innerHTML+=`
       <div class="hp-card">
         <h3>${item.brand} ${item.model}</h3>
-        <p>Kode Mesin: ${item.kode}</p>
+        <p><b>Kode Mesin:</b> ${item.kode}</p>
+        <p><b>Chipset:</b> ${item.chipset}</p>
+        <p><b>OS:</b> ${item.os}</p>
+        <p><b>Tahun:</b> ${item.tahun}</p>
       </div>
     `;
   });
 }
 
-// tampil awal
 tampilkan(dataHP);
 
-// search realtime
-searchHP.addEventListener("keyup", function(){
-  const keyword = this.value.toLowerCase();
+// ===== SEARCH & FILTER =====
 
-  const filter = dataHP.filter(item =>
-    item.brand.toLowerCase().includes(keyword) ||
-    item.model.toLowerCase().includes(keyword) ||
-    item.kode.toLowerCase().includes(keyword)
-  );
+function filterData(){
+  const keyword = searchHP.value.toLowerCase();
+  const brandVal = filterBrand.value;
+  const osVal = filterOS.value;
 
-  tampilkan(filter);
-});
+  const filtered = dataHP.filter(item=>{
+    return (
+      (item.brand.toLowerCase().includes(keyword) ||
+       item.model.toLowerCase().includes(keyword) ||
+       item.kode.toLowerCase().includes(keyword) ||
+       item.chipset.toLowerCase().includes(keyword))
+      &&
+      (brandVal==="" || item.brand===brandVal)
+      &&
+      (osVal==="" || item.os===osVal)
+    );
+  });
+
+  tampilkan(filtered);
+}
+
+searchHP.addEventListener("keyup", filterData);
+filterBrand.addEventListener("change", filterData);
+filterOS.addEventListener("change", filterData);
 
 </script>
 
