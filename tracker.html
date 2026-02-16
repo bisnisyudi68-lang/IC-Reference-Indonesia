@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Mode Tracker Teknisi</title>
+<title>Mode Jalur Tracker</title>
 
 <style>
 body{
@@ -16,67 +16,72 @@ h2{text-align:center;}
 
 button{
   padding:10px 15px;
+  margin:5px;
   border:none;
   border-radius:6px;
-  margin:5px;
   cursor:pointer;
   font-weight:bold;
 }
 
-.pasif{background:#dc2626;color:white;}
-.aktif{background:#16a34a;color:white;}
+.pasif{background:#ef4444;color:white;}
+.aktif{background:#22c55e;color:white;}
 
 .card{
   background:#1e293b;
-  padding:15px;
+  padding:20px;
   border-radius:10px;
-  margin-top:15px;
-  display:none;
+  margin-top:20px;
 }
+
+ul{line-height:1.8;}
 </style>
 </head>
 
 <body>
 
-<h2>🧭 Mode Jalur Tracker</h2>
+<h2>🧭 Mode Jalur Tracker PRO</h2>
 
 <div style="text-align:center;">
 <button class="pasif" onclick="showPasif()">MODE PASIF</button>
 <button class="aktif" onclick="showAktif()">MODE AKTIF</button>
 </div>
 
-<div id="pasif" class="card">
-<h3>🔴 Mode Pasif (HP Tidak Start)</h3>
-<p>
-1️⃣ Ukur VBAT di konektor<br>
-2️⃣ Cek jalur ke PMIC<br>
-3️⃣ Cek short utama (inject 4V)<br>
-4️⃣ Ukur output 1.8V & 3.3V<br>
-5️⃣ Jika Vcore tidak keluar → PMIC rusak
-</p>
-</div>
-
-<div id="aktif" class="card">
-<h3>🟢 Mode Aktif (Ada Arus Tapi Tidak Normal)</h3>
-<p>
-1️⃣ Perhatikan arus awal<br>
-2️⃣ 0.02A → CPU / clock<br>
-3️⃣ 0.40A → Storage<br>
-4️⃣ 0.80A reboot → Firmware<br>
-5️⃣ Cek jalur data & baseband
-</p>
-</div>
+<div id="content" class="card"></div>
 
 <script>
+
 function showPasif(){
-  document.getElementById("pasif").style.display="block";
-  document.getElementById("aktif").style.display="none";
+document.getElementById("content").innerHTML = `
+<h3>🔴 MODE PASIF (HP Mati Total)</h3>
+<ul>
+<li>1️⃣ Ukur VBAT di konektor baterai</li>
+<li>2️⃣ Cek jalur VBAT ke PMIC</li>
+<li>3️⃣ Inject 4V → cek panas IC</li>
+<li>4️⃣ Ukur output 1.8V & 3.3V</li>
+<li>5️⃣ Jika Vcore tidak keluar → PMIC rusak</li>
+<li>6️⃣ Jika arus 0.02A stuck → CPU / Storage</li>
+<li>7️⃣ Jika 0.40A lalu mati → eMMC bad</li>
+<li>8️⃣ Jika >1A short → jalur utama short</li>
+</ul>
+`;
 }
 
 function showAktif(){
-  document.getElementById("aktif").style.display="block";
-  document.getElementById("pasif").style.display="none";
+document.getElementById("content").innerHTML = `
+<h3>🟢 MODE AKTIF (HP Nyala Tapi Error)</h3>
+<ul>
+<li>1️⃣ Bootloop → cek storage (UFS/eMMC)</li>
+<li>2️⃣ Restart sendiri → cek PMIC / baterai</li>
+<li>3️⃣ No signal → cek RF IC & PA</li>
+<li>4️⃣ Tidak charging → cek IC Charger</li>
+<li>5️⃣ Blank display → cek jalur backlight</li>
+<li>6️⃣ Panas berlebih → cek short CPU</li>
+<li>7️⃣ Stuck logo → flash firmware</li>
+<li>8️⃣ No touch → cek IC Touch</li>
+</ul>
+`;
 }
+
 </script>
 
 </body>
