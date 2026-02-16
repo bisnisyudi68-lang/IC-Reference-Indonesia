@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Database IC RF & Sinyal</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  margin:0;
+  padding:20px;
+}
+
+h2{
+  text-align:center;
+}
+
+.card{
+  background:#1e293b;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+th, td{
+  padding:10px;
+  border-bottom:1px solid #334155;
+  text-align:left;
+}
+
+th{
+  background:#0f172a;
+}
+
+.back{
+  display:inline-block;
+  margin-top:20px;
+  color:#38bdf8;
+  text-decoration:none;
+}
+</style>
+
+</head>
+<body>
+
+<h2>📡 Database IC RF & Sinyal</h2>
+
+<div class="card">
+<h3>Komponen RF Umum Smartphone</h3>
+
+<table>
+<tr>
+<th>IC / Jalur</th>
+<th>Fungsi</th>
+<th>Jika Rusak</th>
+</tr>
+
+<tr>
+<td>PA (Power Amplifier)</td>
+<td>Penguat sinyal jaringan</td>
+<td>Sinyal lemah / hilang total</td>
+</tr>
+
+<tr>
+<td>RF Transceiver</td>
+<td>Proses kirim & terima sinyal</td>
+<td>No service</td>
+</tr>
+
+<tr>
+<td>Switch Antenna</td>
+<td>Pilih jalur frekuensi</td>
+<td>Sinyal 1 bar / naik turun</td>
+</tr>
+
+<tr>
+<td>Filter RF</td>
+<td>Saring frekuensi tertentu</td>
+<td>Tidak bisa 4G / 5G</td>
+</tr>
+
+<tr>
+<td>IC Baseband</td>
+<td>Kontrol komunikasi jaringan</td>
+<td>IMEI null / baseband unknown</td>
+</tr>
+
+<tr>
+<td>Clock RF</td>
+<td>Referensi frekuensi</td>
+<td>Sinyal tidak stabil</td>
+</tr>
+
+<tr>
+<td>IC WiFi/Bluetooth</td>
+<td>Koneksi wireless</td>
+<td>WiFi grey / tidak aktif</td>
+</tr>
+
+<tr>
+<td>SIM Interface</td>
+<td>Deteksi kartu SIM</td>
+<td>No SIM / insert SIM</td>
+</tr>
+
+</table>
+</div>
+
+<div class="card">
+<h3>🔎 Analisa Cepat No Signal</h3>
+
+<p>✔ IMEI ada tapi no service → cek PA / antenna switch</p>
+<p>✔ IMEI null → cek CPU / baseband</p>
+<p>✔ Sinyal 1 bar → cek filter & antenna</p>
+<p>✔ WiFi grey → cek tegangan 3.3V jalur RF</p>
+
+</div>
+
+<a class="back" href="premium.html">⬅ Kembali ke Premium</a>
+
+</body>
+</html>
