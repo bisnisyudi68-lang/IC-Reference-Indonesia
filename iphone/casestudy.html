@@ -90,89 +90,100 @@ const searchBox = document.getElementById("searchBox");
 
 const cases = [];
 
-// AUTO GENERATE 100 KASUS BERBEDA
-for(let i=1;i<=100;i++){
+const brands = ["Samsung","Xiaomi","Oppo","Vivo","Realme","Huawei","Infinix","Tecno"];
+const chipsets = ["MTK","Snapdragon","Exynos"];
+const problems = [
+"Mati Total 0.00A",
+"Short VBAT",
+"Bootloop Logo",
+"No Signal IMEI Null",
+"WiFi Tidak Aktif",
+"Mic Mati",
+"Kamera Hitam",
+"Charging 0%",
+"Overheat CPU",
+"eMMC Corrupt",
+"UFS Tidak Detect",
+"Tidak Bisa Flash",
+"Restart 3 Menit",
+"Touch Tidak Respons",
+"No Backlight",
+"Fingerprint Error",
+"Battery Drain Cepat",
+"Tidak Bisa Update",
+"SIM Tidak Terbaca",
+"Layar Blank Putih"
+];
 
-  let level = i%3===0 ? "EXPERT" : i%2===0 ? "ADVANCE" : "BASIC";
+for(let i=0;i<100;i++){
 
-  let title;
-  if(i%10===1) title="Mati Total No Power";
-  else if(i%10===2) title="Short VBAT 0.02A";
-  else if(i%10===3) title="No Signal Baseband";
-  else if(i%10===4) title="Bootloop Logo Apple";
-  else if(i%10===5) title="WiFi Abu";
-  else if(i%10===6) title="Mic Mati";
-  else if(i%10===7) title="Kamera Belakang Hitam";
-  else if(i%10===8) title="Face ID Error";
-  else if(i%10===9) title="Overheat CPU";
-  else title="NAND Error 4013";
+let brand = brands[Math.floor(Math.random()*brands.length)];
+let chip = chipsets[Math.floor(Math.random()*chipsets.length)];
+let problem = problems[Math.floor(Math.random()*problems.length)];
 
-  cases.push({title,level});
+let level = i%3===0 ? "expert" : i%2===0 ? "advance" : "basic";
+
+cases.push({
+title: `${brand} ${chip} - ${problem}`,
+level: level
+});
+
 }
 
 function getAnalisa(title){
 
-  if(title.includes("Mati Total"))
-    return "• Arus 0.00A<br>• Cek PMIC & Charger IC<br>• Cek tombol power<br>• Normal setelah ganti IC";
+if(title.includes("Mati Total"))
+return "• Cek VBUS 5V<br>• Cek IC Charger<br>• Inject PSU<br>• Ganti PMIC";
 
-  if(title.includes("Short"))
-    return "• Mode diode test ke ground<br>• Inject PSU 4V<br>• Thermal detect IC panas<br>• Ganti kapasitor short";
+if(title.includes("Short"))
+return "• Mode diode test<br>• Inject 1V<br>• Cari IC panas<br>• Ganti IC short";
 
-  if(title.includes("No Signal"))
-    return "• Cek IMEI<br>• Cek Baseband version<br>• Cek PA & RF IC<br>• Reball BB";
+if(title.includes("Signal") || title.includes("SIM"))
+return "• Cek IMEI<br>• Cek Baseband<br>• Reflash<br>• Ganti RF IC";
 
-  if(title.includes("Bootloop"))
-    return "• Arus 0.40A<br>• Flash ulang<br>• Cek NAND health<br>• Reball NAND";
+if(title.includes("eMMC") || title.includes("UFS"))
+return "• ISP Test<br>• Flash ulang<br>• Replace Storage";
 
-  if(title.includes("WiFi"))
-    return "• WiFi abu<br>• Cek tegangan 1V8<br>• Reball WiFi IC<br>• Normal";
+if(title.includes("Mic"))
+return "• Cek jalur mic<br>• Cek audio IC<br>• Reball IC";
 
-  if(title.includes("Mic"))
-    return "• Cek jalur mic ke audio IC<br>• Cek supply 1V8 audio<br>• Reball audio IC<br>• Rekaman normal";
+if(title.includes("Kamera"))
+return "• Test kamera lain<br>• Cek supply 1.8V<br>• Reball CPU jika I2C hilang";
 
-  if(title.includes("Kamera"))
-    return "• Cek konektor<br>• Cek supply kamera<br>• Ganti kamera<br>• Normal";
+if(title.includes("Charging"))
+return "• Cek IC Charger<br>• Cek jalur BSI<br>• Ganti IC";
 
-  if(title.includes("Face"))
-    return "• TrueDepth error<br>• Cek dot projector<br>• Cek flex<br>• Reball IC Face ID";
+if(title.includes("Overheat"))
+return "• Monitor arus idle<br>• Thermal spray<br>• Ganti IC panas";
 
-  if(title.includes("Overheat"))
-    return "• Arus idle tinggi<br>• CPU panas<br>• Reball CPU<br>• Normal";
+return "• Analisa arus<br>• Cek jalur utama<br>• Eksekusi perbaikan";
 
-  if(title.includes("NAND"))
-    return "• Error 4013<br>• Restore gagal<br>• Ganti NAND<br>• Write SN & WiFi<br>• Done";
-
-  return "• Analisa arus<br>• Cek jalur<br>• Tindakan sesuai IC";
 }
 
 function renderCases(filter=""){
-  caseList.innerHTML="";
-
-  cases
-    .filter(c => c.title.toLowerCase().includes(filter.toLowerCase()))
-    .forEach((item,index)=>{
-
-      caseList.innerHTML += `
-      <div class="case-card">
-        <div class="case-title">
-          ${index+1}. ${item.title}
-          <span class="level ${item.level.toLowerCase()}">${item.level}</span>
-        </div>
-        <div>
-          ${getAnalisa(item.title)}
-        </div>
-      </div>
-      `;
-    });
+caseList.innerHTML="";
+cases
+.filter(c=>c.title.toLowerCase().includes(filter.toLowerCase()))
+.forEach((c,index)=>{
+caseList.innerHTML+=`
+<div class="case">
+<div class="title">
+${index+1}. ${c.title}
+<span class="level ${c.level}">${c.level.toUpperCase()}</span>
+</div>
+<div>
+${getAnalisa(c.title)}
+</div>
+</div>
+`;
+});
 }
 
-// SEARCH AKTIF
-searchBox.addEventListener("input",()=>{
-  renderCases(searchBox.value);
-});
-
-// LOAD AWAL
 renderCases();
+
+searchBox.addEventListener("input",()=>{
+renderCases(searchBox.value);
+});
 
 </script>
 
