@@ -159,16 +159,17 @@ return `
 }
 
 const cases = [
-"0.00A Short VDD_MAIN",
-"0.02A Stuck CPU",
-"Short PP_BATT",
-"No Signal Baseband",
-"Error 4013 NAND",
-"Overheat CPU",
-"Mic Mati",
-"WiFi Abu Abu",
-"Touch Ghost",
-"Charging 0%"
+  {title:"Mic Mati Total", level:"EXPERT"},
+  {title:"Short VBAT 0.02A", level:"ADVANCE"},
+  {title:"No Signal Baseband", level:"EXPERT"},
+  {title:"Bootloop Logo Apple", level:"ADVANCE"},
+  {title:"WiFi Abu", level:"BASIC"},
+  {title:"Face ID Error", level:"ADVANCE"},
+  {title:"Overheat Parah", level:"BASIC"},
+  {title:"Charging Tidak Masuk", level:"BASIC"},
+  {title:"Camera Hitam", level:"ADVANCE"},
+  {title:"Display No Backlight", level:"BASIC"},
+  ...
 ];
 
 for(let i=1;i<=100;i++){
@@ -189,20 +190,19 @@ if(i%3==0){
   levelText="BASIC";
 }
 
-caseList.innerHTML += `
-<div class="case-card" data-title="${title}">
-  <div class="case-title">
-    ${i}. ${title}
-    <span class="level ${levelClass}">${levelText}</span>
+cases.forEach((item, index) => {
+  caseList.innerHTML += `
+  <div class="case-card">
+     <div class="case-title">
+       ${index+1}. ${item.title}
+       <span class="level ${item.level.toLowerCase()}">${item.level}</span>
+     </div>
+     <div>
+       ${getAnalisa(item.title)}
+     </div>
   </div>
-  <div>
-    ${getAnalisa(title)}
-  </div>
-</div>
-`;
-
-}
-
+  `;
+});
 </script>
 <script>
 
