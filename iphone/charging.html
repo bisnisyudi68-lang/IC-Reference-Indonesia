@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>iPhone Charging Issue</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  margin:0;
+  padding:20px;
+}
+
+h1{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.card{
+  background:#1e293b;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+th,td{
+  padding:8px;
+  border-bottom:1px solid #334155;
+  text-align:left;
+}
+
+th{
+  background:#334155;
+}
+
+a{
+  color:#38bdf8;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🔌 iPhone Tidak Charging (X ke atas)</h1>
+
+<div class="card">
+<h3>Gejala Umum</h3>
+
+<table>
+<tr>
+<th>Gejala</th>
+<th>Kemungkinan</th>
+</tr>
+
+<tr>
+<td>Tidak muncul icon charging</td>
+<td>IC Charging / Tristar rusak</td>
+</tr>
+
+<tr>
+<td>Muncul tapi % tidak naik</td>
+<td>Baterai rusak / Fuel gauge</td>
+</tr>
+
+<tr>
+<td>HP mati saat dicolok</td>
+<td>Short PP_VDD_MAIN</td>
+</tr>
+
+<tr>
+<td>Tidak terdeteksi di PC</td>
+<td>IC USB / Tristar</td>
+</tr>
+
+</table>
+</div>
+
+<div class="card">
+<h3>Langkah Diagnosa</h3>
+<ol>
+<li>Cek port lightning kotor atau tidak</li>
+<li>Ukur tegangan PP_BATT_VCC</li>
+<li>Cek jalur ke IC charging</li>
+<li>Ukur arus saat colok charger</li>
+<li>Jika 0.00A → cek Tristar</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>Level Senior</h3>
+<ul>
+<li>Inject 4V untuk cek short jalur utama</li>
+<li>Cek diode mode pada line USB</li>
+<li>Jika sering tidak detect PC → IC USB rusak</li>
+<li>Hati-hati jalur bawah CPU (multi-layer board)</li>
+</ul>
+</div>
+
+<br>
+<a href="index.html">⬅ Kembali ke Menu iPhone</a>
+
+</body>
+</html>
