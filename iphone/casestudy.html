@@ -88,8 +88,6 @@ IC Reference Teknisi HP Indonesia • iPhone X ke atas
 const caseList = document.getElementById("caseList");
 const searchBox = document.getElementById("searchBox");
 
-const cases = [];
-
 const brands = ["Samsung","Xiaomi","Oppo","Vivo","Realme","Huawei","Infinix","Tecno"];
 const chipsets = ["MTK","Snapdragon","Exynos"];
 const problems = [
@@ -115,11 +113,14 @@ const problems = [
 "Layar Blank Putih"
 ];
 
+const cases = [];
+
+// Generate 100 kombinasi UNIK (bukan random)
 for(let i=0;i<100;i++){
 
-let brand = brands[Math.floor(Math.random()*brands.length)];
-let chip = chipsets[Math.floor(Math.random()*chipsets.length)];
-let problem = problems[Math.floor(Math.random()*problems.length)];
+let brand = brands[i % brands.length];
+let chip = chipsets[Math.floor(i / brands.length) % chipsets.length];
+let problem = problems[i % problems.length];
 
 let level = i%3===0 ? "expert" : i%2===0 ? "advance" : "basic";
 
@@ -139,19 +140,19 @@ if(title.includes("Short"))
 return "• Mode diode test<br>• Inject 1V<br>• Cari IC panas<br>• Ganti IC short";
 
 if(title.includes("Signal") || title.includes("SIM"))
-return "• Cek IMEI<br>• Cek Baseband<br>• Reflash<br>• Ganti RF IC";
+return "• Cek IMEI<br>• Cek Baseband<br>• Reflash firmware<br>• Ganti RF IC";
 
 if(title.includes("eMMC") || title.includes("UFS"))
-return "• ISP Test<br>• Flash ulang<br>• Replace Storage";
+return "• ISP test<br>• Flash ulang<br>• Replace storage";
 
 if(title.includes("Mic"))
-return "• Cek jalur mic<br>• Cek audio IC<br>• Reball IC";
+return "• Cek jalur mic<br>• Cek Audio IC<br>• Reball Audio IC";
 
 if(title.includes("Kamera"))
-return "• Test kamera lain<br>• Cek supply 1.8V<br>• Reball CPU jika I2C hilang";
+return "• Test kamera lain<br>• Cek supply 1.8V<br>• Reball CPU jika perlu";
 
 if(title.includes("Charging"))
-return "• Cek IC Charger<br>• Cek jalur BSI<br>• Ganti IC";
+return "• Cek IC Charger<br>• Cek jalur BSI<br>• Ganti IC charger";
 
 if(title.includes("Overheat"))
 return "• Monitor arus idle<br>• Thermal spray<br>• Ganti IC panas";
