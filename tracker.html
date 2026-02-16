@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Jalur Tracker Teknisi</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  margin:0;
+  padding:20px;
+}
+h2{text-align:center;margin-bottom:20px;}
+
+.card{
+  background:#1e293b;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
+.step{
+  margin-left:15px;
+  color:#94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<h2>🧭 Jalur Tracker Teknisi HP</h2>
+
+<div class="card">
+<h3>📌 Tracing Jalur VBAT (HP Mati Total)</h3>
+<p>
+1️⃣ Ukur VBAT di konektor baterai<br>
+2️⃣ Jika ada → cek ke PMIC input<br>
+3️⃣ Jika hilang → cek coil utama<br>
+4️⃣ Jika short → inject 4V<br>
+5️⃣ Rasakan panas IC<br>
+</p>
+</div>
+
+<div class="card">
+<h3>⚡ Tracing 1.8V Hilang</h3>
+<p>
+1️⃣ Cek output LDO PMIC<br>
+2️⃣ Jika 0V → cek enable signal<br>
+3️⃣ Jika enable ada → PMIC rusak<br>
+4️⃣ Jika short → lepas kapasitor satu per satu
+</p>
+</div>
+
+<div class="card">
+<h3>📶 Tracing No Signal</h3>
+<p>
+1️⃣ Cek IMEI<br>
+2️⃣ Cek baseband<br>
+3️⃣ Ukur tegangan PA<br>
+4️⃣ Cek antenna switch<br>
+5️⃣ Rehot RF IC
+</p>
+</div>
+
+<div class="card">
+<h3>💾 Tracing eMMC Tidak Detect</h3>
+<p>
+1️⃣ Ukur VCC 2.8V<br>
+2️⃣ Ukur VCCQ 1.8V<br>
+3️⃣ Cek CLK & CMD<br>
+4️⃣ Jika arus 0.40A → bad block<br>
+5️⃣ Test via ISP
+</p>
+</div>
+
+</body>
+</html>
