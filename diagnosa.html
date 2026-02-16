@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Diagnosa Otomatis Teknisi</title>
+<title>Diagnosa Otomatis V2</title>
 
 <style>
 body{
@@ -51,7 +51,7 @@ button{
 
 <body>
 
-<h2>🧠 Diagnosa Otomatis Teknisi</h2>
+<h2>🧠 Diagnosa Otomatis Teknisi V2</h2>
 
 <div class="card">
 
@@ -82,47 +82,109 @@ button{
 
 <script>
 
+// ============================
+// DATABASE PER TIPE HP
+// ============================
+
+const databaseHP = {
+
+"redmi note 8":{
+cpu:"Snapdragon 665",
+storage:"eMMC",
+common:"Sering eMMC bad sector"
+},
+
+"oppo a5s":{
+cpu:"Helio P35",
+storage:"eMMC",
+common:"Sering short PMIC"
+},
+
+"samsung a10":{
+cpu:"Exynos 7884",
+storage:"eMMC",
+common:"Bootloop karena storage"
+}
+
+};
+
+// ============================
+// SMART RULE LOGIC
+// ============================
+
 function diagnosa(){
 
-let tipe = document.getElementById("tipe").value;
+let tipe = document.getElementById("tipe").value.toLowerCase();
 let standby = parseFloat(document.getElementById("standby").value);
 let power = parseFloat(document.getElementById("power").value);
 let gejala = document.getElementById("gejala").value;
 
 let hasil = "";
+let infoHP = "";
+
+
+// ==== Ambil database tipe HP ====
+
+if(databaseHP[tipe]){
+infoHP = `
+<b>CPU:</b> ${databaseHP[tipe].cpu}<br>
+<b>Storage:</b> ${databaseHP[tipe].storage}<br>
+<b>Kasus Umum:</b> ${databaseHP[tipe].common}<br><br>
+`;
+}else{
+infoHP = "⚠️ Tipe belum ada di database<br><br>";
+}
+
+
+// ==== RULE DETAIL ARUS ====
 
 if(gejala=="mati"){
-    if(standby==0){
-        hasil="🔴 Tidak ada arus → Cek jalur VBAT / IC Charger";
-    }else if(standby>0 && standby<0.05){
-        hasil="🟡 Arus kecil → CPU / eMMC tidak respon";
-    }else if(standby>1){
-        hasil="🔥 Short jalur utama";
-    }
+
+if(standby==0){
+hasil="🔴 0.00A → Jalur VBAT putus / IC Charger mati";
+
+}else if(standby>0 && standby<0.03){
+hasil="🟡 0.02A Stuck → CPU / eMMC tidak respon";
+
+}else if(power>0.30 && power<0.60){
+hasil="⚠️ 0.40A lalu mati → Storage error / NAND rusak";
+
+}else if(power>1){
+hasil="🔥 1A ke atas → Short jalur utama";
+
+}else{
+hasil="Cek PMIC & output 1.8V / 3.3V";
+}
+
 }
 
 if(gejala=="bootloop"){
-    hasil="⚠️ Kemungkinan Storage (eMMC/UFS) error → Coba Flash / Reball";
+hasil="⚠️ Bootloop → Kemungkinan besar storage rusak atau perlu reflash";
 }
 
 if(gejala=="restart"){
-    hasil="⚡ Cek PMIC / baterai drop";
+hasil="⚡ Restart → Cek baterai / PMIC drop";
 }
 
 if(gejala=="nocharge"){
-    hasil="🔌 Cek IC Charger / Jalur USB";
+hasil="🔌 Tidak charging → IC Charger / Jalur USB";
 }
 
 if(gejala=="nosignal"){
-    hasil="📡 Cek RF IC / PA / Antena";
+hasil="📡 No Signal → RF IC / PA / Antena";
 }
 
 if(gejala=="blank"){
-    hasil="🖥️ Cek jalur backlight / IC display";
+hasil="🖥️ Blank → Jalur backlight / IC display";
 }
 
+
+// ==== TAMPILKAN HASIL ====
+
 document.getElementById("hasil").innerHTML =
-"<b>Tipe HP:</b> "+tipe+"<br><br><b>Hasil Diagnosa:</b><br>"+hasil;
+"<b>Tipe HP:</b> "+tipe+"<br><br>"
++infoHP+
+"<b>Hasil Diagnosa:</b><br>"+hasil;
 
 }
 
