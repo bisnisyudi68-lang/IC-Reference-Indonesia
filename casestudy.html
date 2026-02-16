@@ -98,53 +98,96 @@ small{color:#94a3b8;}
 
 const cases = [
 {
-title:"🔥 Mati Total",
-arus:"0.00A",
-ic:"PMIC",
-level:"Basic",
-content:`🔎 Tidak ada arus masuk<br>
-🔥 Ganti IC Charger<br>
-✅ Normal`
-},
-{
-title:"⚡ 0.02A Stuck",
-arus:"0.02A",
-ic:"CPU",
-level:"Expert",
-content:`🔎 CPU tidak inisialisasi<br>
-🔥 Reball CPU<br>
-✅ Normal`
-},
-{
-title:"📶 No Signal",
-arus:"Normal",
-ic:"PA",
-level:"Advance",
-content:`🔎 IMEI ada<br>
-🔥 Ganti PA<br>
-✅ Signal stabil`
-},
-{
-title:"💾 Bootloop",
-arus:"0.40A",
-ic:"eMMC",
-level:"Advance",
-content:`🔎 Stuck logo<br>
-🔥 Flash ulang<br>
-✅ Normal`
-}
-];
+<!-- CASE 1 -->
+<h3>⚡ Mati Total 0.00A <span class="badge basic">Basic</span></h3>
+<p>Arus: 0.00A | IC: PMIC</p>
+<ul>
+<li>VBAT masuk normal</li>
+<li>Tidak ada output 3.3V</li>
+<li>Ganti PMIC</li>
+<li>Normal</li>
+</ul>
 
-// Tambah dummy sampai 100
-for(let i=5;i<=100;i++){
-  cases.push({
-    title:"Case #" + i,
-    arus:["0.00A","0.02A","0.40A","Normal"][i%4],
-    ic:["PMIC","CPU","eMMC","PA"][i%4],
-    level:["Basic","Advance","Expert"][i%3],
-    content:`🔎 Analisa teknisi<br>🔥 Tindakan sesuai IC<br>✅ Normal`
-  });
-}
+<!-- CASE 2 -->
+<h3>⚡ 0.02A Stuck <span class="badge basic">Basic</span></h3>
+<p>Arus: 0.02A | IC: CPU</p>
+<ul>
+<li>CPU tidak start</li>
+<li>Reheat CPU</li>
+<li>Normal</li>
+</ul>
+
+<!-- CASE 3 -->
+<h3>⚡ 0.40A Bootloop <span class="badge advance">Advance</span></h3>
+<p>Arus: 0.40A | IC: eMMC</p>
+<ul>
+<li>Stuck logo</li>
+<li>Flash ulang</li>
+<li>Normal</li>
+</ul>
+
+<!-- CASE 4 -->
+<h3>📶 No Signal <span class="badge advance">Advance</span></h3>
+<p>Arus: Normal | IC: PA</p>
+<ul>
+<li>IMEI ada</li>
+<li>Ganti PA</li>
+<li>Signal stabil</li>
+</ul>
+
+<!-- CASE 5 -->
+<h3>🔋 Tidak Charge <span class="badge basic">Basic</span></h3>
+<p>Arus: 0.00A | IC: Charger</p>
+<ul>
+<li>IC charger short</li>
+<li>Ganti IC</li>
+<li>Normal</li>
+</ul>
+
+<!-- CASE 6 -->
+<h3>🔥 Panas Saat Mati <span class="badge expert">Expert</span></h3>
+<p>Arus: 0.02A | IC: PMIC</p>
+<ul>
+<li>Short internal PMIC</li>
+<li>Ganti PMIC</li>
+<li>Suhu normal</li>
+</ul>
+
+<!-- CASE 7 -->
+<h3>💾 Error 4013 <span class="badge expert">Expert</span></h3>
+<p>Arus: 0.40A | IC: NAND</p>
+<ul>
+<li>NAND corrupt</li>
+<li>Reball NAND</li>
+<li>Restore sukses</li>
+</ul>
+
+<!-- CASE 8 -->
+<h3>📡 No Service IMEI Ada <span class="badge advance">Advance</span></h3>
+<p>Arus: Normal | IC: RF</p>
+<ul>
+<li>Jalur RF putus</li>
+<li>Jumper jalur</li>
+<li>Normal</li>
+</ul>
+
+<!-- CASE 9 -->
+<h3>🎤 Mic Tidak Fungsi <span class="badge basic">Basic</span></h3>
+<p>Arus: Normal | IC: Audio</p>
+<ul>
+<li>IC audio rusak</li>
+<li>Ganti IC</li>
+<li>Normal</li>
+</ul>
+
+<!-- CASE 10 -->
+<h3>📷 Kamera Hitam <span class="badge advance">Advance</span></h3>
+<p>Arus: Normal | IC: Camera</p>
+<ul>
+<li>Jalur kamera putus</li>
+<li>Jumper jalur</li>
+<li>Normal</li>
+</ul>
 
 const container = document.getElementById("caseContainer");
 
