@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>iPhone Bootloop</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  margin:0;
+  padding:20px;
+}
+
+h1{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.card{
+  background:#1e293b;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+th,td{
+  padding:8px;
+  border-bottom:1px solid #334155;
+  text-align:left;
+}
+
+th{
+  background:#334155;
+}
+
+a{
+  color:#38bdf8;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🔄 iPhone Bootloop / Restart 3 Menit</h1>
+
+<div class="card">
+<h3>Jenis Bootloop</h3>
+
+<table>
+<tr>
+<th>Kondisi</th>
+<th>Kemungkinan Penyebab</th>
+</tr>
+
+<tr>
+<td>Restart tiap 3 menit</td>
+<td>Sensor / EEPROM audio rusak</td>
+</tr>
+
+<tr>
+<td>Stuck Logo Apple</td>
+<td>NAND / iOS corrupt</td>
+</tr>
+
+<tr>
+<td>Boot lalu mati</td>
+<td>PMIC drop / baterai rusak</td>
+</tr>
+
+<tr>
+<td>Boot saat panas saja</td>
+<td>Cold solder CPU / NAND</td>
+</tr>
+
+</table>
+</div>
+
+<div class="card">
+<h3>Restart 3 Menit (Kasus Umum X–11)</h3>
+<ol>
+<li>Cek mic bawah (audio IC line)</li>
+<li>Cek proximity sensor</li>
+<li>Cek flex ear speaker</li>
+<li>Disconnect satu per satu sensor</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>Stuck Logo Apple</h3>
+<ol>
+<li>Masuk Recovery Mode</li>
+<li>Restore via iTunes</li>
+<li>Jika gagal → kemungkinan NAND issue</li>
+<li>Cek arus 0.05–0.10A stuck</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>Level Senior</h3>
+<ul>
+<li>Gunakan 3uTools untuk log error</li>
+<li>Periksa panic log di analytics data</li>
+<li>Jika ada error “mic1” → audio line putus</li>
+<li>Jika ada error “thermal” → sensor suhu rusak</li>
+</ul>
+</div>
+
+<br>
+<a href="index.html">⬅ Kembali ke Menu iPhone</a>
+
+</body>
+</html>
