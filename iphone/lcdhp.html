@@ -15,137 +15,285 @@ body{
 
 h1{
   text-align:center;
+  margin-bottom:5px;
+}
+
+.subtitle{
+  text-align:center;
+  opacity:0.7;
   margin-bottom:20px;
 }
 
-select{
+input, select{
   width:100%;
   padding:10px;
   border-radius:8px;
   border:none;
-  margin-bottom:15px;
+  margin-bottom:10px;
 }
 
-button{
-  background:#22c55e;
-  border:none;
-  padding:12px;
-  border-radius:8px;
-  font-weight:bold;
-  width:100%;
-  cursor:pointer;
-}
-
-.result{
+.card{
   background:#1e293b;
-  padding:20px;
+  padding:15px;
   border-radius:12px;
-  margin-top:20px;
+  margin-top:12px;
+  transition:0.3s;
+}
+
+.card:hover{
+  background:#263449;
+}
+
+.brand{
+  color:#22c55e;
+  font-weight:bold;
+  margin-bottom:5px;
+}
+
+.group{
+  font-size:15px;
+  font-weight:bold;
+}
+
+.type{
+  font-size:13px;
+  opacity:0.8;
+  margin-top:6px;
+}
+
+.count{
+  background:#2563eb;
+  padding:3px 8px;
+  border-radius:10px;
+  font-size:11px;
+  margin-left:8px;
 }
 </style>
-
 </head>
 <body>
 
-<h1>📱 LCD Compatibility Checker</h1>
+<h1>📱 LCD MASTER PRO</h1>
+<div class="subtitle">Grup Persamaan ≥ 3 Model</div>
 
-<select id="brand">
-<option value="">Pilih Brand</option>
-<option>Samsung</option>
-<option>Xiaomi</option>
-<option>Oppo</option>
-<option>Vivo</option>
-<option>Realme</option>
-<option>iPhone</option>
+<input type="text" id="search" placeholder="Cari seri / model...">
+<select id="brandFilter">
+<option value="">Semua Brand</option>
 </select>
 
-<select id="model">
-<option value="">Pilih Model</option>
-</select>
-
-<button onclick="cekLCD()">Cek Persamaan</button>
-
-<div class="result" id="hasil">
-Hasil akan muncul di sini...
-</div>
+<div id="result"></div>
 
 <script>
 
-const dataLCD = {
+// ================= DATA (≥3 MODEL) =================
 
-Samsung:{
-"A10":["A10s"],
-"A10s":["A10"],
-"A12":["A12 Nacho"],
-"A20":["Tidak ada 100% compatible"]
+const data = [
+
+/* ================= OPPO / REALME ================= */
+
+{
+brand:"OPPO",
+group:"A3S / A5 / Realme C1 / Realme 2 / AX5",
+type:"Universal",
+count:5
 },
 
-Xiaomi:{
-"Redmi 8":["Redmi 8A"],
-"Redmi 8A":["Redmi 8"],
-"Redmi Note 8":["Tidak ada persamaan"]
+{
+brand:"OPPO",
+group:"A5 2020 / A9 2020 / A31 2020 / Realme C3 / Narzo 10A / Narzo 20A",
+type:"Incell Universal",
+count:6
 },
 
-Oppo:{
-"A15":["A15s"],
-"A16":["Tidak ada 100% compatible"]
+{
+brand:"OPPO",
+group:"Reno 5 4G / Reno 6 4G / Reno 5 5G / Reno 6 5G / Realme GT Master",
+type:"Full Touchscreen",
+count:5
 },
 
-Vivo:{
-"Y12":["Y15 versi tertentu"],
-"Y20":["Y20i"]
+{
+brand:"REALME",
+group:"C11 / C12 / C15 / A15 / A15S / A16K / A16E",
+type:"Universal",
+count:7
 },
 
-Realme:{
-"C11":["C12"],
-"C12":["C11"]
+{
+brand:"REALME",
+group:"Realme 8 / Realme 8 Pro / Realme 7 Pro / Oppo A94 / Reno 5F",
+type:"Universal",
+count:5
 },
 
-iPhone:{
-"iPhone X":["Tidak kompatibel dengan XS"],
-"iPhone XR":["Tidak kompatibel dengan 11"],
-"iPhone 11":["Tidak kompatibel dengan XR"]
+/* ================= SAMSUNG ================= */
+
+{
+brand:"SAMSUNG",
+group:"A12 / A02 / M12 / A32 5G / A032F / A127",
+type:"Universal",
+count:6
+},
+
+{
+brand:"SAMSUNG",
+group:"A30 / A305 / A50 / A505 / A50S / A507",
+type:"OLED / Incell",
+count:6
+},
+
+{
+brand:"SAMSUNG",
+group:"M21 / M30 / M30S / M31",
+type:"OLED / Incell",
+count:4
+},
+
+{
+brand:"SAMSUNG",
+group:"S20 / S20 Plus / S20 Ultra",
+type:"OLED With Frame",
+count:3
+},
+
+{
+brand:"SAMSUNG",
+group:"S23 / S23 Plus / S23 Ultra",
+type:"OLED With Frame",
+count:3
+},
+
+/* ================= VIVO ================= */
+
+{
+brand:"VIVO",
+group:"Y20 / Y20S / Y20 2021 / Y20I / Y20SG / Y12S / Y12A / Y15S / Y01",
+type:"Universal",
+count:9
+},
+
+{
+brand:"VIVO",
+group:"V20 / V21 4G / V23E",
+type:"Incell / OLED",
+count:3
+},
+
+{
+brand:"VIVO",
+group:"Y12 / Y12I / Y3 / Y11 / Y15 / Y17",
+type:"Universal",
+count:6
+},
+
+/* ================= XIAOMI ================= */
+
+{
+brand:"XIAOMI",
+group:"Redmi 8 / 8A / 8A Pro",
+type:"Universal",
+count:3
+},
+
+{
+brand:"XIAOMI",
+group:"Redmi 9 / 9 Prime / Poco M2",
+type:"Universal",
+count:3
+},
+
+{
+brand:"XIAOMI",
+group:"Redmi 9A / 9C / 9I / 10A / Poco C31",
+type:"Universal",
+count:5
+},
+
+{
+brand:"XIAOMI",
+group:"Redmi Note 10 4G / Note 10S",
+type:"Incell / OLED",
+count:3
+},
+
+{
+brand:"XIAOMI",
+group:"Redmi Note 13 Pro 5G / Poco X6 5G / Poco X6 Pro 5G / Poco F6",
+type:"Incell Full Touchscreen",
+count:4
+},
+
+/* ================= INFINIX ================= */
+
+{
+brand:"INFINIX",
+group:"Hot 10 Play / Hot 11 Play / Vision 2 Plus",
+type:"Universal Incell",
+count:3
+},
+
+{
+brand:"INFINIX",
+group:"Note 10 / Note 11S / Note 10 Pro / Pova 2 / Pova 3",
+type:"Universal Incell",
+count:5
+},
+
+{
+brand:"INFINIX",
+group:"Smart 8 / Smart 8 Pro / Hot 40i",
+type:"Universal Incell",
+count:3
 }
 
-};
+];
 
-const brandSelect = document.getElementById("brand");
-const modelSelect = document.getElementById("model");
+// ================= FILTER SYSTEM =================
 
-brandSelect.addEventListener("change",function(){
+const result = document.getElementById("result");
+const search = document.getElementById("search");
+const brandFilter = document.getElementById("brandFilter");
 
-modelSelect.innerHTML='<option value="">Pilih Model</option>';
+const brands = [...new Set(data.map(item=>item.brand))];
 
-let brand = this.value;
-
-if(dataLCD[brand]){
-for(let model in dataLCD[brand]){
-modelSelect.innerHTML+=`<option>${model}</option>`;
-}
-}
-
+brands.forEach(b=>{
+brandFilter.innerHTML += `<option value="${b}">${b}</option>`;
 });
 
-function cekLCD(){
-
-let brand = brandSelect.value;
-let model = modelSelect.value;
-
-if(!brand || !model){
-document.getElementById("hasil").innerHTML="⚠ Pilih brand dan model dulu.";
+function tampilkan(list){
+result.innerHTML="";
+if(list.length===0){
+result.innerHTML="<p>Data tidak ditemukan</p>";
 return;
 }
-
-let result = dataLCD[brand][model];
-
-if(result){
-document.getElementById("hasil").innerHTML=
-"✅ Persamaan LCD:<br><br>"+result.join("<br>");
-}else{
-document.getElementById("hasil").innerHTML="❌ Tidak ada data.";
+list.forEach(item=>{
+result.innerHTML+=`
+<div class="card">
+<div class="brand">${item.brand}</div>
+<div class="group">${item.group}
+<span class="count">${item.count} Model</span>
+</div>
+<div class="type">Tipe: ${item.type}</div>
+</div>
+`;
+});
 }
 
+tampilkan(data);
+
+function filterData(){
+const keyword = search.value.toLowerCase();
+const brandVal = brandFilter.value;
+
+const filtered = data.filter(item=>
+(item.group.toLowerCase().includes(keyword)) &&
+(brandVal==="" || item.brand===brandVal)
+);
+
+tampilkan(filtered);
 }
+
+search.addEventListener("keyup", filterData);
+brandFilter.addEventListener("change", filterData);
 
 </script>
 
