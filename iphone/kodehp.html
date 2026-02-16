@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Search Kode HP - PRO</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
+}
+
+header{
+  text-align:center;
+  padding:25px 10px;
+  border-bottom:2px solid #1e293b;
+}
+
+header h1{
+  margin:0;
+  font-size:22px;
+}
+
+.search-box{
+  text-align:center;
+  margin:30px 0;
+}
+
+#searchHP{
+  width:90%;
+  max-width:600px;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  font-size:14px;
+}
+
+#resultHP{
+  max-width:700px;
+  margin:auto;
+}
+
+.hp-card{
+  background:#1e293b;
+  padding:15px;
+  border-radius:12px;
+  margin:12px 15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.4);
+}
+
+.hp-card h3{
+  margin:0 0 5px 0;
+}
+
+.hp-card p{
+  font-size:13px;
+  opacity:0.8;
+  margin:2px 0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🔎 Search Kode Mesin HP PRO</h1>
+  <p style="opacity:0.7;font-size:13px;">Semua Brand Android & iPhone</p>
+</header>
+
+<div class="search-box">
+  <input type="text" id="searchHP" placeholder="Cari Brand / Model / Kode Mesin...">
+</div>
+
+<div id="resultHP"></div>
+
+<script>
+
+const dataHP = [
+
+/* SAMSUNG */
+{brand:"Samsung", model:"A12", kode:"SM-A125F"},
+{brand:"Samsung", model:"A13", kode:"SM-A135F"},
+{brand:"Samsung", model:"A32", kode:"SM-A325F"},
+{brand:"Samsung", model:"A52", kode:"SM-A525F"},
+{brand:"Samsung", model:"S10", kode:"SM-G973F"},
+{brand:"Samsung", model:"S20", kode:"SM-G980F"},
+{brand:"Samsung", model:"S21", kode:"SM-G991B"},
+{brand:"Samsung", model:"S22", kode:"SM-S901B"},
+
+/* XIAOMI */
+{brand:"Xiaomi", model:"Redmi Note 8", kode:"M1908C3JG"},
+{brand:"Xiaomi", model:"Redmi Note 9", kode:"M2003J15SS"},
+{brand:"Xiaomi", model:"Redmi Note 10", kode:"M2101K7AG"},
+{brand:"Xiaomi", model:"Redmi 9A", kode:"M2006C3LG"},
+{brand:"Xiaomi", model:"Mi 11", kode:"M2011K2G"},
+
+/* OPPO */
+{brand:"Oppo", model:"A15", kode:"CPH2185"},
+{brand:"Oppo", model:"A16", kode:"CPH2269"},
+{brand:"Oppo", model:"A54", kode:"CPH2239"},
+{brand:"Oppo", model:"F11", kode:"CPH1911"},
+{brand:"Oppo", model:"Reno 5", kode:"CPH2159"},
+
+/* VIVO */
+{brand:"Vivo", model:"Y12", kode:"1904"},
+{brand:"Vivo", model:"Y15", kode:"1901"},
+{brand:"Vivo", model:"Y20", kode:"V2029"},
+{brand:"Vivo", model:"V19", kode:"V1933"},
+{brand:"Vivo", model:"V21", kode:"V2050"},
+
+/* REALME */
+{brand:"Realme", model:"C11", kode:"RMX2185"},
+{brand:"Realme", model:"C15", kode:"RMX2180"},
+{brand:"Realme", model:"5 Pro", kode:"RMX1971"},
+{brand:"Realme", model:"Narzo 20", kode:"RMX2193"},
+
+/* INFINIX */
+{brand:"Infinix", model:"Hot 10", kode:"X682B"},
+{brand:"Infinix", model:"Hot 11", kode:"X662"},
+{brand:"Infinix", model:"Note 8", kode:"X692"},
+{brand:"Infinix", model:"Note 10", kode:"X693"},
+
+/* TECNO */
+{brand:"Tecno", model:"Spark 5", kode:"KD7"},
+{brand:"Tecno", model:"Spark 7", kode:"KF6"},
+{brand:"Tecno", model:"Camon 17", kode:"CG6"},
+
+/* IPHONE */
+{brand:"iPhone", model:"iPhone 7", kode:"A1778"},
+{brand:"iPhone", model:"iPhone 8", kode:"A1905"},
+{brand:"iPhone", model:"iPhone X", kode:"A1865"},
+{brand:"iPhone", model:"iPhone XR", kode:"A1984"},
+{brand:"iPhone", model:"iPhone XS", kode:"A2097"},
+{brand:"iPhone", model:"iPhone 11", kode:"A2221"},
+{brand:"iPhone", model:"iPhone 12", kode:"A2403"},
+{brand:"iPhone", model:"iPhone 13", kode:"A2633"},
+{brand:"iPhone", model:"iPhone 14", kode:"A2882"},
+{brand:"iPhone", model:"iPhone 15", kode:"A3090"}
+
+];
+
+const searchInput = document.getElementById("searchHP");
+const resultHP = document.getElementById("resultHP");
+
+function tampilkan(data){
+  resultHP.innerHTML = "";
+  if(data.length === 0){
+    resultHP.innerHTML = "<p style='text-align:center;'>Data tidak ditemukan</p>";
+    return;
+  }
+
+  data.forEach(item=>{
+    resultHP.innerHTML += `
+      <div class="hp-card">
+        <h3>${item.brand} ${item.model}</h3>
+        <p>Kode Mesin: ${item.kode}</p>
+      </div>
+    `;
+  });
+}
+
+tampilkan(dataHP);
+
+searchInput.addEventListener("keyup", function(){
+  const keyword = this.value.toLowerCase();
+  const filter = dataHP.filter(item =>
+    item.brand.toLowerCase().includes(keyword) ||
+    item.model.toLowerCase().includes(keyword) ||
+    item.kode.toLowerCase().includes(keyword)
+  );
+  tampilkan(filter);
+});
+
+</script>
+
+</body>
+</html>
