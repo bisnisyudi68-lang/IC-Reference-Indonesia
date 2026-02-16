@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>iPhone Short Hunting</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  margin:0;
+  padding:20px;
+}
+
+h1{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.card{
+  background:#1e293b;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+th,td{
+  padding:8px;
+  border-bottom:1px solid #334155;
+  text-align:left;
+}
+
+th{
+  background:#334155;
+}
+
+a{
+  color:#38bdf8;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<h1>⚡ iPhone Short Hunting (X ke atas)</h1>
+
+<div class="card">
+<h3>Langkah Awal</h3>
+<ol>
+<li>Lepas baterai</li>
+<li>Ukur short ke ground (mode diode)</li>
+<li>Jika short berat → inject 4V (limit 2A)</li>
+<li>Gunakan thermal / jari untuk deteksi panas</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>Analisa Jalur Utama</h3>
+
+<table>
+<tr>
+<th>Jalur</th>
+<th>Jika Short</th>
+</tr>
+
+<tr>
+<td>PP_VDD_MAIN</td>
+<td>Kapasitor short / PMIC rusak</td>
+</tr>
+
+<tr>
+<td>PP_BATT_VCC</td>
+<td>Jalur baterai / konektor rusak</td>
+</tr>
+
+<tr>
+<td>PP1V8</td>
+<td>Short sensor / IC kecil</td>
+</tr>
+
+<tr>
+<td>PP_CPU</td>
+<td>CPU short internal (fatal)</td>
+</tr>
+
+</table>
+</div>
+
+<div class="card">
+<h3>Polanya di Lapangan</h3>
+
+<table>
+<tr>
+<th>Arus Inject</th>
+<th>Kesimpulan</th>
+</tr>
+
+<tr>
+<td>0.50A Stabil</td>
+<td>Short ringan kapasitor</td>
+</tr>
+
+<tr>
+<td>1A langsung naik</td>
+<td>Short berat jalur utama</td>
+</tr>
+
+<tr>
+<td>CPU panas cepat</td>
+<td>Short internal CPU</td>
+</tr>
+
+<tr>
+<td>PMIC panas</td>
+<td>PMIC rusak</td>
+</tr>
+
+</table>
+</div>
+
+<div class="card">
+<h3>Tips Level Senior</h3>
+<ul>
+<li>Jangan inject lebih dari 4V</li>
+<li>Gunakan limit arus bertahap</li>
+<li>Periksa layer bawah board (iPhone dual layer)</li>
+<li>Hati-hati short bawah CPU sulit diperbaiki</li>
+</ul>
+</div>
+
+<br>
+<a href="index.html">⬅ Kembali ke Menu iPhone</a>
+
+</body>
+</html>
