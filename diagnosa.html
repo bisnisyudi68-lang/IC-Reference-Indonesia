@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Diagnosa Otomatis Teknisi</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  padding:20px;
+}
+
+h2{text-align:center;}
+
+.card{
+  background:#1e293b;
+  padding:20px;
+  border-radius:10px;
+  margin-top:20px;
+}
+
+button{
+  padding:10px 15px;
+  margin:5px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.btn{background:#2563eb;color:white;}
+</style>
+</head>
+
+<body>
+
+<h2>🧠 Diagnosa Otomatis Teknisi</h2>
+
+<div class="card" id="step1">
+<h3>HP Mati Total?</h3>
+<button class="btn" onclick="step2()">Ya</button>
+<button class="btn" onclick="bootCase()">Tidak</button>
+</div>
+
+<div class="card" id="step2" style="display:none;">
+<h3>Ada Arus di Power Supply?</h3>
+<button class="btn" onclick="noArus()">Tidak Ada (0.00A)</button>
+<button class="btn" onclick="adaArus()">Ada Arus</button>
+</div>
+
+<div class="card" id="result" style="display:none;"></div>
+
+<script>
+
+function step2(){
+  document.getElementById("step2").style.display="block";
+}
+
+function noArus(){
+  showResult("Kemungkinan IC Charger / Jalur VBAT putus. Cek konektor baterai dan jalur utama.");
+}
+
+function adaArus(){
+  showResult("Periksa nilai arus: 0.02A → CPU, 0.40A → Storage, 0.80A → Firmware.");
+}
+
+function bootCase(){
+  showResult("Jika bootloop → cek eMMC/UFS. Jika no signal → cek PA & RF IC.");
+}
+
+function showResult(text){
+  let r = document.getElementById("result");
+  r.style.display="block";
+  r.innerHTML="<h3>📌 Hasil Diagnosa</h3><p>"+text+"</p>";
+}
+
+</script>
+
+</body>
+</html>
