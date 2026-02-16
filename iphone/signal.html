@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>iPhone No Signal</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  margin:0;
+  padding:20px;
+}
+
+h1{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.card{
+  background:#1e293b;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+th,td{
+  padding:8px;
+  border-bottom:1px solid #334155;
+  text-align:left;
+}
+
+th{
+  background:#334155;
+}
+
+a{
+  color:#38bdf8;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📶 iPhone No Signal / Searching</h1>
+
+<div class="card">
+<h3>Step Diagnosa Awal</h3>
+<ol>
+<li>Masuk Settings → General → About</li>
+<li>Cek IMEI ada atau null</li>
+<li>Cek Baseband firmware muncul atau tidak</li>
+<li>Coba reset network</li>
+<li>Test SIM lain</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>Analisa Berdasarkan Kondisi</h3>
+
+<table>
+<tr>
+<th>Kondisi</th>
+<th>Kemungkinan Kerusakan</th>
+</tr>
+
+<tr>
+<td>IMEI Null</td>
+<td>Baseband CPU rusak / jalur putus</td>
+</tr>
+
+<tr>
+<td>No Baseband</td>
+<td>PMU_RF rusak / short jalur baseband</td>
+</tr>
+
+<tr>
+<td>Searching terus</td>
+<td>PA_RF rusak / antena putus</td>
+</tr>
+
+<tr>
+<td>No Service setelah jatuh</td>
+<td>IC Baseband retak (flex board)</td>
+</tr>
+
+<tr>
+<td>Sinyal hilang panas</td>
+<td>IC RF overheating / solder retak</td>
+</tr>
+
+</table>
+</div>
+
+<div class="card">
+<h3>Langkah Level Senior</h3>
+<ol>
+<li>Ukur tegangan VDD_RF</li>
+<li>Cek clock 26MHz</li>
+<li>Reball CPU Baseband (jika perlu)</li>
+<li>Reflow PMU_RF</li>
+<li>Cek jalur antena ke PA_RF</li>
+</ol>
+</div>
+
+<br>
+<a href="index.html">⬅ Kembali ke Menu iPhone</a>
+
+</body>
+</html>
