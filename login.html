@@ -8,82 +8,118 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
 
 <style>
+*{
+  box-sizing:border-box;
+}
+
 body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:linear-gradient(135deg,#0f172a,#0b1220);
+  background: radial-gradient(circle at top,#1e3a8a,#0f172a);
+  color:white;
+  font-family: 'Segoe UI', sans-serif;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
-  color:white;
+  min-height:100vh;
+  margin:0;
+  padding:20px;
 }
 
 .box{
   background:#1e293b;
-  padding:60px 50px;
+  padding:55px 40px;
   border-radius:20px;
-  width:420px;
-  max-width:95%;
+  width:100%;
+  max-width:460px;
   text-align:center;
-  box-shadow:0 0 40px rgba(0,0,0,0.6);
+  box-shadow:0 25px 60px rgba(0,0,0,0.7);
+  animation:fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
 h2{
   font-size:26px;
-  margin-bottom:10px;
+  margin-bottom:8px;
+}
+
+.badge{
+  font-size:14px;
+  color:#22c55e;
+  margin-bottom:15px;
 }
 
 .desc{
-  font-size:14px;
-  color:#94a3b8;
-  margin-bottom:25px;
+  font-size:15px;
+  color:#cbd5e1;
+  margin-bottom:30px;
+  line-height:1.6;
 }
 
 input{
+  padding:16px;
+  margin:12px 0;
   width:100%;
-  padding:14px;
-  margin:10px 0;
-  border-radius:8px;
+  border-radius:10px;
   border:none;
-  font-size:15px;
+  font-size:16px;
+  background:#334155;
+  color:white;
+}
+
+input::placeholder{
+  color:#94a3b8;
 }
 
 button{
+  padding:16px;
   width:100%;
-  padding:14px;
   border:none;
-  background:#2563eb;
+  background:linear-gradient(90deg,#2563eb,#1d4ed8);
   color:white;
-  border-radius:8px;
-  font-size:16px;
+  border-radius:10px;
+  font-size:17px;
   cursor:pointer;
-  margin-top:15px;
+  margin-top:20px;
+  font-weight:bold;
+  transition:0.3s;
 }
 
 button:hover{
-  background:#1d4ed8;
+  transform:scale(1.03);
 }
 
 .wa-btn{
   display:block;
-  margin-top:20px;
-  padding:14px;
-  background:#25D366;
+  margin-top:18px;
+  padding:16px;
+  background:linear-gradient(90deg,#25D366,#1ebe5d);
   color:white;
   text-decoration:none;
-  border-radius:8px;
+  border-radius:10px;
   font-weight:bold;
-  font-size:15px;
+  font-size:16px;
+  transition:0.3s;
+}
+
+.wa-btn:hover{
+  transform:scale(1.03);
 }
 
 .footer-note{
-  font-size:12px;
-  color:#64748b;
-  margin-top:15px;
+  font-size:13px;
+  color:#94a3b8;
+  margin-top:18px;
+}
+
+@media(max-width:480px){
+  .box{
+    padding:45px 25px;
+  }
 }
 </style>
-
 </head>
 
 <body>
