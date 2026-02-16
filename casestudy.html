@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Case Study Teknisi PRO</title>
+<title>Case Study Android Board Level</title>
+
 <style>
 body{
   margin:0;
@@ -10,221 +11,195 @@ body{
   background:#0f172a;
   color:white;
 }
-.header{
+
+h1{
   text-align:center;
-  padding:25px;
-  font-size:22px;
-  font-weight:bold;
-}
-.container{
-  max-width:1000px;
-  margin:auto;
   padding:20px;
 }
-.search-box{
+
+.search{
   text-align:center;
   margin-bottom:20px;
 }
-.search-box input{
+
+#searchBox{
   padding:10px;
   width:90%;
   max-width:400px;
   border-radius:8px;
   border:none;
 }
-.case-card{
+
+.container{
+  width:95%;
+  margin:auto;
+}
+
+.case{
   background:#1e293b;
   padding:15px;
-  border-radius:10px;
+  border-radius:12px;
   margin-bottom:15px;
 }
-.case-title{
-  font-size:16px;
+
+.title{
   font-weight:bold;
-  margin-bottom:5px;
+  margin-bottom:8px;
 }
+
 .level{
-  font-size:12px;
+  font-size:11px;
   padding:3px 8px;
   border-radius:10px;
   margin-left:8px;
 }
+
 .basic{background:#16a34a;}
 .advance{background:#f59e0b;}
 .expert{background:#dc2626;}
+
 .footer{
   text-align:center;
-  opacity:0.6;
-  margin-top:40px;
-  font-size:12px;
+  opacity:0.5;
+  padding:30px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>📚 Case Study iphone (1–100)</h1>
+<h1>📱 Case Study Android Board Level (1–100)</h1>
 
-<input type="text" id="searchBox" placeholder="Cari kasus...">
-
-<div id="caseList"></div>
-<div class="container">
-
-<div class="search-box">
-<input type="text" id="searchInput" placeholder="Cari kasus...">
+<div class="search">
+<input type="text" id="searchBox" placeholder="Cari kasus Android...">
 </div>
 
-<div id="caseList"></div>
+<div class="container" id="caseList"></div>
 
 <div class="footer">
-IC Reference Teknisi HP Indonesia • iPhone X ke atas
-</div>
-
+Database Teknisi Android Semua Brand
 </div>
 
 <script>
 
 const caseList = document.getElementById("caseList");
+const searchBox = document.getElementById("searchBox");
 
-function getAnalisa(title){
+const brands = ["Samsung","Xiaomi","Oppo","Vivo","Realme","Huawei","Infinix","Tecno"];
+const chipsets = ["MTK","Snapdragon","Exynos"];
 
-if(title.includes("Short")){
+function getAnalisa(type){
+
+if(type==="power"){
 return `
-⚡ Mode Diode test ke ground<br>
-🔍 Inject 1V pakai PSU<br>
-🔥 Cari IC panas (thermal spray)<br>
-🛠 Angkat IC penyebab short<br>
-✅ Test arus normal
+• Cek VBUS 5V<br>
+• Cek IC Charger<br>
+• Cek short VBAT<br>
+• Inject PSU 4V<br>
+• Ganti PMIC jika perlu
 `;
 }
 
-if(title.includes("0.00A")){
+if(type==="short"){
 return `
-🔋 Cek PP_BATT & PP_VDD_MAIN<br>
-🔍 Cek tombol power<br>
-⚡ Cek PMIC enable signal<br>
-🛠 Reball / ganti PMIC<br>
-✅ Boot normal
+• Mode diode test<br>
+• Inject 1V ke jalur short<br>
+• Thermal detect IC panas<br>
+• Angkat IC short<br>
+• Test ulang
 `;
 }
 
-if(title.includes("No Signal") || title.includes("IMEI")){
+if(type==="signal"){
 return `
-📶 Cek IMEI & baseband version<br>
-🔍 Cek tegangan PA & RF<br>
-🔥 Reheat / ganti PA<br>
-🛠 Cek jalur RF coil<br>
-✅ Signal stabil
+• Cek IMEI<br>
+• Cek Baseband version<br>
+• Cek PA & RF IC<br>
+• Reflash firmware<br>
+• Ganti RF jika perlu
 `;
 }
 
-if(title.includes("Error") || title.includes("NAND")){
+if(type==="storage"){
 return `
-💾 Cek NAND health<br>
-🔍 Restore pakai 3uTools<br>
-🔥 Reball NAND<br>
-🛠 Program ulang SN & WiFi<br>
-✅ Normal boot
+• Cek eMMC / UFS detect<br>
+• ISP test<br>
+• Flash ulang<br>
+• Replace eMMC/UFS jika rusak
 `;
 }
 
-if(title.includes("Overheat")){
+if(type==="audio"){
 return `
-🔥 Monitor arus idle<br>
-🔍 Thermal camera cek panas<br>
-⚡ Lepas coil satu per satu<br>
-🛠 Ganti IC panas<br>
-✅ Suhu normal
+• Cek jalur mic<br>
+• Cek Audio IC<br>
+• Cek supply 1V8<br>
+• Reball Audio IC
 `;
 }
 
-if(title.includes("Mic") || title.includes("Audio")){
+if(type==="overheat"){
 return `
-🎤 Cek jalur mic ke audio IC<br>
-🔍 Ganti mic dulu<br>
-⚡ Cek supply 1V8 audio<br>
-🛠 Reball audio IC<br>
-✅ Rekaman normal
+• Monitor arus idle<br>
+• Thermal spray<br>
+• Cek coil short<br>
+• Ganti IC panas
+`;
+}
+
+if(type==="camera"){
+return `
+• Test kamera lain<br>
+• Cek supply 1.8V/2.8V<br>
+• Cek jalur I2C<br>
+• Reball CPU jika I2C hilang
 `;
 }
 
 return `
-🔍 Analisa arus awal<br>
-⚡ Tracking jalur<br>
-🔥 Cek IC terkait<br>
-🛠 Eksekusi perbaikan<br>
-✅ Test normal
+• Analisa arus<br>
+• Cek jalur utama<br>
+• Eksekusi perbaikan<br>
+• Test normal
 `;
 
 }
 
-const cases = [
-  {title:"Mic Mati Total", level:"EXPERT"},
-  {title:"Short VBAT 0.02A", level:"ADVANCE"},
-  {title:"No Signal Baseband", level:"EXPERT"},
-  {title:"Bootloop Logo Apple", level:"ADVANCE"},
-  {title:"WiFi Abu", level:"BASIC"},
-  {title:"Face ID Error", level:"ADVANCE"},
-  {title:"Overheat Parah", level:"BASIC"},
-  {title:"Charging Tidak Masuk", level:"BASIC"},
-  {title:"Camera Hitam", level:"ADVANCE"},
-  {title:"Display No Backlight", level:"BASIC"},
-  ...
-];
+const types = ["power","short","signal","storage","audio","overheat","camera"];
 
 for(let i=1;i<=100;i++){
 
-let title = cases[i % cases.length];
+let brand = brands[i % brands.length];
+let chip = chipsets[i % chipsets.length];
+let type = types[i % types.length];
 
-let levelClass="";
-let levelText="";
+let level = i%3===0 ? "expert" : i%2===0 ? "advance" : "basic";
 
-if(i%3==0){
-  levelClass="expert";
-  levelText="EXPERT";
-}else if(i%2==0){
-  levelClass="advance";
-  levelText="ADVANCE";
-}else{
-  levelClass="basic";
-  levelText="BASIC";
-}
+let title = `${brand} ${chip} - ${type.toUpperCase()} Issue`;
 
-cases.forEach((item, index) => {
-  caseList.innerHTML += `
-  <div class="case-card">
-     <div class="case-title">
-       ${index+1}. ${item.title}
-       <span class="level ${item.level.toLowerCase()}">${item.level}</span>
-     </div>
-     <div>
-       ${getAnalisa(item.title)}
-     </div>
+caseList.innerHTML += `
+<div class="case">
+  <div class="title">
+    ${i}. ${title}
+    <span class="level ${level}">${level.toUpperCase()}</span>
   </div>
-  `;
-});
-</script>
-<script>
+  <div>
+    ${getAnalisa(type)}
+  </div>
+</div>
+`;
 
-document.getElementById("searchBox").addEventListener("keyup", function(){
-
-let value = this.value.toLowerCase();
-let cards = document.querySelectorAll(".case-card");
-
-cards.forEach(function(card){
-
-let text = card.innerText.toLowerCase();
-
-if(text.includes(value)){
-  card.style.display = "block";
-}else{
-  card.style.display = "none";
 }
 
+// SEARCH
+searchBox.addEventListener("input",()=>{
+let value = searchBox.value.toLowerCase();
+document.querySelectorAll(".case").forEach(c=>{
+c.style.display = c.innerText.toLowerCase().includes(value) ? "block":"none";
 });
-
 });
 
 </script>
+
 </body>
 </html>
