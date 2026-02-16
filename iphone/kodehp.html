@@ -2,90 +2,68 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Search Kode HP - PRO</title>
+<title>Search Kode Mesin HP PRO</title>
 
 <style>
 body{
-  margin:0;
+  background:#0b1a33;
   font-family:Arial;
-  background:#0f172a;
   color:white;
+  padding:20px;
 }
 
-header{
+h1{
   text-align:center;
-  padding:25px 10px;
-  border-bottom:2px solid #1e293b;
 }
 
-header h1{
-  margin:0;
-  font-size:22px;
-}
-
-.search-box{
-  text-align:center;
-  margin:30px 0;
-}
-
-#searchHP{
-  width:90%;
-  max-width:600px;
+input{
+  width:100%;
   padding:12px;
   border-radius:10px;
   border:none;
-  font-size:14px;
-}
-
-#resultHP{
-  max-width:700px;
-  margin:auto;
+  margin-top:20px;
+  font-size:16px;
 }
 
 .hp-card{
-  background:#1e293b;
+  background:#1e2a44;
   padding:15px;
   border-radius:12px;
-  margin:12px 15px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.4);
+  margin-top:15px;
 }
 
 .hp-card h3{
-  margin:0 0 5px 0;
+  margin:0;
 }
 
 .hp-card p{
-  font-size:13px;
+  margin:5px 0 0;
   opacity:0.8;
-  margin:2px 0;
 }
 </style>
-</head>
 
+</head>
 <body>
 
-<header>
-  <h1>🔎 Search Kode Mesin HP PRO</h1>
-  <p style="opacity:0.7;font-size:13px;">Semua Brand Android & iPhone</p>
-</header>
+<h1>🔎 Search Kode Mesin HP PRO</h1>
 
-<div class="search-box">
-  <input type="text" id="searchHP" placeholder="Cari Brand / Model / Kode Mesin...">
-</div>
+<input type="text" id="searchHP" placeholder="Cari Brand / Model / Kode Mesin...">
 
 <div id="resultHP"></div>
 
 <script>
 
+// ================= DATA =================
+
 const brands = {
-  Samsung: ["A10","A11","A12","A13","A14","A20","A21","A22","A23","A24","A30","A31","A32","A33","A34","A50","A51","A52","A53","S8","S9","S10","S20","S21","S22","S23"],
-  Xiaomi: ["Redmi 8","Redmi 9","Redmi 10","Redmi Note 7","Redmi Note 8","Redmi Note 9","Redmi Note 10","Redmi Note 11","Poco X3","Poco X4","Mi 10","Mi 11"],
-  Oppo: ["A15","A16","A17","A31","A54","A57","A74","F9","F11","Reno 4","Reno 5","Reno 6"],
-  Vivo: ["Y12","Y15","Y17","Y20","Y21","Y22","V15","V19","V20","V21","V23"],
-  Realme: ["C11","C12","C15","C25","C35","5","5 Pro","Narzo 20","Narzo 30","Narzo 50"],
-  Infinix: ["Hot 8","Hot 9","Hot 10","Hot 11","Note 7","Note 8","Note 10","Zero 8"],
-  Tecno: ["Spark 4","Spark 5","Spark 6","Spark 7","Camon 15","Camon 17"],
-  iPhone: ["7","8","X","XR","XS","11","11 Pro","12","12 Pro","13","13 Pro","14","14 Pro","15"]
+  Samsung: ["A10","A11","A12","A13","A14","A20","A21","A22","A23","A24","A30","A31","A32","A33","A34","A50","A51","A52","A53","S10","S20","S21","S22","S23"],
+  Xiaomi: ["Redmi 8","Redmi 9","Redmi 10","Redmi Note 8","Redmi Note 9","Redmi Note 10","Redmi Note 11","Poco X3","Poco X4","Mi 10","Mi 11"],
+  Oppo: ["A15","A16","A17","A31","A54","A57","A74","F11","Reno 4","Reno 5"],
+  Vivo: ["Y12","Y15","Y20","Y21","Y22","V19","V20","V21"],
+  Realme: ["C11","C12","C15","C25","C35","Narzo 20","Narzo 50"],
+  Infinix: ["Hot 8","Hot 9","Hot 10","Note 8","Note 10"],
+  Tecno: ["Spark 5","Spark 6","Spark 7","Camon 17"],
+  iPhone: ["7","8","X","XR","XS","11","12","13","14","15"]
 };
 
 let dataHP = [];
@@ -93,36 +71,58 @@ let counter = 1000;
 
 for (let brand in brands) {
   brands[brand].forEach(model => {
-
-    // buat beberapa variasi biar total 200+
     for (let i = 1; i <= 2; i++) {
-
       dataHP.push({
         brand: brand,
         model: model,
         kode: brand === "iPhone"
-          ? "A" + (counter++)
-          : "SM-" + (counter++)
+          ? "A" + counter++
+          : "SM-" + counter++
       });
-
     }
-
   });
 }
 
-const searchInput = document.getElementById("searchHP");
+// ================= TAMPILKAN =================
+
 const resultHP = document.getElementById("resultHP");
+const searchHP = document.getElementById("searchHP");
 
 function tampilkan(data){
   resultHP.innerHTML = "";
 
   if(data.length === 0){
-    resultHP.innerHTML = "<p style='text-align:center;'>Data tidak ditemukan</p>";
+    resultHP.innerHTML = "<p style='text-align:center;margin-top:20px;'>Data tidak ditemukan</p>";
     return;
   }
 
   data.forEach(item=>{
     resultHP.innerHTML += `
       <div class="hp-card">
+        <h3>${item.brand} ${item.model}</h3>
+        <p>Kode Mesin: ${item.kode}</p>
+      </div>
+    `;
+  });
+}
+
+// tampil awal
+tampilkan(dataHP);
+
+// search realtime
+searchHP.addEventListener("keyup", function(){
+  const keyword = this.value.toLowerCase();
+
+  const filter = dataHP.filter(item =>
+    item.brand.toLowerCase().includes(keyword) ||
+    item.model.toLowerCase().includes(keyword) ||
+    item.kode.toLowerCase().includes(keyword)
+  );
+
+  tampilkan(filter);
+});
+
+</script>
+
 </body>
 </html>
