@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Case Study Perbaikan</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  margin:0;
+  padding:20px;
+}
+
+h2{text-align:center;}
+
+.search{
+  width:100%;
+  padding:10px;
+  border-radius:6px;
+  border:none;
+  margin-bottom:20px;
+}
+
+.card{
+  background:#1e293b;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
+small{color:#94a3b8;}
+</style>
+</head>
+
+<body>
+
+<h2>📚 Case Study Perbaikan HP</h2>
+
+<input type="text" class="search" id="searchInput" placeholder="Cari berdasarkan arus / gejala / IC...">
+
+<div id="caseContainer">
+
+<div class="card">
+<h3>🔥 Mati Total – 0.02A Stuck</h3>
+<small>Arus: 0.02A | IC: PMIC | Gejala: Mati total</small>
+<p>
+🔎 Gejala: Tidak nyala<br>
+🧪 Inject 4V → CPU tidak panas<br>
+🔥 Ganti PMIC<br>
+✅ HP normal<br>
+📌 Kesimpulan: PMIC gagal supply Vcore
+</p>
+</div>
+
+<div class="card">
+<h3>📶 No Signal – PA Rusak</h3>
+<small>Arus: Normal | IC: PA | Gejala: No service</small>
+<p>
+🔎 IMEI ada<br>
+🧪 Tegangan PA hilang<br>
+🔥 Ganti PA<br>
+✅ Sinyal stabil
+</p>
+</div>
+
+</div>
+
+<script>
+const input = document.getElementById("searchInput");
+input.addEventListener("keyup", function(){
+  let filter = input.value.toLowerCase();
+  let cards = document.querySelectorAll(".card");
+
+  cards.forEach(card => {
+    if(card.innerText.toLowerCase().includes(filter)){
+      card.style.display="block";
+    }else{
+      card.style.display="none";
+    }
+  });
+});
+</script>
+
+</body>
+</html>
