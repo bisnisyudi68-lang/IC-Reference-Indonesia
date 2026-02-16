@@ -91,54 +91,43 @@ input, select{
 
 <script>
 
-// ===== MASTER BRAND & MODEL =====
+// ===== DATA GENERATOR =====
 
 const brands = {
-  Samsung: ["A04","A05","A10","A11","A12","A13","A14","A20","A21","A22","A23","A24","A30","A31","A32","A33","A34","A50","A51","A52","A53","S8","S9","S10","S20","S21","S22","S23"],
-  Xiaomi: ["Redmi 8","Redmi 9","Redmi 10","Note 8","Note 9","Note 10","Note 11","Note 12","Poco X3","Poco X4","Poco X5","Mi 10","Mi 11","Mi 12"],
-  Oppo: ["A15","A16","A17","A31","A54","A55","A56","A57","A74","F11","F15","Reno 4","Reno 5","Reno 6"],
-  Vivo: ["Y12","Y15","Y17","Y20","Y21","Y22","Y35","V19","V20","V21","V23"],
-  Realme: ["C11","C12","C15","C25","C30","C35","Narzo 20","Narzo 50","Narzo 60"],
-  Infinix: ["Hot 8","Hot 9","Hot 10","Hot 11","Note 8","Note 10","Note 12"],
-  Tecno: ["Spark 5","Spark 6","Spark 7","Spark 8","Camon 17","Camon 18"],
-  iPhone: ["7","8","X","XR","XS","11","12","13","14","15"]
+  Samsung: {os:"Android", models:["A10","A11","A12","A13","A14","A20","A21","A22","A23","A24","A30","A31","A32","A33","A34","A50","A51","A52","A53","S10","S20","S21","S22","S23"]},
+  Xiaomi: {os:"Android", models:["Redmi 8","Redmi 9","Redmi 10","Note 8","Note 9","Note 10","Note 11","Poco X3","Poco X4","Mi 10","Mi 11"]},
+  Oppo: {os:"Android", models:["A15","A16","A17","A31","A54","A57","A74","F11","Reno 4","Reno 5"]},
+  Vivo: {os:"Android", models:["Y12","Y15","Y20","Y21","Y22","V19","V20","V21"]},
+  Realme: {os:"Android", models:["C11","C12","C15","C25","C35","Narzo 20","Narzo 50"]},
+  Infinix: {os:"Android", models:["Hot 8","Hot 9","Hot 10","Note 8","Note 10"]},
+  Tecno: {os:"Android", models:["Spark 5","Spark 6","Spark 7","Camon 17"]},
+  iPhone: {os:"iOS", models:["7","8","X","XR","XS","11","12","13","14","15"]}
 };
 
 const chipsets = [
-"Snapdragon 450","Snapdragon 660","Snapdragon 720G","Snapdragon 865","Snapdragon 888","Snapdragon 8 Gen 1",
-"Helio G35","Helio G85","Helio G99",
-"Dimensity 700","Dimensity 810","Dimensity 920",
+"Snapdragon 660","Snapdragon 720G","Snapdragon 888",
+"Helio G35","Helio G85","Dimensity 810",
 "Exynos 850","Exynos 2100",
 "A11 Bionic","A12 Bionic","A13 Bionic","A14 Bionic","A15 Bionic","A16 Bionic"
 ];
 
 let dataHP = [];
-let kodeCounter = 1000;
+let counter = 1000;
 
-// ===== GENERATE 2000+ DATA =====
-
-for(let i=0;i<6;i++){   // 40 loop supaya >2000
-  for(let brand in brands){
-
-    brands[brand].forEach(model=>{
-      
+for(let brand in brands){
+  brands[brand].models.forEach(model=>{
+    for(let i=0;i<3;i++){ // bikin banyak supaya >500
       dataHP.push({
-        brand: brand,
-        model: model + " Rev" + (i+1),
-        os: brand === "iPhone" ? "iOS" : "Android",
-        chipset: chipsets[Math.floor(Math.random()*chipsets.length)],
-        tahun: 2017 + Math.floor(Math.random()*9),
-        kode: brand === "iPhone" 
-              ? "A" + kodeCounter++
-              : "SM-" + kodeCounter++
+        brand:brand,
+        model:model,
+        os:brands[brand].os,
+        chipset:chipsets[Math.floor(Math.random()*chipsets.length)],
+        tahun:2018 + Math.floor(Math.random()*8),
+        kode: brand==="iPhone" ? "A"+counter++ : "SM-"+counter++
       });
-
-    });
-
-  }
+    }
+  });
 }
-
-console.log("Total Database:", dataHP.length); // cek di console
 
 // ===== FILTER DROPDOWN =====
 
@@ -178,7 +167,7 @@ function tampilkan(data){
 
 tampilkan(dataHP);
 
-// ===== SEARCH =====
+// ===== SEARCH & FILTER =====
 
 function filterData(){
   const keyword = searchHP.value.toLowerCase();
