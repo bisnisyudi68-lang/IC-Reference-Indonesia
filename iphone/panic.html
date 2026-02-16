@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Panic Log Analyzer PRO</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
+}
+
+.header{
+  text-align:center;
+  padding:25px 15px;
+  border-bottom:2px solid #1e293b;
+}
+
+.header h1{
+  margin:0;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:25px 15px;
+}
+
+textarea{
+  width:100%;
+  height:180px;
+  border-radius:10px;
+  border:none;
+  padding:15px;
+  font-size:14px;
+  margin-bottom:15px;
+}
+
+button{
+  background:#22c55e;
+  border:none;
+  padding:12px 20px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-bottom:20px;
+}
+
+.result{
+  background:#1e293b;
+  padding:20px;
+  border-radius:12px;
+  line-height:1.7;
+}
+
+.badge{
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.high{ background:#ef4444; }
+.medium{ background:#f59e0b; }
+.low{ background:#22c55e; }
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>🧠 Panic Log Analyzer PRO</h1>
+  <p>Analisa Otomatis Panic Log iPhone X ke atas</p>
+</div>
+
+<div class="container">
+
+<textarea id="logInput" placeholder="Paste panic log di sini..."></textarea>
+
+<button onclick="analyzeLog()">Analisa Sekarang</button>
+
+<div class="result" id="resultBox">
+Hasil analisa akan muncul di sini...
+</div>
+
+</div>
+
+<script>
+
+function analyzeLog(){
+  const log = document.getElementById("logInput").value.toLowerCase();
+  const resultBox = document.getElementById("resultBox");
+
+  let result = "";
+
+  if(log.includes("thermalmonitord")){
+    result += "🔥 <span class='badge high'>HIGH</span> Thermal Panic Detected<br>";
+    result += "➡ Cek thermal sensor line<br>";
+    result += "➡ Cek NTC battery<br>";
+    result += "➡ Kemungkinan CPU / PMIC panas abnormal<br><br>";
+  }
+
+  if(log.includes("i2c")){
+    result += "🧩 <span class='badge medium'>MEDIUM</span> I2C Bus Error<br>";
+    result += "➡ Cek jalur SDA / SCL<br>";
+    result += "➡ Cek sensor short<br><br>";
+  }
+
+  if(log.includes("baseband")){
+    result += "📡 <span class='badge high'>HIGH</span> Baseband Panic<br>";
+    result += "➡ Cek BBPMU<br>";
+    result += "➡ Cek PA & RF line<br>";
+    result += "➡ Kemungkinan CPU RF layer issue<br><br>";
+  }
+
+  if(log.includes("audio")){
+    result += "🎤 <span class='badge medium'>MEDIUM</span> Audio Codec Panic<br>";
+    result += "➡ Cek audio IC<br>";
+    result += "➡ Cek 1v8 supply<br><br>";
+  }
+
+  if(log.includes("nand")){
+    result += "💾 <span class='badge high'>HIGH</span> NAND Communication Error<br>";
+    result += "➡ Cek reball NAND<br>";
+    result += "➡ Cek CPU to NAND line<br><br>";
+  }
+
+  if(result === ""){
+    result = "✅ <span class='badge low'>LOW</span> Tidak ditemukan keyword utama.<br>Cek manual lebih lanjut.";
+  }
+
+  resultBox.innerHTML = result;
+}
+
+</script>
+
+</body>
+</html>
