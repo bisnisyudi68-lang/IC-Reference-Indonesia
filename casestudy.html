@@ -2,49 +2,51 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Case Study Android Board Level</title>
+<title>Case Study Teknisi PRO</title>
 
 <style>
 body{
   margin:0;
-  font-family:Arial;
+  font-family:Arial, sans-serif;
   background:#0f172a;
   color:white;
 }
 
 h1{
   text-align:center;
-  padding:20px;
+  padding:20px 10px 10px;
 }
 
-.search{
+.search-box{
   text-align:center;
   margin-bottom:20px;
 }
 
 #searchBox{
-  padding:10px;
   width:90%;
   max-width:400px;
+  padding:10px;
   border-radius:8px;
   border:none;
+  font-size:14px;
 }
 
-.container{
+#caseList{
   width:95%;
   margin:auto;
 }
 
-.case{
+.case-card{
   background:#1e293b;
   padding:15px;
   border-radius:12px;
   margin-bottom:15px;
 }
 
-.title{
+.case-title{
   font-weight:bold;
   margin-bottom:8px;
+  font-size:14px;
 }
 
 .level{
@@ -61,23 +63,24 @@ h1{
 .footer{
   text-align:center;
   opacity:0.5;
-  padding:30px;
+  padding:30px 10px;
+  font-size:12px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>📱 Case Study Android Board Level (1–100)</h1>
+<h1>📚 Case Study iPhone (1–100)</h1>
 
-<div class="search">
-<input type="text" id="searchBox" placeholder="Cari kasus Android...">
+<div class="search-box">
+  <input type="text" id="searchBox" placeholder="Cari kasus...">
 </div>
 
-<div class="container" id="caseList"></div>
+<div id="caseList"></div>
 
 <div class="footer">
-Database Teknisi Android Semua Brand
+IC Reference Teknisi HP Indonesia • iPhone X ke atas
 </div>
 
 <script>
@@ -87,116 +90,100 @@ const searchBox = document.getElementById("searchBox");
 
 const brands = ["Samsung","Xiaomi","Oppo","Vivo","Realme","Huawei","Infinix","Tecno"];
 const chipsets = ["MTK","Snapdragon","Exynos"];
+const problems = [
+"Mati Total 0.00A",
+"Short VBAT",
+"Bootloop Logo",
+"No Signal IMEI Null",
+"WiFi Tidak Aktif",
+"Mic Mati",
+"Kamera Hitam",
+"Charging 0%",
+"Overheat CPU",
+"eMMC Corrupt",
+"UFS Tidak Detect",
+"Tidak Bisa Flash",
+"Restart 3 Menit",
+"Touch Tidak Respons",
+"No Backlight",
+"Fingerprint Error",
+"Battery Drain Cepat",
+"Tidak Bisa Update",
+"SIM Tidak Terbaca",
+"Layar Blank Putih"
+];
 
-function getAnalisa(type){
+const cases = [];
 
-if(type==="power"){
-return `
-• Cek VBUS 5V<br>
-• Cek IC Charger<br>
-• Cek short VBAT<br>
-• Inject PSU 4V<br>
-• Ganti PMIC jika perlu
-`;
-}
-
-if(type==="short"){
-return `
-• Mode diode test<br>
-• Inject 1V ke jalur short<br>
-• Thermal detect IC panas<br>
-• Angkat IC short<br>
-• Test ulang
-`;
-}
-
-if(type==="signal"){
-return `
-• Cek IMEI<br>
-• Cek Baseband version<br>
-• Cek PA & RF IC<br>
-• Reflash firmware<br>
-• Ganti RF jika perlu
-`;
-}
-
-if(type==="storage"){
-return `
-• Cek eMMC / UFS detect<br>
-• ISP test<br>
-• Flash ulang<br>
-• Replace eMMC/UFS jika rusak
-`;
-}
-
-if(type==="audio"){
-return `
-• Cek jalur mic<br>
-• Cek Audio IC<br>
-• Cek supply 1V8<br>
-• Reball Audio IC
-`;
-}
-
-if(type==="overheat"){
-return `
-• Monitor arus idle<br>
-• Thermal spray<br>
-• Cek coil short<br>
-• Ganti IC panas
-`;
-}
-
-if(type==="camera"){
-return `
-• Test kamera lain<br>
-• Cek supply 1.8V/2.8V<br>
-• Cek jalur I2C<br>
-• Reball CPU jika I2C hilang
-`;
-}
-
-return `
-• Analisa arus<br>
-• Cek jalur utama<br>
-• Eksekusi perbaikan<br>
-• Test normal
-`;
-
-}
-
-const types = ["power","short","signal","storage","audio","overheat","camera"];
-
-for(let i=1;i<=100;i++){
+// Generate 100 kombinasi UNIK (bukan random)
+for(let i=0;i<100;i++){
 
 let brand = brands[i % brands.length];
-let chip = chipsets[i % chipsets.length];
-let type = types[i % types.length];
+let chip = chipsets[Math.floor(i / brands.length) % chipsets.length];
+let problem = problems[i % problems.length];
 
 let level = i%3===0 ? "expert" : i%2===0 ? "advance" : "basic";
 
-let title = `${brand} ${chip} - ${type.toUpperCase()} Issue`;
-
-caseList.innerHTML += `
-<div class="case">
-  <div class="title">
-    ${i}. ${title}
-    <span class="level ${level}">${level.toUpperCase()}</span>
-  </div>
-  <div>
-    ${getAnalisa(type)}
-  </div>
-</div>
-`;
+cases.push({
+title: `${brand} ${chip} - ${problem}`,
+level: level
+});
 
 }
 
-// SEARCH
-searchBox.addEventListener("input",()=>{
-let value = searchBox.value.toLowerCase();
-document.querySelectorAll(".case").forEach(c=>{
-c.style.display = c.innerText.toLowerCase().includes(value) ? "block":"none";
+function getAnalisa(title){
+
+if(title.includes("Mati Total"))
+return "• Cek VBUS 5V<br>• Cek IC Charger<br>• Inject PSU<br>• Ganti PMIC";
+
+if(title.includes("Short"))
+return "• Mode diode test<br>• Inject 1V<br>• Cari IC panas<br>• Ganti IC short";
+
+if(title.includes("Signal") || title.includes("SIM"))
+return "• Cek IMEI<br>• Cek Baseband<br>• Reflash firmware<br>• Ganti RF IC";
+
+if(title.includes("eMMC") || title.includes("UFS"))
+return "• ISP test<br>• Flash ulang<br>• Replace storage";
+
+if(title.includes("Mic"))
+return "• Cek jalur mic<br>• Cek Audio IC<br>• Reball Audio IC";
+
+if(title.includes("Kamera"))
+return "• Test kamera lain<br>• Cek supply 1.8V<br>• Reball CPU jika perlu";
+
+if(title.includes("Charging"))
+return "• Cek IC Charger<br>• Cek jalur BSI<br>• Ganti IC charger";
+
+if(title.includes("Overheat"))
+return "• Monitor arus idle<br>• Thermal spray<br>• Ganti IC panas";
+
+return "• Analisa arus<br>• Cek jalur utama<br>• Eksekusi perbaikan";
+
+}
+
+function renderCases(filter=""){
+caseList.innerHTML="";
+cases
+.filter(c=>c.title.toLowerCase().includes(filter.toLowerCase()))
+.forEach((c,index)=>{
+caseList.innerHTML+=`
+<div class="case">
+<div class="title">
+${index+1}. ${c.title}
+<span class="level ${c.level}">${c.level.toUpperCase()}</span>
+</div>
+<div>
+${getAnalisa(c.title)}
+</div>
+</div>
+`;
 });
+}
+
+renderCases();
+
+searchBox.addEventListener("input",()=>{
+renderCases(searchBox.value);
 });
 
 </script>
