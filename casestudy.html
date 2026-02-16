@@ -63,8 +63,11 @@ body{
 
 <body>
 
-<div class="header">📚 Case Study Teknisi PRO (1–100)</div>
+<h1>📚 Case Study iphone (1–100)</h1>
 
+<input type="text" id="searchBox" placeholder="Cari kasus...">
+
+<div id="caseList"></div>
 <div class="container">
 
 <div class="search-box">
@@ -187,7 +190,7 @@ if(i%3==0){
 }
 
 caseList.innerHTML += `
-<div class="case-card">
+<div class="case-card" data-title="${title}">
   <div class="case-title">
     ${i}. ${title}
     <span class="level ${levelClass}">${levelText}</span>
@@ -201,6 +204,27 @@ caseList.innerHTML += `
 }
 
 </script>
+<script>
 
+document.getElementById("searchBox").addEventListener("keyup", function(){
+
+let value = this.value.toLowerCase();
+let cards = document.querySelectorAll(".case-card");
+
+cards.forEach(function(card){
+
+let text = card.innerText.toLowerCase();
+
+if(text.includes(value)){
+  card.style.display = "block";
+}else{
+  card.style.display = "none";
+}
+
+});
+
+});
+
+</script>
 </body>
 </html>
