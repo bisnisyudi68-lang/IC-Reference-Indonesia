@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Multi Analyzer PRO</title>
+
+<style>
+body{
+  background:#0f172a;
+  font-family:Arial;
+  color:white;
+  padding:20px;
+}
+
+h1{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.card{
+  background:#1e293b;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:20px;
+}
+
+select,input{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  margin-bottom:10px;
+}
+
+button{
+  background:#22c55e;
+  border:none;
+  padding:12px;
+  border-radius:8px;
+  font-weight:bold;
+  width:100%;
+  cursor:pointer;
+}
+
+.result{
+  background:#111827;
+  padding:20px;
+  border-radius:12px;
+  margin-top:20px;
+  line-height:1.7;
+}
+</style>
+
+</head>
+<body>
+
+<h1>🧠 Multi Analyzer ALL-IN-ONE</h1>
+
+<div class="card">
+
+<label>Arus PSU:</label>
+<select id="arus">
+<option value="">Pilih Arus</option>
+<option value="0.00">0.00A</option>
+<option value="0.02">0.02A</option>
+<option value="0.06">0.06A</option>
+<option value="0.12">0.12A</option>
+<option value="0.40">0.40A</option>
+</select>
+
+<label>IMEI:</label>
+<select id="imei">
+<option value="">Pilih</option>
+<option value="ada">Ada</option>
+<option value="tidak">Tidak Ada</option>
+</select>
+
+<label>Error Restore:</label>
+<input type="text" id="error" placeholder="Contoh: 4013 / 4014">
+
+<label>Panic Keyword:</label>
+<input type="text" id="panic" placeholder="thermal / i2c / baseband">
+
+<label>Gejala Utama:</label>
+<input type="text" id="gejala" placeholder="No signal / Bootloop / Overheat">
+
+<button onclick="analyze()">ANALISA SEKARANG</button>
+
+</div>
+
+<div class="result" id="hasil">
+Hasil analisa akan muncul di sini...
+</div>
+
+<script>
+
+function analyze(){
+
+let arus = document.getElementById("arus").value;
+let imei = document.getElementById("imei").value;
+let error = document.getElementById("error").value.toLowerCase();
+let panic = document.getElementById("panic").value.toLowerCase();
+let gejala = document.getElementById("gejala").value.toLowerCase();
+
+let result = "";
+
+
+// ===== ARUS ANALISA =====
+if(arus === "0.00"){
+result += "🔋 0.00A → Cek PMIC / Enable Line<br>";
+}
+
+if(arus === "0.02"){
+result += "🧠 0.02A → CPU Init Fail / DRAM Issue<br>";
+}
+
+if(arus === "0.06"){
+result += "💾 0.06A → NAND Stage<br>";
+}
+
+if(arus === "0.12"){
+result += "📦 0.12A → Kernel Loading<br>";
+}
+
+if(arus === "0.40"){
+result += "🚀 0.40A → Booting Normal Stage<br>";
+}
+
+
+// ===== IMEI =====
+if(imei === "tidak"){
+result += "📡 No IMEI → Baseband CPU / BBPMU<br>";
+}
+
+if(imei === "ada" && gejala.includes("no signal")){
+result += "📶 IMEI Ada tapi No Signal → PA / RF IC<br>";
+}
+
+
+// ===== ERROR =====
+if(error.includes("4013") || error.includes("4014")){
+result += "💾 Error 4013/4014 → NAND / CPU to NAND Line<br>";
+}
+
+
+// ===== PANIC =====
+if(panic.includes("thermal")){
+result += "🔥 Thermal Panic → Sensor / PMIC / CPU Overheat<br>";
+}
+
+if(panic.includes("i2c")){
+result += "🧩 I2C Panic → Sensor Short / SDA-SCL Line<br>";
+}
+
+if(panic.includes("baseband")){
+result += "📡 Baseband Panic → BB CPU / RF Section<br>";
+}
+
+
+// ===== GEJALA =====
+if(gejala.includes("bootloop")){
+result += "🔄 Bootloop → NAND / Kernel Corrupt<br>";
+}
+
+if(gejala.includes("overheat")){
+result += "🔥 Overheat → Short Rail / CPU Leak<br>";
+}
+
+if(result === ""){
+result = "⚠ Data belum cukup. Tambahkan parameter untuk analisa lebih akurat.";
+}
+
+document.getElementById("hasil").innerHTML = result;
+
+}
+
+</script>
+
+</body>
+</html>
