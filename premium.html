@@ -130,6 +130,28 @@ footer{
   transform: translateY(-3px);
   background:#1e293b;
 }
+.title{
+  font-size:22px;
+  font-weight:bold;
+  text-align:center;
+  margin-bottom:10px;
+}
+
+.badge-level{
+  background:linear-gradient(90deg,#2563eb,#1e40af);
+  padding:6px 18px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+  box-shadow:0 0 15px rgba(37,99,235,0.7);
+  display:inline-block;
+  animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{box-shadow:0 0 10px rgba(37,99,235,0.4);}
+  to{box-shadow:0 0 20px rgba(37,99,235,1);}
+}
 </style>
 </head>
 
