@@ -152,6 +152,14 @@ footer{
   from{box-shadow:0 0 10px rgba(37,99,235,0.4);}
   to{box-shadow:0 0 20px rgba(37,99,235,1);}
 }
+.card{
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.6);
+}
 </style>
 </head>
 
@@ -167,9 +175,22 @@ footer{
  <div class="title">Premium Database</div>
 
 <!-- BADGE LEVEL -->
-<div style="text-align:center;margin:10px 0;">
-  <span class="badge-level">🧠 Level: Teknisi Senior</span>
-</div>
+.badge-level{
+  background:linear-gradient(90deg,#2563eb,#1e3a8a,#2563eb);
+  background-size:200% 200%;
+  padding:6px 20px;
+  border-radius:30px;
+  font-size:13px;
+  font-weight:bold;
+  box-shadow:0 0 20px rgba(37,99,235,0.8);
+  display:inline-block;
+  animation:shine 3s linear infinite;
+}
+
+@keyframes shine{
+  0%{background-position:0% 50%;}
+  100%{background-position:200% 50%;}
+}
   <!-- BUTTON ARUS -->
   <div class="top-button">
     <a href="arus.html">⚡ Arus Normal & Diagnosa</a>
