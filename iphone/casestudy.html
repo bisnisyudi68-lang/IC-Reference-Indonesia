@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Case Study Teknisi PRO</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0f172a;
+  color:white;
+}
+
+h1{
+  text-align:center;
+  padding:20px 10px 10px;
+}
+
+.search-box{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+#searchBox{
+  width:90%;
+  max-width:400px;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  font-size:14px;
+}
+
+#caseList{
+  width:95%;
+  margin:auto;
+}
+
+.case-card{
+  background:#1e293b;
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+
+.case-title{
+  font-weight:bold;
+  margin-bottom:8px;
+  font-size:14px;
+}
+
+.level{
+  font-size:11px;
+  padding:3px 8px;
+  border-radius:10px;
+  margin-left:8px;
+}
+
+.basic{background:#16a34a;}
+.advance{background:#f59e0b;}
+.expert{background:#dc2626;}
+
+.footer{
+  text-align:center;
+  opacity:0.5;
+  padding:30px 10px;
+  font-size:12px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📚 Case Study iPhone (1–100)</h1>
+
+<div class="search-box">
+  <input type="text" id="searchBox" placeholder="Cari kasus...">
+</div>
+
+<div id="caseList"></div>
+
+<div class="footer">
+IC Reference Teknisi HP Indonesia • iPhone X ke atas
+</div>
+
+<script>
+
+const caseList = document.getElementById("caseList");
+const searchBox = document.getElementById("searchBox");
+
+const cases = [];
+
+// AUTO GENERATE 100 KASUS BERBEDA
+for(let i=1;i<=100;i++){
+
+  let level = i%3===0 ? "EXPERT" : i%2===0 ? "ADVANCE" : "BASIC";
+
+  let title;
+  if(i%10===1) title="Mati Total No Power";
+  else if(i%10===2) title="Short VBAT 0.02A";
+  else if(i%10===3) title="No Signal Baseband";
+  else if(i%10===4) title="Bootloop Logo Apple";
+  else if(i%10===5) title="WiFi Abu";
+  else if(i%10===6) title="Mic Mati";
+  else if(i%10===7) title="Kamera Belakang Hitam";
+  else if(i%10===8) title="Face ID Error";
+  else if(i%10===9) title="Overheat CPU";
+  else title="NAND Error 4013";
+
+  cases.push({title,level});
+}
+
+function getAnalisa(title){
+
+  if(title.includes("Mati Total"))
+    return "• Arus 0.00A<br>• Cek PMIC & Charger IC<br>• Cek tombol power<br>• Normal setelah ganti IC";
+
+  if(title.includes("Short"))
+    return "• Mode diode test ke ground<br>• Inject PSU 4V<br>• Thermal detect IC panas<br>• Ganti kapasitor short";
+
+  if(title.includes("No Signal"))
+    return "• Cek IMEI<br>• Cek Baseband version<br>• Cek PA & RF IC<br>• Reball BB";
+
+  if(title.includes("Bootloop"))
+    return "• Arus 0.40A<br>• Flash ulang<br>• Cek NAND health<br>• Reball NAND";
+
+  if(title.includes("WiFi"))
+    return "• WiFi abu<br>• Cek tegangan 1V8<br>• Reball WiFi IC<br>• Normal";
+
+  if(title.includes("Mic"))
+    return "• Cek jalur mic ke audio IC<br>• Cek supply 1V8 audio<br>• Reball audio IC<br>• Rekaman normal";
+
+  if(title.includes("Kamera"))
+    return "• Cek konektor<br>• Cek supply kamera<br>• Ganti kamera<br>• Normal";
+
+  if(title.includes("Face"))
+    return "• TrueDepth error<br>• Cek dot projector<br>• Cek flex<br>• Reball IC Face ID";
+
+  if(title.includes("Overheat"))
+    return "• Arus idle tinggi<br>• CPU panas<br>• Reball CPU<br>• Normal";
+
+  if(title.includes("NAND"))
+    return "• Error 4013<br>• Restore gagal<br>• Ganti NAND<br>• Write SN & WiFi<br>• Done";
+
+  return "• Analisa arus<br>• Cek jalur<br>• Tindakan sesuai IC";
+}
+
+function renderCases(filter=""){
+  caseList.innerHTML="";
+
+  cases
+    .filter(c => c.title.toLowerCase().includes(filter.toLowerCase()))
+    .forEach((item,index)=>{
+
+      caseList.innerHTML += `
+      <div class="case-card">
+        <div class="case-title">
+          ${index+1}. ${item.title}
+          <span class="level ${item.level.toLowerCase()}">${item.level}</span>
+        </div>
+        <div>
+          ${getAnalisa(item.title)}
+        </div>
+      </div>
+      `;
+    });
+}
+
+// SEARCH AKTIF
+searchBox.addEventListener("input",()=>{
+  renderCases(searchBox.value);
+});
+
+// LOAD AWAL
+renderCases();
+
+</script>
+
+</body>
+</html>
