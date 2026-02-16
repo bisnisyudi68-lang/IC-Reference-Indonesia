@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Case Study Teknisi PRO</title>
-
 <style>
 body{
   margin:0;
@@ -11,152 +10,126 @@ body{
   background:#0f172a;
   color:white;
 }
-
-header{
+.header{
   text-align:center;
-  padding:25px 15px;
-  border-bottom:1px solid #1e293b;
+  padding:25px;
+  font-size:22px;
+  font-weight:bold;
 }
-
-h1{
-  margin:0;
-  font-size:20px;
-}
-
 .container{
   max-width:1000px;
   margin:auto;
   padding:20px;
 }
-
 .search-box{
-  display:flex;
-  gap:10px;
+  text-align:center;
   margin-bottom:20px;
 }
-
 .search-box input{
-  flex:1;
   padding:10px;
+  width:90%;
+  max-width:400px;
   border-radius:8px;
   border:none;
 }
-
-.search-box select{
-  padding:10px;
-  border-radius:8px;
-  border:none;
-}
-
-.case{
+.case-card{
   background:#1e293b;
-  padding:18px;
-  border-radius:12px;
+  padding:15px;
+  border-radius:10px;
   margin-bottom:15px;
 }
-
-.case h3{
-  margin:0 0 8px 0;
+.case-title{
+  font-size:16px;
+  font-weight:bold;
+  margin-bottom:5px;
 }
-
-.case p{
-  font-size:13px;
-  opacity:0.8;
-  margin:0 0 10px 0;
-}
-
-.case ul{
-  margin:0;
-  padding-left:18px;
-  font-size:13px;
-}
-
-.badge{
-  font-size:11px;
+.level{
+  font-size:12px;
   padding:3px 8px;
-  border-radius:8px;
+  border-radius:10px;
   margin-left:8px;
 }
-
 .basic{background:#16a34a;}
 .advance{background:#f59e0b;}
 .expert{background:#dc2626;}
-
+.footer{
+  text-align:center;
+  opacity:0.6;
+  margin-top:40px;
+  font-size:12px;
+}
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>📚 Case Study Teknisi PRO</h1>
-</header>
+<div class="header">📚 Case Study Teknisi PRO (1–100)</div>
 
 <div class="container">
 
 <div class="search-box">
-<input type="text" id="search" placeholder="Cari kasus...">
-<select id="level">
-<option value="">Semua Level</option>
-<option value="basic">Basic</option>
-<option value="advance">Advance</option>
-<option value="expert">Expert</option>
-</select>
+<input type="text" id="searchInput" placeholder="Cari kasus...">
 </div>
 
 <div id="caseList"></div>
 
+<div class="footer">
+IC Reference Teknisi HP Indonesia • iPhone X ke atas
+</div>
+
 </div>
 
 <script>
-const caseList = document.getElementById("caseList");
 
-const levels = ["basic","advance","expert"];
-const icList = ["PMIC","CPU","eMMC","NAND","PA","RF","Audio","WiFi","Backlight"];
+const cases = [
+{title:"1. Mati Total 0.00A",level:"basic",desc:"IC: PMIC | Cek VBAT → Cek VDD_MAIN → Reflow PMIC"},
+{title:"2. Short VBAT",level:"expert",desc:"Inject 1V → Cari panas → Ganti kapasitor short"},
+{title:"3. 0.02A Stuck",level:"expert",desc:"CPU tidak init → Reball CPU"},
+{title:"4. 0.04A Restart",level:"advance",desc:"NAND error → Reflow / Flash ulang"},
+{title:"5. 0.18A Logo Stuck",level:"advance",desc:"NAND bad block → Restore"},
+{title:"6. No Charge",level:"basic",desc:"IC Tristar rusak → Ganti IC"},
+{title:"7. Bootloop 3 menit",level:"advance",desc:"Panic log NAND → Reflow"},
+{title:"8. No Service IMEI ada",level:"advance",desc:"IC PA rusak → Ganti PA"},
+{title:"9. WiFi Abu-abu",level:"expert",desc:"WiFi IC cold solder → Reflow"},
+{title:"10. Mic Mati",level:"basic",desc:"Audio IC jalur mic rusak"},
+];
 
-for(let i=1;i<=100;i++){
-
-  let level = levels[i%3];
-  let ic = icList[i%icList.length];
-
-  let arus = (i%4==0) ? "0.40A" : (i%3==0) ? "0.02A" : "Normal";
-
-  let div = document.createElement("div");
-  div.className="case";
-  div.setAttribute("data-level",level);
-
-  div.innerHTML=`
-    <h3>Case #${i} - ${ic} Issue 
-      <span class="badge ${level}">${level.toUpperCase()}</span>
-    </h3>
-    <p>Arus: ${arus} | IC: ${ic}</p>
-    <ul>
-      <li>Analisa jalur tegangan</li>
-      <li>Identifikasi IC bermasalah</li>
-      <li>Tindakan sesuai prosedur</li>
-      <li>Normal kembali</li>
-    </ul>
-  `;
-
-  caseList.appendChild(div);
+// AUTO GENERATE sampai 100
+for(let i=11;i<=100;i++){
+cases.push({
+title:i+". Case Diagnosa Board Level",
+level:i%3==0?"expert":(i%2==0?"advance":"basic"),
+desc:"Analisa arus → Cek jalur → Tindakan sesuai IC"
+});
 }
 
-document.getElementById("search").addEventListener("keyup",function(){
-  let value=this.value.toLowerCase();
-  document.querySelectorAll(".case").forEach(function(el){
-    el.style.display = el.innerText.toLowerCase().includes(value) ? "block":"none";
-  });
+const caseList=document.getElementById("caseList");
+
+function renderCases(filter=""){
+caseList.innerHTML="";
+cases.forEach(c=>{
+if(c.title.toLowerCase().includes(filter.toLowerCase())){
+let levelClass=c.level;
+let levelText=c.level.toUpperCase();
+
+caseList.innerHTML+=`
+<div class="case-card">
+<div class="case-title">
+${c.title}
+<span class="level ${levelClass}">${levelText}</span>
+</div>
+<div>${c.desc}</div>
+</div>`;
+}
+});
+}
+
+renderCases();
+
+document.getElementById("searchInput").addEventListener("input",e=>{
+renderCases(e.target.value);
 });
 
-document.getElementById("level").addEventListener("change",function(){
-  let value=this.value;
-  document.querySelectorAll(".case").forEach(function(el){
-    if(value===""){
-      el.style.display="block";
-    }else{
-      el.style.display = el.getAttribute("data-level")===value ? "block":"none";
-    }
-  });
-});
 </script>
 
 </body>
