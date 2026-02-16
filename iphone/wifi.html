@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>iPhone WiFi Issue</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  margin:0;
+  padding:20px;
+}
+
+h1{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.card{
+  background:#1e293b;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+th,td{
+  padding:8px;
+  border-bottom:1px solid #334155;
+  text-align:left;
+}
+
+th{
+  background:#334155;
+}
+
+a{
+  color:#38bdf8;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📡 iPhone WiFi Grey / Tidak Aktif</h1>
+
+<div class="card">
+<h3>Gejala Umum</h3>
+
+<table>
+<tr>
+<th>Kondisi</th>
+<th>Kemungkinan Penyebab</th>
+</tr>
+
+<tr>
+<td>WiFi tombol abu-abu</td>
+<td>IC WiFi rusak / solder retak</td>
+</tr>
+
+<tr>
+<td>Bluetooth tidak aktif</td>
+<td>IC combo WiFi/BT rusak</td>
+</tr>
+
+<tr>
+<td>WiFi hilang setelah jatuh</td>
+<td>Board flex retak</td>
+</tr>
+
+<tr>
+<td>WiFi hilang setelah panas</td>
+<td>Cold solder IC WiFi</td>
+</tr>
+
+</table>
+</div>
+
+<div class="card">
+<h3>Langkah Diagnosa</h3>
+<ol>
+<li>Reset network setting</li>
+<li>Restore iOS (untuk pastikan bukan software)</li>
+<li>Ukur tegangan PP3V0_WLAN</li>
+<li>Periksa IC WiFi dengan thermal</li>
+<li>Reflow atau reball IC WiFi</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>Level Senior</h3>
+<ul>
+<li>Jika WiFi + Bluetooth mati bersamaan → 90% IC WiFi</li>
+<li>Jika hanya WiFi mati → cek jalur antenna</li>
+<li>Perhatikan board sandwich (iPhone X–11)</li>
+<li>Gunakan microscope untuk cek solder crack</li>
+</ul>
+</div>
+
+<br>
+<a href="index.html">⬅ Kembali ke Menu iPhone</a>
+
+</body>
+</html>
