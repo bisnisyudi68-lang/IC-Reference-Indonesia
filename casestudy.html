@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Case Study Perbaikan HP</title>
+<title>Case Study PRO</title>
 
 <style>
 body{
@@ -12,110 +12,174 @@ body{
   margin:0;
   padding:20px;
 }
-h2{text-align:center;}
-.search{
-  width:100%;
-  padding:12px;
-  border-radius:8px;
-  border:none;
+
+h2{text-align:center;margin-bottom:20px;}
+
+.controls{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
   margin-bottom:20px;
-  font-size:16px;
 }
+
+input, select{
+  padding:10px;
+  border-radius:6px;
+  border:none;
+  font-size:14px;
+}
+
+.search{
+  flex:1;
+  min-width:200px;
+}
+
 .card{
   background:#1e293b;
   padding:15px;
   border-radius:10px;
   margin-bottom:15px;
+  transition:0.2s;
 }
+
+.card:hover{
+  transform:translateY(-3px);
+  background:#263445;
+}
+
 small{color:#94a3b8;}
+.badge{
+  padding:3px 8px;
+  border-radius:4px;
+  font-size:12px;
+  margin-left:5px;
+}
+
+.basic{background:#16a34a;}
+.advance{background:#f59e0b;}
+.expert{background:#dc2626;}
 </style>
 </head>
 
 <body>
 
-<h2>📚 100 Case Study Perbaikan Smartphone</h2>
+<h2>📚 Case Study Teknisi PRO</h2>
 
-<input type="text" class="search" id="searchInput" placeholder="Cari berdasarkan arus / gejala / IC...">
+<div class="controls">
+  <input type="text" id="searchInput" class="search" placeholder="🔎 Cari kasus...">
 
-<div id="caseContainer">
+  <select id="arusFilter">
+    <option value="">Semua Arus</option>
+    <option value="0.00A">0.00A</option>
+    <option value="0.02A">0.02A</option>
+    <option value="0.40A">0.40A</option>
+    <option value="Normal">Normal</option>
+  </select>
+
+  <select id="icFilter">
+    <option value="">Semua IC</option>
+    <option value="PMIC">PMIC</option>
+    <option value="CPU">CPU</option>
+    <option value="eMMC">eMMC</option>
+    <option value="PA">PA</option>
+  </select>
+
+  <select id="levelFilter">
+    <option value="">Semua Level</option>
+    <option value="Basic">Basic</option>
+    <option value="Advance">Advance</option>
+    <option value="Expert">Expert</option>
+  </select>
 </div>
+
+<div id="caseContainer"></div>
 
 <script>
 
-const cases = [];
+const cases = [
+{
+title:"🔥 Mati Total",
+arus:"0.00A",
+ic:"PMIC",
+level:"Basic",
+content:`🔎 Tidak ada arus masuk<br>
+🔥 Ganti IC Charger<br>
+✅ Normal`
+},
+{
+title:"⚡ 0.02A Stuck",
+arus:"0.02A",
+ic:"CPU",
+level:"Expert",
+content:`🔎 CPU tidak inisialisasi<br>
+🔥 Reball CPU<br>
+✅ Normal`
+},
+{
+title:"📶 No Signal",
+arus:"Normal",
+ic:"PA",
+level:"Advance",
+content:`🔎 IMEI ada<br>
+🔥 Ganti PA<br>
+✅ Signal stabil`
+},
+{
+title:"💾 Bootloop",
+arus:"0.40A",
+ic:"eMMC",
+level:"Advance",
+content:`🔎 Stuck logo<br>
+🔥 Flash ulang<br>
+✅ Normal`
+}
+];
 
-for(let i=1;i<=100;i++){
+// Tambah dummy sampai 100
+for(let i=5;i<=100;i++){
   cases.push({
-    title: "Case #" + i,
-    content: `
-    🔎 Gejala: Variatif sesuai kondisi lapangan<br>
-    📊 Arus: 0.${i%5}A / Normal / Drop<br>
-    🧪 Pengukuran: Cek jalur VBAT / PMIC / CPU<br>
-    🔥 Tindakan: Reball / Replace IC terkait<br>
-    ✅ Hasil: Normal kembali<br>
-    📌 Kesimpulan: Kerusakan pada IC terkait
-    `
+    title:"Case #" + i,
+    arus:["0.00A","0.02A","0.40A","Normal"][i%4],
+    ic:["PMIC","CPU","eMMC","PA"][i%4],
+    level:["Basic","Advance","Expert"][i%3],
+    content:`🔎 Analisa teknisi<br>🔥 Tindakan sesuai IC<br>✅ Normal`
   });
 }
-
-// Contoh spesifik agar tidak generik
-cases[0] = {
-  title:"🔥 Mati Total – 0.00A",
-  content:`
-  🔎 Tidak ada arus masuk<br>
-  🧪 Cek jalur VBAT putus<br>
-  🔥 Jumper jalur<br>
-  ✅ HP normal<br>
-  📌 Jalur supply utama terputus
-  `
-};
-
-cases[1] = {
-  title:"📶 No Signal – PA Rusak",
-  content:`
-  🔎 IMEI ada tapi no service<br>
-  🧪 Tegangan PA hilang<br>
-  🔥 Ganti PA<br>
-  ✅ Signal stabil
-  `
-};
-
-cases[2] = {
-  title:"⚡ 0.02A Stuck – CPU Tidak Inisialisasi",
-  content:`
-  🔎 Tekan power 0.02A diam<br>
-  🧪 CPU tidak panas<br>
-  🔥 Reball CPU<br>
-  ✅ Normal
-  `
-};
 
 const container = document.getElementById("caseContainer");
 
 function renderCases(){
   container.innerHTML="";
+  let search = document.getElementById("searchInput").value.toLowerCase();
+  let arus = document.getElementById("arusFilter").value;
+  let ic = document.getElementById("icFilter").value;
+  let level = document.getElementById("levelFilter").value;
+
   cases.forEach(c=>{
-    container.innerHTML+=`
-      <div class="card">
-        <h3>${c.title}</h3>
-        <p>${c.content}</p>
-      </div>
-    `;
+    if(
+      (c.title.toLowerCase().includes(search) || c.content.toLowerCase().includes(search)) &&
+      (arus==="" || c.arus===arus) &&
+      (ic==="" || c.ic===ic) &&
+      (level==="" || c.level===level)
+    ){
+      let badgeClass = c.level.toLowerCase();
+      container.innerHTML+=`
+        <div class="card">
+          <h3>${c.title}
+          <span class="badge ${badgeClass}">${c.level}</span>
+          </h3>
+          <small>Arus: ${c.arus} | IC: ${c.ic}</small>
+          <p>${c.content}</p>
+        </div>
+      `;
+    }
   });
 }
 
 renderCases();
 
-document.getElementById("searchInput").addEventListener("keyup", function(){
-  let filter = this.value.toLowerCase();
-  let cards = document.querySelectorAll(".card");
-  cards.forEach(card=>{
-    if(card.innerText.toLowerCase().includes(filter)){
-      card.style.display="block";
-    }else{
-      card.style.display="none";
-    }
-  });
+document.querySelectorAll("input, select").forEach(el=>{
+  el.addEventListener("input", renderCases);
 });
 
 </script>
