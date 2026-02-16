@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>LCD Compatibility PRO</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
+  padding:20px;
+}
+
+h1{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+select{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  margin-bottom:15px;
+}
+
+button{
+  background:#22c55e;
+  border:none;
+  padding:12px;
+  border-radius:8px;
+  font-weight:bold;
+  width:100%;
+  cursor:pointer;
+}
+
+.result{
+  background:#1e293b;
+  padding:20px;
+  border-radius:12px;
+  margin-top:20px;
+}
+</style>
+
+</head>
+<body>
+
+<h1>📱 LCD Compatibility Checker</h1>
+
+<select id="brand">
+<option value="">Pilih Brand</option>
+<option>Samsung</option>
+<option>Xiaomi</option>
+<option>Oppo</option>
+<option>Vivo</option>
+<option>Realme</option>
+<option>iPhone</option>
+</select>
+
+<select id="model">
+<option value="">Pilih Model</option>
+</select>
+
+<button onclick="cekLCD()">Cek Persamaan</button>
+
+<div class="result" id="hasil">
+Hasil akan muncul di sini...
+</div>
+
+<script>
+
+const dataLCD = {
+
+Samsung:{
+"A10":["A10s"],
+"A10s":["A10"],
+"A12":["A12 Nacho"],
+"A20":["Tidak ada 100% compatible"]
+},
+
+Xiaomi:{
+"Redmi 8":["Redmi 8A"],
+"Redmi 8A":["Redmi 8"],
+"Redmi Note 8":["Tidak ada persamaan"]
+},
+
+Oppo:{
+"A15":["A15s"],
+"A16":["Tidak ada 100% compatible"]
+},
+
+Vivo:{
+"Y12":["Y15 versi tertentu"],
+"Y20":["Y20i"]
+},
+
+Realme:{
+"C11":["C12"],
+"C12":["C11"]
+},
+
+iPhone:{
+"iPhone X":["Tidak kompatibel dengan XS"],
+"iPhone XR":["Tidak kompatibel dengan 11"],
+"iPhone 11":["Tidak kompatibel dengan XR"]
+}
+
+};
+
+const brandSelect = document.getElementById("brand");
+const modelSelect = document.getElementById("model");
+
+brandSelect.addEventListener("change",function(){
+
+modelSelect.innerHTML='<option value="">Pilih Model</option>';
+
+let brand = this.value;
+
+if(dataLCD[brand]){
+for(let model in dataLCD[brand]){
+modelSelect.innerHTML+=`<option>${model}</option>`;
+}
+}
+
+});
+
+function cekLCD(){
+
+let brand = brandSelect.value;
+let model = modelSelect.value;
+
+if(!brand || !model){
+document.getElementById("hasil").innerHTML="⚠ Pilih brand dan model dulu.";
+return;
+}
+
+let result = dataLCD[brand][model];
+
+if(result){
+document.getElementById("hasil").innerHTML=
+"✅ Persamaan LCD:<br><br>"+result.join("<br>");
+}else{
+document.getElementById("hasil").innerHTML="❌ Tidak ada data.";
+}
+
+}
+
+</script>
+
+</body>
+</html>
