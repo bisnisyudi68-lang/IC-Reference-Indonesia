@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>iPhone Diagnosa Interaktif</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  padding:20px;
+}
+
+h1{text-align:center;margin-bottom:20px;}
+
+.card{
+  background:#1e293b;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+input, select{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  margin-bottom:15px;
+  border-radius:6px;
+  border:none;
+}
+
+button{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:6px;
+  background:#22c55e;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.result{
+  margin-top:15px;
+  background:#111827;
+  padding:15px;
+  border-radius:8px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🍎 iPhone Diagnosa Interaktif</h1>
+
+<div class="card">
+
+<label>Model iPhone:</label>
+<select id="model">
+<option>iPhone X</option>
+<option>iPhone XS</option>
+<option>iPhone XR</option>
+<option>iPhone 11</option>
+<option>iPhone 12</option>
+<option>iPhone 13</option>
+<option>iPhone 14</option>
+<option>iPhone 15</option>
+</select>
+
+<label>Arus Power Supply (A):</label>
+<input type="number" step="0.01" id="arus">
+
+<label>Gejala:</label>
+<select id="gejala">
+<option value="mati">Mati Total</option>
+<option value="bootloop">Bootloop</option>
+<option value="nosignal">No Signal</option>
+<option value="wifi">WiFi Grey</option>
+<option value="charge">Tidak Charging</option>
+<option value="panas">Overheat</option>
+</select>
+
+<button onclick="analisa()">Analisa Sekarang</button>
+
+<div id="hasil" class="result"></div>
+
+</div>
+
+<script>
+
+function analisa(){
+
+let model = document.getElementById("model").value;
+let arus = parseFloat(document.getElementById("arus").value);
+let gejala = document.getElementById("gejala").value;
+
+let hasil = "";
+
+if(gejala=="mati"){
+
+if(arus==0){
+hasil="🔴 0.00A → Jalur baterai / Tristar / Charging IC";
+}
+else if(arus>1){
+hasil="🔥 Short PP_VDD_MAIN → cek kapasitor / PMIC";
+}
+else if(arus<0.05){
+hasil="🟡 CPU tidak start / NAND issue";
+}
+else{
+hasil="⚠️ Cek PMIC output & power sequence";
+}
+
+}
+
+if(gejala=="bootloop"){
+hasil="🔄 Kemungkinan NAND / sensor line error (cek panic log)";
+}
+
+if(gejala=="nosignal"){
+hasil="📶 Cek Baseband / RF IC / PA_RF";
+}
+
+if(gejala=="wifi"){
+hasil="📡 IC WiFi rusak / solder crack";
+}
+
+if(gejala=="charge"){
+hasil="🔌 Tristar / IC USB / Jalur charging";
+}
+
+if(gejala=="panas"){
+hasil="🌡 Short ringan / Sensor thermal error";
+}
+
+document.getElementById("hasil").innerHTML =
+"<b>Model:</b> "+model+"<br><br><b>Analisa:</b><br>"+hasil;
+
+}
+
+</script>
+
+</body>
+</html>
