@@ -83,42 +83,94 @@ IC Reference Teknisi HP Indonesia • iPhone X ke atas
 
 const caseList = document.getElementById("caseList");
 
+function getAnalisa(title){
+
+if(title.includes("Short")){
+return `
+⚡ Mode Diode test ke ground<br>
+🔍 Inject 1V pakai PSU<br>
+🔥 Cari IC panas (thermal spray)<br>
+🛠 Angkat IC penyebab short<br>
+✅ Test arus normal
+`;
+}
+
+if(title.includes("0.00A")){
+return `
+🔋 Cek PP_BATT & PP_VDD_MAIN<br>
+🔍 Cek tombol power<br>
+⚡ Cek PMIC enable signal<br>
+🛠 Reball / ganti PMIC<br>
+✅ Boot normal
+`;
+}
+
+if(title.includes("No Signal") || title.includes("IMEI")){
+return `
+📶 Cek IMEI & baseband version<br>
+🔍 Cek tegangan PA & RF<br>
+🔥 Reheat / ganti PA<br>
+🛠 Cek jalur RF coil<br>
+✅ Signal stabil
+`;
+}
+
+if(title.includes("Error") || title.includes("NAND")){
+return `
+💾 Cek NAND health<br>
+🔍 Restore pakai 3uTools<br>
+🔥 Reball NAND<br>
+🛠 Program ulang SN & WiFi<br>
+✅ Normal boot
+`;
+}
+
+if(title.includes("Overheat")){
+return `
+🔥 Monitor arus idle<br>
+🔍 Thermal camera cek panas<br>
+⚡ Lepas coil satu per satu<br>
+🛠 Ganti IC panas<br>
+✅ Suhu normal
+`;
+}
+
+if(title.includes("Mic") || title.includes("Audio")){
+return `
+🎤 Cek jalur mic ke audio IC<br>
+🔍 Ganti mic dulu<br>
+⚡ Cek supply 1V8 audio<br>
+🛠 Reball audio IC<br>
+✅ Rekaman normal
+`;
+}
+
+return `
+🔍 Analisa arus awal<br>
+⚡ Tracking jalur<br>
+🔥 Cek IC terkait<br>
+🛠 Eksekusi perbaikan<br>
+✅ Test normal
+`;
+
+}
+
 const cases = [
 "0.00A Short VDD_MAIN",
 "0.02A Stuck CPU",
-"0.05A Restart Loop",
-"0.40A eMMC Fail",
-"No Signal Baseband",
-"WiFi Abu-Abu",
-"Face ID Not Available",
-"Camera Black Screen",
-"No Backlight",
-"Mic Tidak Berfungsi",
 "Short PP_BATT",
-"Short PP_VDD_CPU",
-"Short PP1V8",
-"Short PP3V0",
-"Bootloop Logo",
+"No Signal Baseband",
+"Error 4013 NAND",
 "Overheat CPU",
-"Overheat PMIC",
-"Charging 0%",
-"Battery Not Detected",
-"Error 4013",
-"Error 4014",
-"NAND Corrupt",
+"Mic Mati",
+"WiFi Abu Abu",
 "Touch Ghost",
-"No Sound Speaker",
-"No Mic Recording",
-"Front Camera Error",
-"Rear Camera Error",
-"TrueDepth Error",
-"IMEI Null",
-"Baseband Unknown"
+"Charging 0%"
 ];
 
 for(let i=1;i<=100;i++){
 
-let caseName = cases[i % cases.length];
+let title = cases[i % cases.length];
 
 let levelClass="";
 let levelText="";
@@ -137,15 +189,11 @@ if(i%3==0){
 caseList.innerHTML += `
 <div class="case-card">
   <div class="case-title">
-    ${i}. ${caseName}
+    ${i}. ${title}
     <span class="level ${levelClass}">${levelText}</span>
   </div>
   <div>
-    🔍 Cek arus di power supply<br>
-    ⚡ Tracking jalur short<br>
-    🔥 Analisa IC terkait<br>
-    🛠 Eksekusi perbaikan<br>
-    ✅ Test ulang sampai normal
+    ${getAnalisa(title)}
   </div>
 </div>
 `;
