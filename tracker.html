@@ -2,78 +2,82 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Jalur Tracker Teknisi</title>
+<title>Mode Tracker Teknisi</title>
 
 <style>
 body{
   background:#0f172a;
   color:white;
   font-family:Arial;
-  margin:0;
   padding:20px;
 }
-h2{text-align:center;margin-bottom:20px;}
+
+h2{text-align:center;}
+
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:6px;
+  margin:5px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.pasif{background:#dc2626;color:white;}
+.aktif{background:#16a34a;color:white;}
 
 .card{
   background:#1e293b;
   padding:15px;
   border-radius:10px;
-  margin-bottom:15px;
-}
-
-.step{
-  margin-left:15px;
-  color:#94a3b8;
+  margin-top:15px;
+  display:none;
 }
 </style>
 </head>
 
 <body>
 
-<h2>🧭 Jalur Tracker Teknisi HP</h2>
+<h2>🧭 Mode Jalur Tracker</h2>
 
-<div class="card">
-<h3>📌 Tracing Jalur VBAT (HP Mati Total)</h3>
+<div style="text-align:center;">
+<button class="pasif" onclick="showPasif()">MODE PASIF</button>
+<button class="aktif" onclick="showAktif()">MODE AKTIF</button>
+</div>
+
+<div id="pasif" class="card">
+<h3>🔴 Mode Pasif (HP Tidak Start)</h3>
 <p>
-1️⃣ Ukur VBAT di konektor baterai<br>
-2️⃣ Jika ada → cek ke PMIC input<br>
-3️⃣ Jika hilang → cek coil utama<br>
-4️⃣ Jika short → inject 4V<br>
-5️⃣ Rasakan panas IC<br>
+1️⃣ Ukur VBAT di konektor<br>
+2️⃣ Cek jalur ke PMIC<br>
+3️⃣ Cek short utama (inject 4V)<br>
+4️⃣ Ukur output 1.8V & 3.3V<br>
+5️⃣ Jika Vcore tidak keluar → PMIC rusak
 </p>
 </div>
 
-<div class="card">
-<h3>⚡ Tracing 1.8V Hilang</h3>
+<div id="aktif" class="card">
+<h3>🟢 Mode Aktif (Ada Arus Tapi Tidak Normal)</h3>
 <p>
-1️⃣ Cek output LDO PMIC<br>
-2️⃣ Jika 0V → cek enable signal<br>
-3️⃣ Jika enable ada → PMIC rusak<br>
-4️⃣ Jika short → lepas kapasitor satu per satu
+1️⃣ Perhatikan arus awal<br>
+2️⃣ 0.02A → CPU / clock<br>
+3️⃣ 0.40A → Storage<br>
+4️⃣ 0.80A reboot → Firmware<br>
+5️⃣ Cek jalur data & baseband
 </p>
 </div>
 
-<div class="card">
-<h3>📶 Tracing No Signal</h3>
-<p>
-1️⃣ Cek IMEI<br>
-2️⃣ Cek baseband<br>
-3️⃣ Ukur tegangan PA<br>
-4️⃣ Cek antenna switch<br>
-5️⃣ Rehot RF IC
-</p>
-</div>
+<script>
+function showPasif(){
+  document.getElementById("pasif").style.display="block";
+  document.getElementById("aktif").style.display="none";
+}
 
-<div class="card">
-<h3>💾 Tracing eMMC Tidak Detect</h3>
-<p>
-1️⃣ Ukur VCC 2.8V<br>
-2️⃣ Ukur VCCQ 1.8V<br>
-3️⃣ Cek CLK & CMD<br>
-4️⃣ Jika arus 0.40A → bad block<br>
-5️⃣ Test via ISP
-</p>
-</div>
+function showAktif(){
+  document.getElementById("aktif").style.display="block";
+  document.getElementById("pasif").style.display="none";
+}
+</script>
 
 </body>
 </html>
