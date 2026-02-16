@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>iPhone No Power</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  margin:0;
+  padding:20px;
+}
+
+h1{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.card{
+  background:#1e293b;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+th,td{
+  padding:8px;
+  border-bottom:1px solid #334155;
+  text-align:left;
+}
+
+th{
+  background:#334155;
+}
+
+a{
+  color:#38bdf8;
+  text-decoration:none;
+}
+
+button{
+  padding:10px 15px;
+  border:none;
+  background:#22c55e;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🔋 iPhone No Power (X ke atas)</h1>
+
+<div class="card">
+<h3>Step Awal Diagnosa</h3>
+<ol>
+<li>Ukur VBAT di konektor baterai (normal 3.7–4.2V)</li>
+<li>Cek short ke ground (mode diode)</li>
+<li>Cek arus power supply</li>
+<li>Tekan power – lihat respon arus</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>Analisa Arus Power Supply</h3>
+
+<table>
+<tr>
+<th>Arus Terbaca</th>
+<th>Kemungkinan Kerusakan</th>
+</tr>
+
+<tr>
+<td>0.00A</td>
+<td>Jalur baterai putus / Tristar rusak</td>
+</tr>
+
+<tr>
+<td>0.02A Stuck</td>
+<td>CPU tidak start / NAND issue</td>
+</tr>
+
+<tr>
+<td>0.10A Drop</td>
+<td>PMIC rusak / Short ringan</td>
+</tr>
+
+<tr>
+<td>0.30–0.50A</td>
+<td>Normal booting</td>
+</tr>
+
+<tr>
+<td>1.00A langsung short</td>
+<td>Short jalur utama / kapasitor short</td>
+</tr>
+
+</table>
+</div>
+
+<div class="card">
+<h3>Mode Inject Short</h3>
+<ol>
+<li>Lepas baterai</li>
+<li>Inject 4V – 2A limit</li>
+<li>Raba panas / pakai thermal</li>
+<li>Jika CPU panas → short internal</li>
+<li>Jika kapasitor panas → ganti kapasitor</li>
+</ol>
+</div>
+
+<br>
+<a href="index.html">⬅ Kembali ke Menu iPhone</a>
+
+</body>
+</html>
