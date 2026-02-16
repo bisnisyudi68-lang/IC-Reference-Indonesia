@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>iPhone NAND & Storage Issue</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  margin:0;
+  padding:20px;
+}
+
+h1{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.card{
+  background:#1e293b;
+  padding:20px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+
+th,td{
+  padding:8px;
+  border-bottom:1px solid #334155;
+  text-align:left;
+}
+
+th{
+  background:#334155;
+}
+
+a{
+  color:#38bdf8;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<h1>💾 iPhone NAND / Storage Issue</h1>
+
+<div class="card">
+<h3>Gejala Umum</h3>
+
+<table>
+<tr>
+<th>Kondisi</th>
+<th>Kemungkinan Penyebab</th>
+</tr>
+
+<tr>
+<td>Stuck Logo Apple</td>
+<td>NAND corrupt / iOS rusak</td>
+</tr>
+
+<tr>
+<td>Tidak bisa restore</td>
+<td>Bad sector NAND</td>
+</tr>
+
+<tr>
+<td>Error 4013 / 4014</td>
+<td>Storage / CPU solder issue</td>
+</tr>
+
+<tr>
+<td>Storage penuh terus</td>
+<td>NAND aging</td>
+</tr>
+
+<tr>
+<td>Data hilang mendadak</td>
+<td>File system corrupt</td>
+</tr>
+
+</table>
+</div>
+
+<div class="card">
+<h3>Analisa Arus Umum</h3>
+
+<table>
+<tr>
+<th>Arus</th>
+<th>Kesimpulan</th>
+</tr>
+
+<tr>
+<td>0.05A – 0.10A Stuck</td>
+<td>NAND tidak inisialisasi</td>
+</tr>
+
+<tr>
+<td>0.20A naik turun</td>
+<td>Boot attempt gagal</td>
+</tr>
+
+<tr>
+<td>Normal tapi gagal restore</td>
+<td>Firmware corrupt</td>
+</tr>
+
+</table>
+</div>
+
+<div class="card">
+<h3>Langkah Diagnosa</h3>
+<ol>
+<li>Coba restore via iTunes / 3uTools</li>
+<li>Periksa error code</li>
+<li>Cek panic log jika ada</li>
+<li>Reflow NAND ringan (hati-hati)</li>
+<li>Reball NAND jika solder crack</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>Level Senior</h3>
+<ul>
+<li>NAND iPhone memiliki pairing dengan CPU</li>
+<li>Penggantian NAND butuh alat khusus</li>
+<li>Data recovery hanya bisa jika CPU & NAND masih sehat</li>
+<li>Error 4013 sering terkait CPU + NAND connection</li>
+</ul>
+</div>
+
+<br>
+<a href="index.html">⬅ Kembali ke Menu iPhone</a>
+
+</body>
+</html>
