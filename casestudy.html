@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Case Study Teknisi PRO</title>
+<title>Case Study iPhone Board Level</title>
 
 <style>
 body{
@@ -14,39 +14,37 @@ body{
 
 h1{
   text-align:center;
-  padding:20px 10px 10px;
+  padding:20px;
 }
 
-.search-box{
+.search{
   text-align:center;
   margin-bottom:20px;
 }
 
 #searchBox{
+  padding:10px;
   width:90%;
   max-width:400px;
-  padding:10px;
   border-radius:8px;
   border:none;
-  font-size:14px;
 }
 
-#caseList{
+.container{
   width:95%;
   margin:auto;
 }
 
-.case-card{
+.case{
   background:#1e293b;
   padding:15px;
   border-radius:12px;
   margin-bottom:15px;
 }
 
-.case-title{
+.title{
   font-weight:bold;
   margin-bottom:8px;
-  font-size:14px;
 }
 
 .level{
@@ -63,24 +61,23 @@ h1{
 .footer{
   text-align:center;
   opacity:0.5;
-  padding:30px 10px;
-  font-size:12px;
+  padding:30px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>📚 Case Study iPhone (1–100)</h1>
+<h1>🍎 Case Study iPhone Board Level (1–100)</h1>
 
-<div class="search-box">
-  <input type="text" id="searchBox" placeholder="Cari kasus...">
+<div class="search">
+<input type="text" id="searchBox" placeholder="Cari kasus iPhone...">
 </div>
 
-<div id="caseList"></div>
+<div class="container" id="caseList"></div>
 
 <div class="footer">
-IC Reference Teknisi HP Indonesia • iPhone X ke atas
+Database Teknisi iPhone X ke atas
 </div>
 
 <script>
@@ -88,76 +85,97 @@ IC Reference Teknisi HP Indonesia • iPhone X ke atas
 const caseList = document.getElementById("caseList");
 const searchBox = document.getElementById("searchBox");
 
-const brands = ["Samsung","Xiaomi","Oppo","Vivo","Realme","Huawei","Infinix","Tecno"];
-const chipsets = ["MTK","Snapdragon","Exynos"];
+const models = [
+"iPhone X","iPhone XR","iPhone XS",
+"iPhone 11","iPhone 11 Pro",
+"iPhone 12","iPhone 12 Pro",
+"iPhone 13","iPhone 13 Pro",
+"iPhone 14","iPhone 14 Pro"
+];
+
 const problems = [
 "Mati Total 0.00A",
-"Short VBAT",
-"Bootloop Logo",
+"Short VDD_MAIN",
+"0.02A Stuck CPU",
+"Bootloop Logo Apple",
 "No Signal IMEI Null",
-"WiFi Tidak Aktif",
+"WiFi Abu-Abu",
 "Mic Mati",
 "Kamera Hitam",
 "Charging 0%",
 "Overheat CPU",
-"eMMC Corrupt",
-"UFS Tidak Detect",
-"Tidak Bisa Flash",
-"Restart 3 Menit",
-"Touch Tidak Respons",
+"NAND Error 4013",
+"NAND Error 4014",
 "No Backlight",
-"Fingerprint Error",
+"Touch Ghost",
+"Face ID Error",
+"Restart 3 Menit",
 "Battery Drain Cepat",
-"Tidak Bisa Update",
-"SIM Tidak Terbaca",
-"Layar Blank Putih"
+"Tidak Bisa Restore",
+"Baseband Unknown",
+"TrueDepth Gagal"
 ];
 
 const cases = [];
 
-// Generate 100 kombinasi UNIK (bukan random)
-for(let i=0;i<100;i++){
+// kombinasi silang tanpa modulo sederhana
+let count = 0;
 
-let brand = brands[i % brands.length];
-let chip = chipsets[Math.floor(i / brands.length) % chipsets.length];
-let problem = problems[i % problems.length];
+for(let m=0; m<models.length; m++){
+  for(let p=0; p<problems.length; p++){
 
-let level = i%3===0 ? "expert" : i%2===0 ? "advance" : "basic";
+    if(count >= 100) break;
 
-cases.push({
-title: `${brand} ${chip} - ${problem}`,
-level: level
-});
+    let level = count%3===0 ? "expert" : count%2===0 ? "advance" : "basic";
 
+    cases.push({
+      title: models[m] + " - " + problems[p],
+      level: level
+    });
+
+    count++;
+  }
 }
 
 function getAnalisa(title){
 
 if(title.includes("Mati Total"))
-return "• Cek VBUS 5V<br>• Cek IC Charger<br>• Inject PSU<br>• Ganti PMIC";
+return "• Cek PP_VDD_MAIN<br>• Cek PMIC<br>• Inject PSU<br>• Reball PMIC";
 
 if(title.includes("Short"))
-return "• Mode diode test<br>• Inject 1V<br>• Cari IC panas<br>• Ganti IC short";
+return "• Mode diode test<br>• Inject 1V<br>• Thermal detect IC panas";
 
-if(title.includes("Signal") || title.includes("SIM"))
-return "• Cek IMEI<br>• Cek Baseband<br>• Reflash firmware<br>• Ganti RF IC";
+if(title.includes("Signal") || title.includes("Baseband"))
+return "• Cek IMEI<br>• Cek PA & RF IC<br>• Reball BB CPU";
 
-if(title.includes("eMMC") || title.includes("UFS"))
-return "• ISP test<br>• Flash ulang<br>• Replace storage";
+if(title.includes("NAND"))
+return "• Restore gagal<br>• Reball NAND<br>• Program ulang SN";
+
+if(title.includes("WiFi"))
+return "• Cek supply 1V8<br>• Reball WiFi IC";
 
 if(title.includes("Mic"))
-return "• Cek jalur mic<br>• Cek Audio IC<br>• Reball Audio IC";
+return "• Cek jalur mic<br>• Reball Audio IC";
 
 if(title.includes("Kamera"))
-return "• Test kamera lain<br>• Cek supply 1.8V<br>• Reball CPU jika perlu";
+return "• Test kamera lain<br>• Cek supply 2.8V";
 
 if(title.includes("Charging"))
-return "• Cek IC Charger<br>• Cek jalur BSI<br>• Ganti IC charger";
+return "• Cek Tristar/Hydra<br>• Cek VBUS";
 
 if(title.includes("Overheat"))
-return "• Monitor arus idle<br>• Thermal spray<br>• Ganti IC panas";
+return "• Monitor arus idle<br>• Thermal spray";
 
-return "• Analisa arus<br>• Cek jalur utama<br>• Eksekusi perbaikan";
+if(title.includes("Backlight"))
+return "• Cek boost coil<br>• Ganti driver";
+
+if(title.includes("Touch"))
+return "• Test LCD lain<br>• Cek IC touch";
+
+if(title.includes("Face") || title.includes("TrueDepth"))
+return "• Cek dot projector<br>• Cek flex Face ID";
+
+return "• Analisa arus<br>• Tracking jalur";
 
 }
 
@@ -187,6 +205,5 @@ renderCases(searchBox.value);
 });
 
 </script>
-
 </body>
 </html>
