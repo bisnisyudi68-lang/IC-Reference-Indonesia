@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Voltage Reference</title>
+
+<style>
+body{
+  background:#0f172a;
+  color:white;
+  font-family:Arial;
+  margin:0;
+  padding:20px;
+}
+
+h2{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+select{
+  padding:12px;
+  width:100%;
+  max-width:400px;
+  border-radius:8px;
+  border:none;
+  font-size:16px;
+  margin-bottom:25px;
+}
+
+.card{
+  background:#1e293b;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
+.rail{
+  font-weight:bold;
+  font-size:16px;
+  color:#22c55e;
+}
+
+.small{
+  font-size:14px;
+  opacity:0.8;
+}
+</style>
+
+</head>
+<body>
+
+<h2>📊 Voltage Important Rail</h2>
+
+<select onchange="showData(this.value)">
+  <option value="">-- Pilih Tipe HP --</option>
+  <option value="y12">Vivo Y12</option>
+  <option value="a12">Samsung A12</option>
+  <option value="redmi9">Redmi 9</option>
+</select>
+
+<div id="result"></div>
+
+<script>
+
+const data = {
+
+  y12: [
+    {rail:"VBAT", volt:"3.7 – 4.2V", ohm:">1KΩ", note:"Jika 0Ω → short main line"},
+    {rail:"1.8V", volt:"1.8V saat power", ohm:"300–500Ω", note:"Jika 0V → cek PMIC enable"},
+    {rail:"3.0V", volt:"3V saat power", ohm:"400–800Ω", note:"Jika drop → cek LDO"},
+    {rail:"CPU Core", volt:"0.8–1V", ohm:"10–40Ω", note:"Jika 0V → CPU tidak start"},
+    {rail:"RAM", volt:"1.2V", ohm:"30–60Ω", note:"Jika hilang → boot gagal"},
+    {rail:"NAND", volt:"1.8V", ohm:"200–400Ω", note:"Jika short → eMMC rusak"}
+  ],
+
+  a12: [
+    {rail:"VBAT", volt:"3.7 – 4.2V", ohm:">1KΩ", note:"Short → cek kapasitor main"},
+    {rail:"1.8V", volt:"1.8V", ohm:"250–450Ω", note:"Jika hilang → cek BUCK"},
+    {rail:"3.3V", volt:"3.3V", ohm:"400–700Ω", note:"Jika 0V → PMIC error"},
+    {rail:"CPU Core", volt:"0.9V", ohm:"15–35Ω", note:"Drop → kemungkinan short core"}
+  ],
+
+  redmi9: [
+    {rail:"VBAT", volt:"3.7 – 4.2V", ohm:">1KΩ", note:"Short → cek coil utama"},
+    {rail:"1.8V", volt:"1.8V", ohm:"280–500Ω", note:"Jika 0Ω → short LDO"},
+    {rail:"CPU Core", volt:"0.85–1V", ohm:"12–30Ω", note:"Jika 0V → enable hilang"}
+  ]
+
+};
+
+function showData(type){
+  const result = document.getElementById("result");
+  result.innerHTML = "";
+
+  if(!data[type]) return;
+
+  data[type].forEach(item => {
+    result.innerHTML += `
+      <div class="card">
+        <div class="rail">${item.rail}</div>
+        <div class="small">Volt Normal: ${item.volt}</div>
+        <div class="small">Resistansi Normal: ${item.ohm}</div>
+        <div class="small">Catatan: ${item.note}</div>
+      </div>
+    `;
+  });
+}
+
+</script>
+
+</body>
+</html>
