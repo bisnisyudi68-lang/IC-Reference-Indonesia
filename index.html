@@ -6,175 +6,160 @@
 <title>IC Reference Teknisi HP Indonesia</title>
 
 <style>
+
 body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#0f172a;
-    color:#e2e8f0;
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:linear-gradient(135deg,#0f172a,#111827);
+  color:#e2e8f0;
 }
+
+/* HEADER */
 header{
-    background:#111827;
-    padding:20px;
-    text-align:center;
-    border-bottom:2px solid #2563eb;
-}
-header h1{
-    margin:0;
-    font-size:22px;
-}
-header p{
-    margin:5px 0 0 0;
-    font-size:14px;
-    opacity:0.7;
-}
-.container{
-    padding:20px;
-}
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:15px;
-}
-.card{
-    background:#1e293b;
-    padding:20px;
-    border-radius:10px;
-    text-align:center;
-}
-.card h3{
-    margin:0 0 10px 0;
-}
-.card p{
-    margin:0;
-    font-size:14px;
-    opacity:0.8;
-}
-a{
-    text-decoration:none;
-    color:white;
-}
-.section{
-    margin-top:30px;
-    background:#1e293b;
-    padding:15px;
-    border-radius:10px;
-}
-.footer{
-    margin-top:40px;
-    text-align:center;
-    font-size:12px;
-    opacity:0.6;
-    padding-bottom:20px;
-}
-h2{
   text-align:center;
-  margin-bottom:30px;
+  padding:40px 20px;
+  border-bottom:2px solid #2563eb;
+}
+
+header h1{
+  margin:0;
   font-size:28px;
 }
-.promo-img{
-  margin-top:20px;
+
+header p{
+  margin-top:10px;
+  opacity:0.8;
+  font-size:15px;
+}
+
+/* CONTAINER */
+.container{
+  padding:25px;
+  max-width:1000px;
+  margin:auto;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
+  margin-top:30px;
+}
+
+/* CARD */
+.card{
+  background:#1e293b;
+  padding:30px 20px;
+  border-radius:18px;
   text-align:center;
-}
-
-.promo-img img{
-  width:100%;
-  max-width:500px;
-  border-radius:15px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.4);
   transition:0.3s;
+  box-shadow:0 10px 25px rgba(0,0,0,0.4);
 }
 
-.promo-img img:hover{
-  transform:scale(1.02);
+.card:hover{
+  transform:translateY(-5px);
+  background:#243447;
+}
+
+.card h3{
+  margin:0 0 10px 0;
+  font-size:20px;
+}
+
+.card p{
+  margin:0;
+  font-size:14px;
+  opacity:0.8;
+}
+
+a{
+  text-decoration:none;
+  color:white;
+}
+
+/* PREMIUM CARD SPECIAL */
+.premium{
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+}
+
+.premium:hover{
+  background:linear-gradient(135deg,#1d4ed8,#1e40af);
+}
+
+/* FOOTER */
+.footer{
+  text-align:center;
+  margin-top:60px;
+  padding:20px;
+  font-size:13px;
+  opacity:0.6;
 }
 
 </style>
 </head>
+
 <body>
 
 <header>
-<h1>🛠 IC Reference Teknisi HP Indonesia</h1>
-<p>Database Kode IC Storage, UFS, PMIC & CPU Smartphone</p>
+  <h1>🛠 IC Reference Teknisi HP Indonesia</h1>
+  <p>Database IC Storage • UFS • PMIC • CPU Smartphone</p>
 </header>
 
 <div class="container">
 
-<h2>Kategori Database</h2>
+  <div class="grid">
 
-<div class="grid">
+    <a href="kode.html">
+      <div class="card">
+        <h3>🧑‍🔧 Search Kode HP</h3>
+        <p>Android & iPhone</p>
+      </div>
+    </a>
 
-<a href="kode.html">
-<div class="card">
-<h3>🕵Search Kode HP (demo)</h3>
-<p>Android & Iphone</p>
-</div>
-</a>
+    <a href="lcd.html">
+      <div class="card">
+        <h3>📱 LCD Compatibility</h3>
+        <p>Persamaan & Checker Otomatis</p>
+      </div>
+    </a>
 
-<a href="lcd.html">
-  <div class="card">
-    📱
-    <h3>LCD Compatibility</h3>
-    <p>Persamaan & Checker Otomatis</p>
+    <a href="pmicdemo.html">
+      <div class="card">
+        <h3>⚡ PMIC</h3>
+        <p>Power Management IC</p>
+      </div>
+    </a>
+
+    <a href="cpudemo.html">
+      <div class="card">
+        <h3>🧠 CPU (SoC)</h3>
+        <p>Processor Smartphone</p>
+      </div>
+    </a>
+
+    <a href="iphone/tegangan.html">
+      <div class="card">
+        <h3>💾 Nilai Arus</h3>
+        <p>Database Tegangan HP</p>
+      </div>
+    </a>
+
+    <!-- PREMIUM BUTTON -->
+    <a href="login.html">
+      <div class="card premium">
+        <h3>🔒 Premium Access</h3>
+        <p>Akses Full 2.000+ Database (50.000 lifetime)</p>
+      </div>
+    </a>
+
   </div>
-</a>
-<a href="pmicdemo.html">
-<div class="card">
-<h3>⚡ PMIC (demo)</h3>
-<p>Power Management IC</p>
-</div>
-</a>
-
-
-<a href="iphone/tegangan.html">
-<div class="card">
-<h3>💾 nilai arus di setiap hp (demo)</h3>
-<p>Database tegangan</p>
-</div>
-</a>
-
-<a href="cpudemo.html">
-  <div class="card">
-    <h3>🧠 CPU (SoC)demo</h3>
-    <p>Processor Smartphone</p>
-  </div>
-</a>
-
-
-<a href="ufsdemo.html">
-<div class="card">
-<h3>🚀 UFS (demo)</h3>
-<p>Database IC UFS</p>
-</div>
-</a>
-
-
-
-<a href="pmicdemo.html">
-<div class="card">
-<h3>⚡ PMIC (demo)</h3>
-<p>Power Management IC</p>
-</div>
-</a>
-
-
-<a href="login.html">
-<div class="card">
-<h3>👉KLIK DI SINI<br>
-🔒 Premium Access</h3>
-<p>Akses Full 2.000+ Database (💰 50.000 lifetime)</p>
-</div>
-</a>
-<div class="promo-img">
-  <img src="premium.jpg" alt="Promo IC Reference">
-</div>
-
 
 </div>
 
 <div class="footer">
-© 2026 IC Reference Teknisi HP Indonesia
+  © 2026 IC Reference Teknisi HP Indonesia
 </div>
 
 </body>
-
 </html>
