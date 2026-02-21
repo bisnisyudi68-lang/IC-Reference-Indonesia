@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tool Backup Partisi Penting</title>
+<style>
+body{
+    font-family:Arial;
+    background:#0f172a;
+    color:white;
+    margin:0;
+    padding:20px;
+}
+h1{
+    text-align:center;
+    color:#00ffcc;
+}
+.container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:15px;
+}
+.card{
+    padding:15px;
+    border-radius:10px;
+    background:#1e293b;
+}
+.card h3{
+    margin-top:0;
+}
+.samsung{background:#1e40af;}
+.mtk{background:#065f46;}
+.qualcomm{background:#7c2d12;}
+.unisoc{background:#581c87;}
+.huawei{background:#7f1d1d;}
+button{
+    margin-top:10px;
+    padding:8px;
+    border:none;
+    border-radius:5px;
+    background:#00ffcc;
+    cursor:pointer;
+    font-weight:bold;
+}
+.done{
+    background:#16a34a !important;
+}
+</style>
+</head>
+<body>
+
+<h1>📦 Backup Partisi Penting Teknisi</h1>
+
+<div class="container">
+
+<div class="card samsung">
+<h3>SAMSUNG EXYNOS</h3>
+<label><input type="checkbox"> efs (IMEI)</label><br>
+<label><input type="checkbox"> sec_efs</label><br>
+<label><input type="checkbox"> M9KEFS</label><br>
+<button onclick="done(this)">Backup Selesai</button>
+</div>
+
+<div class="card mtk">
+<h3>SAMSUNG MTK</h3>
+<label><input type="checkbox"> efs</label><br>
+<label><input type="checkbox"> nvdata</label><br>
+<label><input type="checkbox"> nvram</label><br>
+<label><input type="checkbox"> protect1</label><br>
+<label><input type="checkbox"> protect2</label><br>
+<button onclick="done(this)">Backup Selesai</button>
+</div>
+
+<div class="card qualcomm">
+<h3>SAMSUNG QUALCOMM</h3>
+<label><input type="checkbox"> efs</label><br>
+<label><input type="checkbox"> fsc / fsg</label><br>
+<label><input type="checkbox"> modemst1</label><br>
+<label><input type="checkbox"> modemst2</label><br>
+<button onclick="done(this)">Backup Selesai</button>
+</div>
+
+<div class="card unisoc">
+<h3>SAMSUNG UNISOC</h3>
+<label><input type="checkbox"> sec_efs</label><br>
+<label><input type="checkbox"> vendor_efs</label><br>
+<label><input type="checkbox"> MISC DATA</label><br>
+<label><input type="checkbox"> PROD NV</label><br>
+<button onclick="done(this)">Backup Selesai</button>
+</div>
+
+<div class="card qualcomm">
+<h3>XIAOMI QUALCOMM</h3>
+<label><input type="checkbox"> fsc / fsg</label><br>
+<label><input type="checkbox"> modemst1</label><br>
+<label><input type="checkbox"> modemst2</label><br>
+<label><input type="checkbox"> mdm1m9kefs</label><br>
+<button onclick="done(this)">Backup Selesai</button>
+</div>
+
+<div class="card mtk">
+<h3>MEDIATEK GENERAL</h3>
+<label><input type="checkbox"> nvram</label><br>
+<label><input type="checkbox"> nvdata</label><br>
+<label><input type="checkbox"> protect1</label><br>
+<label><input type="checkbox"> protect2</label><br>
+<label><input type="checkbox"> proinfo</label><br>
+<button onclick="done(this)">Backup Selesai</button>
+</div>
+
+<div class="card huawei">
+<h3>HUAWEI / HISILICON</h3>
+<label><input type="checkbox"> oeminfo</label><br>
+<label><input type="checkbox"> modemnv</label><br>
+<label><input type="checkbox"> modemnv_factory</label><br>
+<label><input type="checkbox"> modemnv_backup</label><br>
+<button onclick="done(this)">Backup Selesai</button>
+</div>
+
+</div>
+
+<script>
+function done(btn){
+    btn.classList.add("done");
+    btn.innerText="✔ Backup Selesai";
+}
+</script>
+
+</body>
+</html>
