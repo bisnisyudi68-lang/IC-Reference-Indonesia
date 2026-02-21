@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Database Socket Charging Samsung</title>
+
+<style>
+body{
+    font-family:Arial;
+    margin:0;
+    background:#f2f2f2;
+}
+h1{
+    text-align:center;
+    padding:20px;
+    background:#0d47a1;
+    color:white;
+}
+.search{
+    width:90%;
+    display:block;
+    margin:20px auto;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+    padding:20px;
+}
+.card{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+.card img{
+    width:80px;
+}
+.models{
+    font-weight:bold;
+    color:#0d47a1;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📱 Database Socket Charging Samsung</h1>
+
+<input type="text" id="search" class="search" placeholder="Cari model..." onkeyup="searchModel()">
+
+<div class="grid" id="grid">
+
+<!-- CARD TEMPLATE -->
+<div class="card">
+<img src="https://i.imgur.com/1Q9Z1Zm.png">
+<div>
+<div class="models">A10</div>
+<div>Type: Micro USB</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://i.imgur.com/1Q9Z1Zm.png">
+<div>
+<div class="models">A20 A30 A40</div>
+<div>Type: Micro USB</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://i.imgur.com/2R8xM3N.png">
+<div>
+<div class="models">A50 A60 A70</div>
+<div>Type: USB Type-C</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://i.imgur.com/1Q9Z1Zm.png">
+<div>
+<div class="models">A01</div>
+<div>Type: Micro USB</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://i.imgur.com/2R8xM3N.png">
+<div>
+<div class="models">A11</div>
+<div>Type: Type-C</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://i.imgur.com/2R8xM3N.png">
+<div>
+<div class="models">A12</div>
+<div>Type: Type-C</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://i.imgur.com/2R8xM3N.png">
+<div>
+<div class="models">A21 A21s</div>
+<div>Type: Type-C</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://i.imgur.com/2R8xM3N.png">
+<div>
+<div class="models">A30s A50s</div>
+<div>Type: Type-C</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://i.imgur.com/2R8xM3N.png">
+<div>
+<div class="models">A31 A51 A71</div>
+<div>Type: Type-C</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://i.imgur.com/2R8xM3N.png">
+<div>
+<div class="models">A52 A72</div>
+<div>Type: Type-C (PCB Board)</div>
+</div>
+</div>
+
+<!-- TAMBAHAN MODEL BARU -->
+<div class="card">
+<img src="https://i.imgur.com/2R8xM3N.png">
+<div>
+<div class="models">A02 A02s</div>
+<div>Type: Type-C</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://i.imgur.com/2R8xM3N.png">
+<div>
+<div class="models">A32 A33 A53</div>
+<div>Type: Type-C</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://i.imgur.com/2R8xM3N.png">
+<div>
+<div class="models">M21 M31 M51</div>
+<div>Type: Type-C</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://i.imgur.com/2R8xM3N.png">
+<div>
+<div class="models">S8 S9 S10</div>
+<div>Type: Type-C</div>
+</div>
+</div>
+
+</div>
+
+<script>
+function searchModel(){
+let input=document.getElementById("search").value.toLowerCase();
+let cards=document.getElementsByClassName("card");
+
+for(let i=0;i<cards.length;i++){
+let text=cards[i].innerText.toLowerCase();
+cards[i].style.display=text.includes(input)?"flex":"none";
+}
+}
+</script>
+
+</body>
+</html>
