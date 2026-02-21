@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Charging IC Database</title>
+<style>
+body{
+    font-family:Arial;
+    margin:0;
+    background:linear-gradient(135deg,#ffcc00,#ff6600);
+}
+.header{
+    text-align:center;
+    padding:20px;
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+    background:red;
+}
+.sub{
+    background:blue;
+    color:white;
+    text-align:center;
+    padding:10px;
+    font-size:20px;
+}
+.container{
+    padding:20px;
+}
+.card{
+    background:white;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+}
+.card h2{
+    color:red;
+}
+.brand{
+    font-weight:bold;
+    margin-top:10px;
+}
+img{
+    width:150px;
+    border-radius:8px;
+}
+.search{
+    width:100%;
+    padding:10px;
+    margin-bottom:20px;
+    border-radius:8px;
+    border:none;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+S2MF301A CHARGING IC
+</div>
+
+<div class="sub">
+Charging Management IC - Multi Brand Support
+</div>
+
+<div class="container">
+
+<input type="text" class="search" id="search" placeholder="Cari model HP..." onkeyup="searchModel()">
+
+<div class="card">
+<h2>S2MF301A</h2>
+
+<img src="https://i.imgur.com/4ZQZ4ZK.png" alt="IC">
+
+<div class="brand">🔥 Samsung Compatible:</div>
+<ul>
+<li>Samsung Galaxy A30</li>
+<li>Samsung Galaxy A30s</li>
+<li>Samsung Galaxy A31</li>
+<li>Samsung Galaxy A50</li>
+<li>Samsung Galaxy A50s</li>
+<li>Samsung Galaxy A51</li>
+<li>Samsung Galaxy A70s</li>
+<li>Samsung Galaxy M21</li>
+<li>Samsung Galaxy M30</li>
+<li>Samsung Galaxy M30s</li>
+<li>Samsung Galaxy M31</li>
+</ul>
+
+<div class="brand">🔥 Xiaomi Compatible:</div>
+<ul>
+<li>Redmi Note 8</li>
+<li>Redmi Note 9</li>
+<li>Redmi 9</li>
+<li>Redmi 10</li>
+<li>Poco M3</li>
+</ul>
+
+<div class="brand">🔥 Oppo Compatible:</div>
+<ul>
+<li>Oppo A5 2020</li>
+<li>Oppo A9 2020</li>
+<li>Oppo A31</li>
+<li>Oppo F11</li>
+</ul>
+
+<div class="brand">🔥 Vivo Compatible:</div>
+<ul>
+<li>Vivo Y12</li>
+<li>Vivo Y15</li>
+<li>Vivo Y17</li>
+<li>Vivo Y20</li>
+</ul>
+
+<div class="brand">🔥 Realme Compatible:</div>
+<ul>
+<li>Realme 5</li>
+<li>Realme 5i</li>
+<li>Realme 6</li>
+<li>Realme C3</li>
+</ul>
+
+<div class="brand">🔥 Huawei Compatible:</div>
+<ul>
+<li>Huawei Y7</li>
+<li>Huawei Y9</li>
+<li>Huawei Nova 3i</li>
+</ul>
+
+</div>
+
+</div>
+
+<script>
+function searchModel(){
+let input=document.getElementById("search").value.toLowerCase();
+let li=document.getElementsByTagName("li");
+
+for(let i=0;i<li.length;i++){
+let txt=li[i].innerText.toLowerCase();
+li[i].style.display=txt.includes(input)?"":"none";
+}
+}
+</script>
+
+</body>
+</html>
