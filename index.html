@@ -9,52 +9,94 @@
 
 body{
     margin:0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg,#0f172a,#111827);
+    font-family:'Segoe UI',Arial,sans-serif;
+    background:linear-gradient(135deg,#0f172a,#111827);
     color:#e2e8f0;
 }
 
 /* HEADER */
 header{
     text-align:center;
-    padding:50px 20px 40px;
-    border-bottom:1px solid rgba(255,255,255,0.08);
+    padding:60px 20px 40px;
+    border-bottom:1px solid rgba(255,255,255,0.05);
 }
 
 header h1{
-    font-size:28px;
+    font-size:30px;
     margin:0;
     font-weight:600;
 }
 
 header p{
-    margin-top:12px;
+    margin-top:10px;
     opacity:0.7;
     font-size:15px;
 }
 
+/* PREMIUM TITLE */
+.premium-title{
+    text-align:center;
+    margin-top:40px;
+}
+
+.badge{
+    display:inline-block;
+    background:linear-gradient(135deg,#ef4444,#f97316);
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.green-btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 22px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+    font-weight:600;
+    box-shadow:0 8px 20px rgba(34,197,94,0.4);
+}
+
+/* SEARCH */
+.search-box{
+    margin:35px auto;
+    max-width:600px;
+}
+
+.search-box input{
+    width:100%;
+    padding:14px 18px;
+    border-radius:12px;
+    border:none;
+    outline:none;
+    background:#1e293b;
+    color:white;
+    font-size:14px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.4);
+}
+
 /* CONTAINER */
 .container{
-    max-width:1100px;
+    max-width:1200px;
     margin:auto;
-    padding:30px 20px;
+    padding:20px;
 }
 
 /* GRID */
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-    gap:22px;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:25px;
 }
 
 /* CARD */
 .card{
     background:#1e293b;
-    padding:28px 20px;
-    border-radius:20px;
+    padding:30px 22px;
+    border-radius:22px;
     transition:0.3s ease;
     box-shadow:0 10px 30px rgba(0,0,0,0.4);
-    text-align:left;
     border:1px solid rgba(255,255,255,0.05);
 }
 
@@ -76,7 +118,6 @@ header p{
     opacity:0.7;
 }
 
-/* LINK */
 a{
     text-decoration:none;
     color:#e2e8f0;
@@ -84,18 +125,18 @@ a{
 
 /* PREMIUM CARD */
 .premium{
-    background: linear-gradient(135deg,#2563eb,#1d4ed8);
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
     border:none;
 }
 
 .premium:hover{
-    background: linear-gradient(135deg,#1d4ed8,#1e40af);
+    background:linear-gradient(135deg,#1d4ed8,#1e40af);
 }
 
 /* FOOTER */
 .footer{
     text-align:center;
-    margin-top:70px;
+    margin-top:80px;
     padding:25px;
     font-size:13px;
     opacity:0.6;
@@ -111,7 +152,17 @@ a{
   <h1>🛠 IC Reference Teknisi HP Indonesia</h1>
   <p>Database IC Storage • UFS • PMIC • CPU Smartphone</p>
 </header>
+<div class="premium-title">
+    <h2>Premium Database</h2>
+    <div class="badge">🇮🇩 Level Teknisi Senior</div>
+    <div>
+        <span class="green-btn">⚡ Arus Normal & Diagnosa</span>
+    </div>
+</div>
 
+<div class="search-box">
+    <input type="text" placeholder="🔎 Cari IC / Tegangan / Penyakit...">
+</div>
 <div class="container">
 
   <div class="grid">
