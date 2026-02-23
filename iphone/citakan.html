@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Lengkap Citakan IC</title>
+
+<style>
+:root{
+    --bg:#f4f6f9;
+    --card:#ffffff;
+    --text:#222;
+    --primary:#0d6efd;
+}
+body.dark{
+    --bg:#121212;
+    --card:#1e1e1e;
+    --text:#f1f1f1;
+    --primary:#00bcd4;
+}
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:0.3s;
+}
+header{
+    background:var(--primary);
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+.controls{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:20px;
+}
+input{
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    width:250px;
+}
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    background:var(--primary);
+    color:white;
+}
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+.card{
+    background:var(--card);
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    text-align:center;
+    transition:0.3s;
+}
+.card:hover{
+    transform:translateY(-4px);
+}
+footer{
+    text-align:center;
+    padding:15px;
+    margin-top:30px;
+    background:#222;
+    color:white;
+}
+.total{
+    font-weight:bold;
+    font-size:18px;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>DATA LENGKAP CITAKAN IC</h1>
+<p class="total">Total: <span id="totalCount"></span> Item</p>
+</header>
+
+<div class="container">
+
+<div class="controls">
+<input type="text" id="search" placeholder="Cari citakan...">
+<button onclick="toggleDark()">Dark / Light</button>
+</div>
+
+<div class="grid" id="dataContainer"></div>
+
+</div>
+
+<footer>
+© 2026 Sistem Data Citakan IC
+</footer>
+
+<script>
+const data = [
+"QU 1","QU 2","QU 3","QU 4","QU 5","QU 6","QU 7","QU 8","QU 9",
+
+"MQ 1","MQ 4","MQ 5","MQ 6",
+
+"MU 1","MU 2","MU 3","MU 4","MU 5",
+
+"UN 1","UN 2","UN 3",
+
+"SAM 2","SAM 3","SAM 4","SAM 5","SAM 6","SAM 7","SAM 8","SAM 9","SAM 10",
+"SAM 11","SAM 12","SAM 13","SAM 14","SAM 15","SAM 16","SAM 17","SAM 18",
+"SAM 19","SAM 20","SAM 21",
+
+"MI 1","MI 2","MI 3","MI 4","MI 5","MI 6","MI 7","MI 8","MI 9","MI 10",
+"MI 11","MI 12","MI 13","MI 14","MI 15","MI 16","MI 17","MI 18","MI 19"
+];
+
+const container = document.getElementById("dataContainer");
+
+function renderData(list){
+container.innerHTML="";
+list.forEach(item=>{
+    const div=document.createElement("div");
+    div.className="card";
+    div.innerText=item;
+    container.appendChild(div);
+});
+document.getElementById("totalCount").innerText=list.length;
+}
+
+renderData(data);
+
+document.getElementById("search").addEventListener("keyup", function(){
+let filter=this.value.toLowerCase();
+let filtered=data.filter(item=>item.toLowerCase().includes(filter));
+renderData(filtered);
+});
+
+function toggleDark(){
+document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>
