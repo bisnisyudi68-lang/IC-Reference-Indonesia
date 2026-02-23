@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Citakan IC CPU</title>
+
+<style>
+:root{
+    --bg:#f4f6f9;
+    --card:#ffffff;
+    --text:#222;
+    --primary:#0d6efd;
+}
+
+body.dark{
+    --bg:#121212;
+    --card:#1e1e1e;
+    --text:#f1f1f1;
+    --primary:#00bcd4;
+}
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:0.3s;
+}
+
+header{
+    background:var(--primary);
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+.controls{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+input{
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    width:250px;
+}
+
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    background:var(--primary);
+    color:white;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:var(--card);
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h3{
+    margin-top:0;
+    color:var(--primary);
+}
+
+ul{
+    padding-left:18px;
+}
+
+footer{
+    text-align:center;
+    padding:15px;
+    margin-top:30px;
+    background:#222;
+    color:white;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>DATA CITAKAN IC CPU</h1>
+    <p>Stencil Reballing Profesional</p>
+</header>
+
+<div class="container">
+
+<div class="controls">
+    <input type="text" id="search" placeholder="Cari citakan...">
+    <button onclick="toggleDark()">Dark / Light</button>
+</div>
+
+<div class="grid" id="dataContainer">
+
+<div class="card">
+<h3>QU (Qualcomm)</h3>
+<ul>
+<li>QU 1</li><li>QU 2</li><li>QU 3</li><li>QU 4</li>
+<li>QU 5</li><li>QU 6</li><li>QU 7</li>
+<li>QU 8</li><li>QU 9</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>MQ (MediaTek)</h3>
+<ul>
+<li>MQ 1</li><li>MQ 4</li><li>MQ 5</li><li>MQ 6</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>MU (UFS / eMMC)</h3>
+<ul>
+<li>MU 1</li><li>MU 2</li><li>MU 3</li>
+<li>MU 4</li><li>MU 5</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>UN (NAND)</h3>
+<ul>
+<li>UN 1</li><li>UN 2</li><li>UN 3</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>SAM (Samsung)</h3>
+<ul>
+<li>SAM 2 - SAM 21</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>MI (Xiaomi)</h3>
+<ul>
+<li>MI 1 - MI 19</li>
+</ul>
+</div>
+
+</div>
+</div>
+
+<footer>
+© 2026 | Sistem Data Citakan IC
+</footer>
+
+<script>
+function toggleDark(){
+    document.body.classList.toggle("dark");
+}
+
+document.getElementById("search").addEventListener("keyup", function(){
+    let filter = this.value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(card=>{
+        let text = card.innerText.toLowerCase();
+        card.style.display = text.includes(filter) ? "block" : "none";
+    });
+});
+</script>
+
+</body>
+</html>
