@@ -1,110 +1,211 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Tool Backup Partisi Penting</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teknisi Pro Lab</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
-body{
-    font-family:Arial;
-    background:#0f172a;
-    color:white;
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    background:#0f172a;
+    color:#e2e8f0;
+}
+header{
+    background:linear-gradient(90deg,#0ea5e9,#22d3ee);
     padding:20px;
-}
-h1{
     text-align:center;
-    color:#00ffcc;
+    font-family:'Orbitron',sans-serif;
+    font-size:22px;
+    letter-spacing:2px;
+    color:#000;
 }
-.container{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:15px;
+nav{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    padding:15px;
+    background:#111827;
+}
+nav a{
+    color:#38bdf8;
+    text-decoration:none;
+    font-weight:600;
+}
+section{
+    padding:30px;
 }
 .card{
-    padding:15px;
-    border-radius:10px;
     background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 0 15px rgba(0,255,255,0.1);
 }
-.card h3{
-    margin-top:0;
+h2{
+    color:#22d3ee;
+    margin-bottom:15px;
 }
-.samsung{background:#1e40af;}
-.mtk{background:#065f46;}
-.qualcomm{background:#7c2d12;}
-.unisoc{background:#581c87;}
-.huawei{background:#7f1d1d;}
-button{
+table{
+    width:100%;
+    border-collapse:collapse;
     margin-top:10px;
-    padding:8px;
-    border:none;
-    border-radius:5px;
-    background:#00ffcc;
-    cursor:pointer;
-    font-weight:bold;
 }
-.done{
-    background:#16a34a !important;
+table th,table td{
+    border:1px solid #334155;
+    padding:8px;
+    text-align:left;
+}
+table th{
+    background:#0ea5e9;
+    color:#000;
+}
+.badge{
+    background:#22d3ee;
+    color:#000;
+    padding:4px 8px;
+    border-radius:6px;
+    font-size:12px;
+}
+footer{
+    text-align:center;
+    padding:15px;
+    background:#111827;
+    margin-top:20px;
+    font-size:13px;
+}
+@media(max-width:768px){
+    nav{
+        flex-wrap:wrap;
+    }
 }
 </style>
 </head>
+
 <body>
 
-<h1>📦 Backup Partisi Penting Teknisi</h1>
+<header>
+TEKNISI PRO LAB — LEVEL SENIOR
+</header>
 
-<div class="container">
+<nav>
+<a href="#arus">Analisa Arus</a>
+<a href="#ic">Database IC</a>
+<a href="#study">Study Case</a>
+<a href="#tegangan">Tegangan</a>
+</nav>
 
-<div class="card samsung">
-<h3>SAMSUNG EXYNOS</h3>
-<label><input type="checkbox"> efs (IMEI)</label><br>
-<label><input type="checkbox"> sec_efs</label><br>
-<label><input type="checkbox"> M9KEFS</label><br>
-<button onclick="done(this)">Backup Selesai</button>
+<section id="arus">
+<div class="card">
+<h2>🔋 Analisa Arus & Power</h2>
+
+<p><span class="badge">0.01 - 0.03</span> Standby Normal</p>
+<p><span class="badge">0.07 Stuck</span> Kemungkinan UFS / CPU Tidak Boot</p>
+<p><span class="badge">0.15 Restart</span> Power Supply Drop</p>
+<p><span class="badge">0.00 Total</span> Putus VPH / Short Total</p>
+
 </div>
+</section>
 
-<div class="card mtk">
-<h3>SAMSUNG MTK</h3>
-<label><input type="checkbox"> efs</label><br>
-<label><input type="checkbox"> nvdata</label><br>
-<label><input type="checkbox"> nvram</label><br>
-<label><input type="checkbox"> protect1</label><br>
-<label><input type="checkbox"> protect2</label><br>
-<button onclick="done(this)">Backup Selesai</button>
+<section id="ic">
+<div class="card">
+<h2>💾 Database IC</h2>
+
+<table>
+<tr>
+<th>IC</th>
+<th>Fungsi</th>
+<th>Ciri Rusak</th>
+</tr>
+<tr>
+<td>UFS</td>
+<td>Storage System</td>
+<td>Logo petir, tidak boot</td>
+</tr>
+<tr>
+<td>eMMC</td>
+<td>Memory lama</td>
+<td>Bootloop / Hang logo</td>
+</tr>
+<tr>
+<td>CPU</td>
+<td>Proses utama</td>
+<td>Arus naik turun abnormal</td>
+</tr>
+<tr>
+<td>PMIC</td>
+<td>Distribusi Tegangan</td>
+<td>Mati total / tidak respon</td>
+</tr>
+</table>
+
 </div>
+</section>
 
-<div class="card qualcomm">
-<h3>SAMSUNG QUALCOMM</h3>
-<label><input type="checkbox"> efs</label><br>
-<label><input type="checkbox"> fsc / fsg</label><br>
-<label><input type="checkbox"> modemst1</label><br>
-<label><input type="checkbox"> modemst2</label><br>
-<button onclick="done(this)">Backup Selesai</button>
+<section id="study">
+<div class="card">
+<h2>🧠 Study Case Lapangan</h2>
+
+<p><strong>KASUS:</strong> Vivo Y36 – Arus 0.07 – Tidak Detect PC</p>
+<p><strong>Analisa:</strong></p>
+<ul>
+<li>VBUS Normal</li>
+<li>PMIC Output Stabil</li>
+<li>Tidak ada komunikasi data</li>
+</ul>
+<p><strong>Kesimpulan:</strong> Kemungkinan UFS corrupt atau mati</p>
+
+<hr style="margin:15px 0;border:1px solid #334155;">
+
+<p><strong>KASUS:</strong> Samsung A02 – 0.00 Saat Tekan Power</p>
+<p><strong>Kesimpulan:</strong> Jalur VPH Putus / IC Power Short</p>
+
 </div>
+</section>
 
-<div class="card unisoc">
-<h3>SAMSUNG UNISOC</h3>
-<label><input type="checkbox"> sec_efs</label><br>
-<label><input type="checkbox"> vendor_efs</label><br>
-<label><input type="checkbox"> MISC DATA</label><br>
-<label><input type="checkbox"> PROD NV</label><br>
-<button onclick="done(this)">Backup Selesai</button>
+<section id="tegangan">
+<div class="card">
+<h2>⚡ Database Tegangan Jalur</h2>
+
+<table>
+<tr>
+<th>Jalur</th>
+<th>Tegangan Normal</th>
+<th>Fungsi</th>
+</tr>
+<tr>
+<td>VPH_PWR</td>
+<td>3.8V - 4.2V</td>
+<td>Main Power</td>
+</tr>
+<tr>
+<td>VBUS</td>
+<td>5V</td>
+<td>Charging</td>
+</tr>
+<tr>
+<td>VDD_MAIN</td>
+<td>1.8V - 3.3V</td>
+<td>Supply IC</td>
+</tr>
+</table>
+
 </div>
+</section>
 
-<div class="card qualcomm">
-<h3>XIAOMI QUALCOMM</h3>
-<label><input type="checkbox"> fsc / fsg</label><br>
-<label><input type="checkbox"> modemst1</label><br>
-<label><input type="checkbox"> modemst2</label><br>
-<label><input type="checkbox"> mdm1m9kefs</label><br>
-<button onclick="done(this)">Backup Selesai</button>
-</div>
+<footer>
+© 2026 Teknisi Pro Lab | Upgrade Skill Tanpa Batas
+</footer>
 
-<div class="card mtk">
-<h3>MEDIATEK GENERAL</h3>
-<label><input type="checkbox"> nvram</label><br>
-<label><input type="checkbox"> nvdata</label><br>
-<label><input type="checkbox"> protect1</label><br>
-<label><input type="checkbox"> protect2</label><br>
-<label><input type="checkbox"> proinfo</label><br>
+</body>
+</html><label><input type="checkbox"> proinfo</label><br>
 <button onclick="done(this)">Backup Selesai</button>
 </div>
 
